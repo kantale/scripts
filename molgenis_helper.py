@@ -61,7 +61,6 @@ molgenis_script = 'molgenis_compute.sh'
 #Script specific parameters
 run_id = 'run_01'
 
-
 if pipeline == 'minimac':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Mach_5_Sep_2012/mach_minimach'
 	workflow_name = 'workflowMachMinimac'
@@ -334,21 +333,24 @@ def import_workflow_to_molgenis(compile_molg = False):
 
 
 def run_command(to_exec = True):
-	command = ['sh', os.path.join(molgenis_dir, molgenis_script)]
-	command += ['-worksheet=' + worksheet_fn]
-	command += ['-parameters=' + parameters_fn]
-	command += ['-workflow=' + workflow_fn]
-	command += ['-protocols=' + protocols_dir]
-	command += ['-templates=' + scripts_dir]
-	command += ['-scripts=' + os.path.join(scripts_dir, 'molgenis_output')]
-	command += ['-id=' + run_id]
+	if molgenis_dir:
+		command = ['sh', os.path.join(molgenis_dir, molgenis_script)]
+		command += ['-worksheet=' + worksheet_fn]
+		command += ['-parameters=' + parameters_fn]
+		command += ['-workflow=' + workflow_fn]
+		command += ['-protocols=' + protocols_dir]
+		command += ['-templates=' + scripts_dir]
+		command += ['-scripts=' + os.path.join(scripts_dir, 'molgenis_output')]
+		command += ['-id=' + run_id]
 
-	command_line = str.join(' ', command)
-	print "---COMMAND LINE:---"
-	print command_line
-	print "-------------------"
-	if to_exec:
-		os.system(command_line)
+		command_line = str.join(' ', command)
+		print "---COMMAND LINE:---"
+		print command_line
+		print "-------------------"
+		if to_exec:
+			os.system(command_line)
+	else:
+		print "molgenis_dir is None. Skipping script standalone generation."
 
 	if import_to_molgenis:
 		import_workflow_to_molgenis()
