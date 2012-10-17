@@ -327,7 +327,11 @@ def import_workflow_to_molgenis(compile_molg = False):
 	if compile_molg:
 		compile_molgenis()
 
-	start_molgenis()
+	if envrionment == 'vm':
+		start_molgenis(port = 8888)
+	else:
+		start_molgenis()
+		
 	import_workflow()
 	import_worksheet()
 
