@@ -61,6 +61,7 @@ molgenis_script = 'molgenis_compute.sh'
 #Script specific parameters
 run_id = 'run_01'
 
+
 if pipeline == 'minimac':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Mach_5_Sep_2012/mach_minimach'
 	workflow_name = 'workflowMachMinimac'
