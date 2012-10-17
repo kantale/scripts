@@ -12,8 +12,9 @@ import urllib2
 #pipeline = 'beagle'
 pipeline = 'compare_grid'
 
-environment = 'gpfs'
+#environment = 'gpfs'
 #environment = 'macbookair'
+environment = 'vm'
 
 #queue = 'gcc'
 queue = 'test-long'
@@ -48,6 +49,10 @@ if environment == 'gpfs':
 elif environment == 'macbookair':
 	molgenis_dir = '/Users/alexandroskanterakis/GitHub/molgenis_apps/bin/molgenis_compute-aabb8f3'
 	molgenis_apps_dir = '/Users/alexandroskanterakis/GitHub/molgenis_apps'
+elif environment == 'vm':
+	molgenis_dir = None
+	molgenis_apps_dir = '/srv/molgenis/compute/molgenis_apps' 
+	import_to_molgenies = True
 else:
 	raise Exception('Unknown value for environment variable: ' + str(environment))
 
@@ -73,6 +78,8 @@ elif pipeline == 'compare_grid':
 		scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Grid_test/grid_compare'
 	elif environment == 'macbookair':
 		scripts_dir = '/Users/alexandroskanterakis/runs/grid_compare'
+	elif environment == 'vm':
+		scripts_dir = '/srv/molgenis/alex/runs/compare_grid'
 	else:
 		raise Exception('Unknown value for environment variable: ' + str(environment))
 
