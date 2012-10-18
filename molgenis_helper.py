@@ -247,7 +247,10 @@ def compile_molgenis():
 	#build/classes/META-INF/persistence.xml
 
 def start_molgenis(port = 8080):
-	command = "kill -9 `lsof -i :%i -t`" % (port)
+	if environment == 'vm':
+		command = "kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`"
+	else:
+		command = "kill -9 `lsof -i :%i -t`" % (port)
 	print "Running: " + command
 	os.system(command)
 
@@ -330,11 +333,7 @@ def import_workflow_to_molgenis(compile_molg = False):
 	if compile_molg:
 		compile_molgenis()
 
-	if environment == 'vm':
-		start_molgenis(port = 8888)
-	else:
-		start_molgenis()
-
+	start_molgenis()
 	import_workflow()
 	import_worksheet()
 
