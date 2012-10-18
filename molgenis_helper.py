@@ -239,9 +239,12 @@ def clean_compute():
 	os.system(command)
 
 def compile_molgenis():
-	command = "cd %s; ant -f build_compute.xml clean-generate-compile" % (molgenis_apps_dir)
+	command = "cd %s; ant -f build_compute.xml clean-generate-compile" % (molgenis_apps_dir)	
 	print "Running: " + command
 	os.system(command)
+
+	#After compile. Change persistence.xml.
+	#build/classes/META-INF/persistence.xml
 
 def start_molgenis(port = 8080):
 	command = "kill -9 `lsof -i :%i -t`" % (port)
