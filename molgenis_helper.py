@@ -299,7 +299,7 @@ molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibern
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
 org.molgenis.compute.test.util.WorkflowImporterJPA %s %s %s """
 	command = command % (os.path.join(molgenis_apps_dir, '..'), parameters_fn, workflow_fn, protocols_dir)
-	print "Running: " + command
+	print "Import workflow. Running: " + command
 	os.system(command)
 
 def import_worksheet(run_name = 'test_001'):
@@ -331,7 +331,7 @@ molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibern
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
 org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -worksheet_file %s -McId %s """
 	command = command % (os.path.join(molgenis_apps_dir, '..'), os.path.split(workflow_fn)[1], worksheet_fn, run_name)
-	print "Running: " + command
+	print "Import worksheet. Running: " + command
 	os.system(command)
 
 def submit_script_to_grid():
@@ -364,7 +364,7 @@ molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.ja
 org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
 	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', 'byelas', 'str4ndb4l', 'grid')
-	print 'Running: ' + command
+	print 'Submit script to grid. Running: ' + command
 	os.system(command)
 
 def import_workflow_to_molgenis(compile_molg = False):
