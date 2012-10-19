@@ -92,12 +92,15 @@ else:
 
 protocols_dir = os.path.join(scripts_dir, 'protocols')
 
+def substitute_parameter(parameter_name, new_value):
+	return re.sub(r'%s,[\w\-\/]*,' % (parameter_name), r'%s,%s,' % (parameter_name, new_value), parameters)
+
 #Substitue clusterQueue, scheduler
-parameters = re.sub(r'clusterQueue,[\w\-]*,', r'clusterQueue,' + queue + ',', parameters)
-parameters = re.sub(r'scheduler,[\w\-]*,', r'scheduler,' + scheduler + ',', parameters)
+parameters = substitute_parameter('clusterQueue', queue)
+parameters = substitute_parameter('scheduler', scheduler)
 
 if scheduler == 'GRID':
-	parameters = re.sub(r'root,[\w\-]*,', r'root,' + '$WORKDIR' + ',', parameters)
+	parameters = re.sub('root', '$WORKDIR')
 
 protocol_convertPedMapToTriTyper = {
 	"name" : "convertPedMapToTriTyper",
@@ -332,7 +335,7 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -worksheet_fi
 	os.system(command)
 
 def submit_script_to_grid():
-	command = """java -cp molgenis_apps/build/classes:molgenis/bin:\
+	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
 molgenis/lib/bcprov-jdk15-1.43.jar:molgenis/lib/commons-codec-1.3.jar:molgenis/lib/commons-collections-3.2.1.jar:\
@@ -360,9 +363,9 @@ molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibern
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
 org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
-	command = command % ('ui.grid.sara.nl', 'byelas', 'str4ndb4l', 'grid')
+	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', 'byelas', 'str4ndb4l', 'grid')
 	print 'Running: ' + command
-	#os.system(command)
+	os.system(command)
 
 def import_workflow_to_molgenis(compile_molg = False):
 	clean_compute()
