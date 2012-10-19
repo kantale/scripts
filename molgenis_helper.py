@@ -100,7 +100,7 @@ parameters = substitute_parameter('clusterQueue', queue)
 parameters = substitute_parameter('scheduler', scheduler)
 
 if scheduler == 'GRID':
-	parameters = re.sub('root', '$WORKDIR')
+	parameters = substitute_parameter('root', '$WORKDIR')
 
 protocol_convertPedMapToTriTyper = {
 	"name" : "convertPedMapToTriTyper",
