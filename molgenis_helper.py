@@ -249,7 +249,7 @@ def compile_molgenis():
 
 def start_molgenis(port = 8080):
 	if environment == 'vm':
-		command = "kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`"
+		command = "kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`"
 	else:
 		command = "kill -9 `lsof -i :%i -t`" % (port)
 	print "Running: " + command
