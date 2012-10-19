@@ -362,7 +362,7 @@ org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
 	command = command % ('ui.grid.sara.nl', 'byelas', 'str4ndb4l', 'grid')
 	print 'Running: ' + command
-	os.system(command)
+	#os.system(command)
 
 def import_workflow_to_molgenis(compile_molg = False):
 	clean_compute()
@@ -373,7 +373,7 @@ def import_workflow_to_molgenis(compile_molg = False):
 	start_molgenis()
 	import_workflow()
 	import_worksheet()
-
+	submit_script_to_grid()
 
 def run_command(to_exec = True):
 	if molgenis_dir:
