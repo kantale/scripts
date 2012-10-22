@@ -2,6 +2,10 @@
 #wget http://www.sph.umich.edu/csg/cfuchsb/minimac-beta-2012.8.15.tgz
 
 #tar xvf minimac-beta-2012.8.15.tgz
+#srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas/tools/python_scripts/AssemblyImpute2GprobsBins.py
+#srmcp -server_mode=passive file:///$HOME/kanterak/AssemblyImpute2GprobsBins.py srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas/tools/python_scripts/AssemblyImpute2GprobsBins.py
+#srmls srm://carme.htc.biggrid.nl/dpm/htc.biggrid.nl/home/bbmri.nl/generated/2012-02-24/file61914e6b-ad7d-402b-a4eb-87345b1a257b
+#srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas/tools/python_scripts/AssemblyImpute2GprobsBins.py
 
 import os
 import re
