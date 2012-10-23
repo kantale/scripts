@@ -1,10 +1,9 @@
 
-
-Simple http protocol to store and review logs.
+Simple rest protocol to store and review logs.
 
 To Store:
-http://molgenislog.appspot.com/?msg=This_happened&author=kantale&action=store
+http://molgenislog.appspot.com/?msg=This_happened&user=akanterak&action=store
 
 To Review:
-http://molgenislog.appspot.com/?autor=kantale&action=view
+http://molgenislog.appspot.com/?user=akanterak&action=view
 
