@@ -1,0 +1,10 @@
+
+
+Simple http protocol to store and review logs.
+
+To Store:
+http://molgenislog.appspot.com/?msg=This_happened&author=kantale&action=store
+
+To Review:
+http://molgenislog.appspot.com/?autor=kantale&action=view
+
