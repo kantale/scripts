@@ -337,7 +337,7 @@ molgenis/lib/hibernate-validator-4.1.0.Final/validation-api-1.0.0.GA.jar:\
 molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-1.6.1.jar:molgenis/lib/hibernate/hibernate3.jar:\
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
-org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend %s -worksheet_file %s -McId %s """
+org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name %s -worksheet_file %s -McId %s """
 	#Change RUN_ID!
 	command = command % (os.path.join(molgenis_apps_dir, '..'), os.path.split(workflow_fn)[1], 'ui.grid.sara.nl', worksheet_fn, run_name) 
 	print "Import worksheet. Running: " + command
