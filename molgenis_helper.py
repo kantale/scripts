@@ -434,5 +434,5 @@ if __name__ == '__main__':
 		raise Exception('Please define username and password in arguments')
 
 	print username, password
-	run_command(username=username, password=password, to_exec=to_exec)
+	#run_command(username=username, password=password, to_exec=to_exec)
 
