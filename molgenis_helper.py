@@ -418,15 +418,15 @@ if __name__ == '__main__':
 	username, password, to_exec = None, None, True 
 
 	for argument in sys.argv:
-		found = re.search(r'username=(.)*', argument)
+		found = re.search(r'username=(.*)', argument)
 		if found:
 			username = found.group(1)
 
-		found = re.search(r'password=(.)*', argument)
+		found = re.search(r'password=(.*)', argument)
 		if found:
 			password = found.group(1)
 
-		found = re.search(r'exec=(.)*', argument)
+		found = re.search(r'exec=(.*)', argument)
 		if found:
 			to_exec = eval(found.group(1))
 
