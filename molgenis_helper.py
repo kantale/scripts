@@ -415,7 +415,7 @@ def run_command(username=None, password=None, to_exec = True):
 if __name__ == '__main__':
 	make_scripts()
 
-	username, password = None, None 
+	username, password, to_exec = None, None, True 
 
 	for argument is sys.argv:
 		found = re.search(r'username=(.)*', argument)
@@ -426,10 +426,13 @@ if __name__ == '__main__':
 		if found:
 			password = found.group(1)
 
-	if len(sys.argv) > 1 and sys.argv[1] == '0':
-		if not username or not password:
-			raise Exception('Please define username and password in arguments')
-		run_command(username, password, to_exec=False)
-	else:
-		run_command()
+		found = re.search(r'exec=(.)*', argument)
+		if found:
+			to_exec = eval(found.group(1))
+
+	if not username or not password:
+		raise Exception('Please define username and password in arguments')
+
+	print username, password
+	run_command(username=username, password=password, to_exec=to_exec)
 
