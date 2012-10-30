@@ -417,7 +417,7 @@ if __name__ == '__main__':
 
 	username, password, to_exec = None, None, True 
 
-	for argument is sys.argv:
+	for argument in sys.argv:
 		found = re.search(r'username=(.)*', argument)
 		if found:
 			username = found.group(1)
