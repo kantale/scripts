@@ -343,7 +343,7 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name
 	print "Import worksheet. Running: " + command
 	os.system(command)
 
-def submit_script_to_grid():
+def submit_script_to_grid(username, password):
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
@@ -372,11 +372,11 @@ molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibern
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
 org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
-	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', 'byelas', 'str4ndb4l', 'grid')
+	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', username, password, 'grid')
 	print 'Submit script to grid. Running: ' + command
 	os.system(command)
 
-def import_workflow_to_molgenis(compile_molg = False):
+def import_workflow_to_molgenis(compile_molg = False, username = 'george', password = ''):
 	clean_compute()
 
 	if compile_molg:
@@ -385,9 +385,9 @@ def import_workflow_to_molgenis(compile_molg = False):
 	start_molgenis()
 	import_workflow()
 	import_worksheet()
-	submit_script_to_grid()
+	submit_script_to_grid(username, password)
 
-def run_command(to_exec = True):
+def run_command(username=None, password=None, to_exec = True):
 	if molgenis_dir:
 		command = ['sh', os.path.join(molgenis_dir, molgenis_script)]
 		command += ['-worksheet=' + worksheet_fn]
@@ -408,15 +408,28 @@ def run_command(to_exec = True):
 		print "molgenis_dir is None. Skipping script standalone generation."
 
 	if import_to_molgenis:
-		import_workflow_to_molgenis()
+		import_workflow_to_molgenis(username, password)
 
 
 
 if __name__ == '__main__':
 	make_scripts()
 
+	username, password = None, None 
+
+	for argument is sys.argv:
+		found = re.find(r'username=(.)*')
+		if found:
+			username = found.group(1)
+
+		found = re.find(r'password=(.)*')
+		if found:
+			password = found.group(1)
+
 	if len(sys.argv) > 1 and sys.argv[1] == '0':
-		run_command(to_exec=False)
+		if not username or not password:
+			raise Exception('Please define username and password in arguments')
+		run_command(username, password, to_exec=False)
 	else:
 		run_command()
 
