@@ -418,11 +418,11 @@ if __name__ == '__main__':
 	username, password = None, None 
 
 	for argument is sys.argv:
-		found = re.find(r'username=(.)*')
+		found = re.search(r'username=(.)*', argument)
 		if found:
 			username = found.group(1)
 
-		found = re.find(r'password=(.)*')
+		found = re.search(r'password=(.)*', argument)
 		if found:
 			password = found.group(1)
 
