@@ -376,7 +376,7 @@ org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 	print 'Submit script to grid. Running: ' + command
 	os.system(command)
 
-def import_workflow_to_molgenis(compile_molg = False, username = 'george', password = ''):
+def import_workflow_to_molgenis(compile_molg = False, username = None, password = None):
 	clean_compute()
 
 	if compile_molg:
@@ -413,7 +413,7 @@ def run_command(username=None, password=None, to_exec = True):
 
 
 if __name__ == '__main__':
-	make_scripts()
+	#make_scripts()
 
 	username, password, to_exec = None, None, True 
 
