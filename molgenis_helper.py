@@ -413,7 +413,7 @@ def run_command(username=None, password=None, to_exec = True):
 
 
 if __name__ == '__main__':
-	#make_scripts()
+	make_scripts()
 
 	username, password, to_exec = None, None, True 
 
@@ -426,13 +426,13 @@ if __name__ == '__main__':
 		if found:
 			password = found.group(1)
 
-		found = re.search(r'exec=(.*)', argument)
+		found = re.search(r'to_exec=(.*)', argument)
 		if found:
 			to_exec = eval(found.group(1))
 
 	if not username or not password:
-		raise Exception('Please define username and password in arguments')
+		raise Exception('Please define username and password in arguments\npython molgenis_helper username=... password=...')
 
 	print username, password
-	#run_command(username=username, password=password, to_exec=to_exec)
+	run_command(username=username, password=password, to_exec=to_exec)
 
