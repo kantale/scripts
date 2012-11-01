@@ -271,7 +271,9 @@ def compile_molgenis():
 
 	#After compile. Change persistence.xml.
 	#build/classes/META-INF/persistence.xml
-	# sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml
+	command = "cd %s; sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir)
+	print "Running: " + command
+	os.system(command)
 
 def start_molgenis(port = 8080):
 	if environment == 'vm':
