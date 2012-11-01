@@ -91,9 +91,14 @@ elif pipeline == 'compare_grid':
 	else:
 		raise Exception('Unknown value for environment variable: ' + str(environment))
 
-	workflow_name = 'workflowComparison'
+	#workflow_name = 'workflowComparison' # Step 1
+	workflow_name = 'workflowComparison_step2' # Step 2
+
 	worksheet = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
-	workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison.csv')
+
+	#workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison.csv') # Step 1
+	workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison_step2.csv') # Step 2
+
 	parameters = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 else:
 	raise Exception("Error")
@@ -165,9 +170,15 @@ protocol_imputeWithBeagle = {
 	"content" : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/beagle/imputeWithBeagle.ftl')
 }
 
+#Compare imputation bins created by impute2
 protocol_concatImputationResults = {
 	"name" : 'concatImputationResults',
 	"content" : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/concatImputationResults.ftl')
+}
+
+protocol_convertGProbs2PEDMAP = {
+	"name" : 'convertGProbs2PEDMAP',
+	"content" : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/convertGProbs2PEDMAP.ftl')
 }
 
 if pipeline == 'minimac':
@@ -191,7 +202,8 @@ elif pipeline == 'beagle':
 	]
 elif pipeline == 'compare_grid':
 	protocols = [
-		protocol_concatImputationResults,
+#		protocol_concatImputationResults, # Step 1
+		protocol_convertGProbs2PEDMAP, # Step 2
 	]
 else:
 	raise Exception("Error")
