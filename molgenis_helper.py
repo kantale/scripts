@@ -399,7 +399,7 @@ def import_workflow_to_molgenis(compile_molg = False, username = None, password 
 	import_worksheet()
 	submit_script_to_grid(username, password)
 
-def run_command(username=None, password=None, to_exec = True):
+def run_command(username=None, password=None, to_exec = True, compile_molg = False):
 	if molgenis_dir:
 		command = ['sh', os.path.join(molgenis_dir, molgenis_script)]
 		command += ['-worksheet=' + worksheet_fn]
@@ -420,31 +420,30 @@ def run_command(username=None, password=None, to_exec = True):
 		print "molgenis_dir is None. Skipping script standalone generation."
 
 	if import_to_molgenis:
-		import_workflow_to_molgenis(username, password)
+		import_workflow_to_molgenis(compile_molg = compile_molg, username=username, password=password)
 
 
+def get_param(name, arguments, default):
+
+	for argument in arguments:
+		found = re.search(r'%s=(.*)' % (name), argument)
+		if found:
+			return found.group(1)
+
+	return default
 
 if __name__ == '__main__':
 	make_scripts()
 
-	username, password, to_exec = None, None, True 
+	username, password, to_exec, compile_molg = None, None, True, False 
 
-	for argument in sys.argv:
-		found = re.search(r'username=(.*)', argument)
-		if found:
-			username = found.group(1)
-
-		found = re.search(r'password=(.*)', argument)
-		if found:
-			password = found.group(1)
-
-		found = re.search(r'to_exec=(.*)', argument)
-		if found:
-			to_exec = eval(found.group(1))
+	username = get_param('username', sys.argv, None)
+	password = get_param('password', sys.argv, None)
+	to_exec  = eval(get_param('to_exec' , sys.argv, 'True'))
+	compile_molg = eval(get_param('compile_molg', sys.argv, 'False'))
 
 	if not username or not password:
 		raise Exception('Please define username and password in arguments\npython molgenis_helper username=... password=...')
 
-	print username, password
-	run_command(username=username, password=password, to_exec=to_exec)
+	run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg)
 
