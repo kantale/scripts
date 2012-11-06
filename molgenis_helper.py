@@ -236,6 +236,10 @@ workflow_fn = os.path.join(scripts_dir, workflow_name + '.csv')
 
 #TODO! Make ftl files in scripts_dir
 
+def exec_command(command):
+	print 'Running:', command
+	os.system(command)
+
 def remove_empty_lines(text):
 	return str.join('\n', [x for x in text.split('\n') if len(x) > 0])
 
@@ -295,19 +299,16 @@ def compile_molgenis():
 
 def start_molgenis(port = 8080):
 	if environment == 'vm':
-		command = "kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`"
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`") # This doesn't always word
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`") # So we are running this as well
 	else:
-		command = "kill -9 `lsof -i :%i -t`" % (port)
-	print "Running: " + command
-	os.system(command)
+		exec_command("kill -9 `lsof -i :%i -t`" % (port))
 
-	command = "cd %s; nohup ant -f build_compute.xml runOn -Dport=%i & " % (molgenis_apps_dir, port)
-	print "Running: " + command
-	os.system(command)
 
-	command = "sleep 4"
+	exec_command("cd %s; nohup ant -f build_compute.xml runOn -Dport=%i & " % (molgenis_apps_dir, port))
+
 	print "Waiting for molgenis to start up.."
-	os.system(command)
+	exec_command("sleep 4")
 	print "ok"
 
 def import_workflow():
