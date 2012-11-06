@@ -7,9 +7,27 @@
 #srmls srm://carme.htc.biggrid.nl/dpm/htc.biggrid.nl/home/bbmri.nl/generated/2012-02-24/file61914e6b-ad7d-402b-a4eb-87345b1a257b
 #srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas/tools/python_scripts/AssemblyImpute2GprobsBins.py
 
+#srmcp -server_mode=passive srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/tools/python_scripts/convertGProbs2PEDMAP.py file:///$HOME/data/convertGProbs2PEDMAP.py
+
 #srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/data_for_mathijs/chr1_0_499
 
 #Root: srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas
+#To submit manually a job:
+# glite-wms-job-submit  -d $USER -o manual-submit3 $HOME/maverick/maverick.jdl
+#To request the status of the submition:
+#glite-wms-job-status -i manual-submit2
+#To get the output:
+#glite-wms-job-output https://wms2.grid.sara.nl:9000/4buFFOeboWEOhwRQ3Tjbrg
+#cp -r /scratch/kanterak_p-njjccBwoW293YBtdVyxg .
+
+#Check status:
+#glite-wms-job-status -i pilot-one
+
+# Check result: 
+# srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/groups/ebiobank/projects/imputation/benchmark/results
+
+#To check script output from the database:
+#select * from ComputeTask;
 
 import os
 import re
