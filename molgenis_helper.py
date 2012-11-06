@@ -7,8 +7,7 @@
 #srmls srm://carme.htc.biggrid.nl/dpm/htc.biggrid.nl/home/bbmri.nl/generated/2012-02-24/file61914e6b-ad7d-402b-a4eb-87345b1a257b
 #srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas/tools/python_scripts/AssemblyImpute2GprobsBins.py
 
-#srmcp -server_mode=passive srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/tools/python_scripts/convertGProbs2PEDMAP.py file:///$HOME/data/convertGProbs2PEDMAP.py
-
+#srmcp -server_mode=passive file:///$HOME/data/convertGProbs2PEDMAP.py srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/tools/python_scripts/convertGProbs2PEDMAP.py
 #srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/data_for_mathijs/chr1_0_499
 
 #Root: srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/byelas
