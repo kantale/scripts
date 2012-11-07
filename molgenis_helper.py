@@ -286,15 +286,13 @@ def clean_compute():
 	os.system(command)
 
 def compile_molgenis():
-	command = "cd %s; ant -f build_compute.xml clean-generate-compile" % (molgenis_apps_dir)	
-	print "Running: " + command
-	os.system(command)
+	exec_command("cd %s; ant -f build_compute.xml clean-generate-compile" % (molgenis_apps_dir))
 
 	#After compile. Change persistence.xml.
 	#build/classes/META-INF/persistence.xml
-	command = "cd %s; sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir)
-	print "Running: " + command
-	os.system(command)
+	exec_command("cd %s; sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir))
+
+	# sed -i 's/innodb_autoinc_lock_mode=2?//g' build/classes/META-INF/persistence.xml
 
 def start_molgenis(port = 8080):
 	if environment == 'vm':
