@@ -31,6 +31,7 @@
 import os
 import re
 import sys
+import random
 import urllib2
 
 #pipeline = 'minimac'
@@ -89,15 +90,15 @@ run_id = 'run_01'
 if pipeline == 'minimac':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Mach_5_Sep_2012/mach_minimach'
 	workflow_name = 'workflowMachMinimac'
-	worksheet = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/worksheet_example.csv')
-	workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/workflowMachMinimac.csv')
-	parameters = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/worksheet_example.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/workflowMachMinimac.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
 elif pipeline == 'beagle':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Beagle_19_Sep_2012/beagle/'
 	workflow_name = 'workflowBeagle'
-	worksheet = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/beagle/worksheet_example.csv')
-	workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/beagle/workflowBeagle.csv')
-	parameters = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/beagle/worksheet_example.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/beagle/workflowBeagle.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
 elif pipeline == 'compare_grid':
 	if environment == 'gpfs':
 		scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Grid_test/grid_compare'
@@ -111,26 +112,31 @@ elif pipeline == 'compare_grid':
 	#workflow_name = 'workflowComparison' # Step 1
 	workflow_name = 'workflowComparison_step2' # Step 2
 
-	worksheet = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
 
 	#workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison.csv') # Step 1
-	workflow = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison_step2.csv') # Step 2
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison_step2.csv') # Step 2
 
-	parameters = fetch_page('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 else:
 	raise Exception("Error")
 
 protocols_dir = os.path.join(scripts_dir, 'protocols')
 
-def substitute_parameter(parameter_name, new_value):
-	return re.sub(r'%s,[\w\-\/]*,' % (parameter_name), r'%s,%s,' % (parameter_name, new_value), parameters)
+def substitute_parameter(parameter_name, new_value, parameters_content):
+	return re.sub(r'%s,[\w\-\/\.]*,' % (parameter_name), r'%s,%s,' % (parameter_name, new_value), parameters_content)
 
-#Substitue clusterQueue, scheduler
-parameters = substitute_parameter('clusterQueue', queue)
-parameters = substitute_parameter('scheduler', scheduler)
+def substitute_parameters(parameters_content):
+	#Substitue clusterQueue, scheduler
+	new_parameters = str(parameters_content)
+	new_parameters = substitute_parameter('clusterQueue', queue, new_parameters)
+	new_parameters = substitute_parameter('scheduler', scheduler, new_parameters)
 
-if scheduler == 'GRID':
-	parameters = substitute_parameter('root', '$WORKDIR')
+	if scheduler == 'GRID':
+		new_parameters = substitute_parameter('root', '$WORKDIR', new_parameters)
+
+	return new_parameters
+
 
 protocol_convertPedMapToTriTyper = {
 	"name" : "convertPedMapToTriTyper",
@@ -242,7 +248,7 @@ def exec_command(command):
 def remove_empty_lines(text):
 	return str.join('\n', [x for x in text.split('\n') if len(x) > 0])
 
-def make_scripts():
+def make_scripts(custom_parameters):
 
 	#Check scripts directory
 	if not os.path.exists(scripts_dir):
@@ -252,17 +258,24 @@ def make_scripts():
 		os.mkdir(protocols_dir)
 
 	#Save worksheet
-	worksheet_nl = remove_empty_lines(worksheet)
+	worksheet_nl = remove_empty_lines(worksheet())
 	open(worksheet_fn, 'w').write(worksheet_nl + '\n')
 
 	#Remove empty lines of parameters
-	parameters_nl = remove_empty_lines(parameters)
+	parameters_nl = remove_empty_lines(parameters())
+
+	#Do essential standard substitutions
+	parameters_nl = substitute_parameters(parameters_nl)
+
+	#Place user parameters
+	for param in custom_parameters:
+		parameters_nl = substitute_parameter(param, custom_parameters[param], parameters_nl)
 
 	#Save parameters
 	open(parameters_fn, 'w').write(parameters_nl + '\n')
 
 	#Remove empty lines of workflow
-	workflow_nl = remove_empty_lines(workflow)
+	workflow_nl = remove_empty_lines(workflow())
 
 	#Save workflow
 	open(workflow_fn, 'w').write(workflow_nl + '\n')
@@ -301,6 +314,10 @@ def start_molgenis(port = 8080):
 	else:
 		exec_command("kill -9 `lsof -i :%i -t`" % (port))
 
+	#Move nohup in a new file
+	hash_string = "%032x" % random.getrandbits(128)
+	command = 'mv %s/nohup.out %s/nohup.out.%s' % (molgenis_apps_dir, molgenis_apps_dir, hash_string)
+	exec_command(command)
 
 	exec_command("cd %s; nohup ant -f build_compute.xml runOn -Dport=%i & " % (molgenis_apps_dir, port))
 
@@ -406,7 +423,7 @@ org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 	print 'Submit script to grid. Running: ' + command
 	os.system(command)
 
-def import_workflow_to_molgenis(compile_molg = False, username = None, password = None):
+def import_workflow_to_molgenis(compile_molg = False, username = None, password = None, run_name = None):
 	clean_compute()
 
 	if compile_molg:
@@ -414,10 +431,10 @@ def import_workflow_to_molgenis(compile_molg = False, username = None, password 
 
 	start_molgenis()
 	import_workflow()
-	import_worksheet()
+	import_worksheet(run_name)
 	submit_script_to_grid(username, password)
 
-def run_command(username=None, password=None, to_exec = True, compile_molg = False):
+def run_command(username=None, password=None, to_exec = True, compile_molg = False, run_name=None):
 	if molgenis_dir:
 		command = ['sh', os.path.join(molgenis_dir, molgenis_script)]
 		command += ['-worksheet=' + worksheet_fn]
@@ -438,7 +455,7 @@ def run_command(username=None, password=None, to_exec = True, compile_molg = Fal
 		print "molgenis_dir is None. Skipping script standalone generation."
 
 	if import_to_molgenis:
-		import_workflow_to_molgenis(compile_molg = compile_molg, username=username, password=password)
+		import_workflow_to_molgenis(compile_molg = compile_molg, username=username, password=password, run_name = None)
 
 
 def get_param(name, arguments, default):
@@ -450,25 +467,53 @@ def get_param(name, arguments, default):
 
 	return default
 
+def check_run_name(run_name):
+	if not run_name:
+		raise Exception('Could not find parameter: run_id')
+
+def check_username_password(username, password):
+	if not username or not password:
+		raise Exception('Please define username and password in arguments')
+
 if __name__ == '__main__':
-	make_scripts()
 
 	username, password, to_exec, compile_molg, action = None, None, True, False, 'default' 
+	run_name = None
 
 	username = get_param('username', sys.argv, None)
 	password = get_param('password', sys.argv, None)
 	to_exec  = eval(get_param('to_exec' , sys.argv, 'True'))
 	compile_molg = eval(get_param('compile_molg', sys.argv, 'False'))
 	action = get_param('action', sys.argv, None)
+	run_name = get_param('run_id', sys.argv, None)
 
+	#Get custom parameters:
+	custom_parameters = {}
+	for argument in sys.argv:
+		found = re.search(r'p:([\w]*)=([\w\.]*)', argument)
+		if found:
+			print 'Found custom parameter: %s = %s' % (found.group(1), found.group(2))
+			custom_parameters[found.group(1)] = found.group(2)
+
+	make_scripts(custom_parameters)
+ 
 	if action == 'default':
-		if not username or not password:
-			raise Exception('Please define username and password in arguments\npython molgenis_helper username=... password=...')
+		check_username_password(username, password)
+		check_run_name(run_name)
 
-		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg)
+		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg, run_name = run_name)
+
 	elif action == 'restart_server':
 		start_molgenis()
+
+	elif action == 'submit_worksheet_grid':
+		check_username_password(username, password)
+		check_run_name(run_name)
+
+		import_worksheet(run_name)
+		submit_script_to_grid(username, password)
+
 	else:
 		raise Exception('Unknown action:', action)
-		
+
 
