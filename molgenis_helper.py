@@ -261,6 +261,7 @@ def make_scripts(custom_parameters):
 	#Save worksheet
 	worksheet_nl = remove_empty_lines(worksheet())
 	open(worksheet_fn, 'w').write(worksheet_nl + '\n')
+	print "Save worksheet to:", worksheet_fn
 
 	#Remove empty lines of parameters
 	parameters_nl = remove_empty_lines(parameters())
@@ -274,17 +275,20 @@ def make_scripts(custom_parameters):
 
 	#Save parameters
 	open(parameters_fn, 'w').write(parameters_nl + '\n')
+	print "Saved parameters to:", parameters_fn
 
 	#Remove empty lines of workflow
 	workflow_nl = remove_empty_lines(workflow())
 
 	#Save workflow
 	open(workflow_fn, 'w').write(workflow_nl + '\n')
+	print "Saved workflow to:", workflow_fn
 
 	#Save protocols
 	for protocol in protocols:
 		protocol_fn = os.path.join(protocols_dir, protocol['name'] + '.ftl')
 		open(protocol_fn, 'w').write(protocol['content']() + '\n')
+		print "Saved protocol: %s to %s" % (protocol['name'], protocol_fn)
 
 	#Necessary files
 	open(os.path.join(protocols_dir, 'Header.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Header.ftl'))
