@@ -556,10 +556,19 @@ if __name__ == '__main__':
 		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		import_worksheet(run_name, dummy = dummy)
 
+	elif action == 'submit_grid':
+		check_username_password(username, password)
+		check_run_name(run_name)
+		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
+
+		submit_script_to_grid(username, password, dummy = dummy)
+
 	elif action == 'submit_worksheet_grid':
 		check_username_password(username, password)
 		check_run_name(run_name)
 		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
+
+		import_worksheet(run_name, dummy = dummy)
 		submit_script_to_grid(username, password, dummy = dummy)
 
 	else:
