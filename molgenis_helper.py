@@ -241,9 +241,10 @@ workflow_fn = os.path.join(scripts_dir, workflow_name + '.csv')
 
 #TODO! Make ftl files in scripts_dir
 
-def exec_command(command):
+def exec_command(command, dummy=False):
 	print 'Running:', command
-	os.system(command)
+	if not dummy:
+		os.system(command)
 
 def remove_empty_lines(text):
 	return str.join('\n', [x for x in text.split('\n') if len(x) > 0])
@@ -293,39 +294,40 @@ def make_scripts(custom_parameters):
 	open(os.path.join(protocols_dir, 'Helpers.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Helpers.ftl'))
 
 
-def clean_compute():
+def clean_compute(dummy=False):
 	command = "echo 'DROP DATABASE IF EXISTS compute; CREATE DATABASE compute;' | mysql -u molgenis -pmolgenis"
 	print "Running: " + command
-	os.system(command)
+	if not dummy:
+		os.system(command)
 
-def compile_molgenis():
-	exec_command("cd %s; ant -f build_compute.xml clean-generate-compile" % (molgenis_apps_dir))
+def compile_molgenis(dummy=False):
+	exec_command("cd %s; ant -f build_compute.xml clean-generate-compile" % (molgenis_apps_dir), dummy)
 
 	#After compile. Change persistence.xml.
 	#build/classes/META-INF/persistence.xml
-	exec_command("cd %s; sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir))
+	exec_command("cd %s; sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir), dummy)
 
-	# sed -i 's/innodb_autoinc_lock_mode=2?//g' build/classes/META-INF/persistence.xml
+	exec_command("cd %s; sed -i 's/innodb_autoinc_lock_mode=2?//g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir), dummy)
 
-def start_molgenis(port = 8080):
+def start_molgenis(port = 8080, dummy=False):
 	if environment == 'vm':
-		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`") # This doesn't always word
-		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`") # So we are running this as well
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy) # This doesn't always word
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`", dummy) # So we are running this as well
 	else:
-		exec_command("kill -9 `lsof -i :%i -t`" % (port))
+		exec_command("kill -9 `lsof -i :%i -t`" % (port), dummy)
 
 	#Move nohup in a new file
 	hash_string = "%032x" % random.getrandbits(128)
 	command = 'mv %s/nohup.out %s/nohup.out.%s' % (molgenis_apps_dir, molgenis_apps_dir, hash_string)
-	exec_command(command)
+	exec_command(command, dummy)
 
-	exec_command("cd %s; nohup ant -f build_compute.xml runOn -Dport=%i & " % (molgenis_apps_dir, port))
+	exec_command("cd %s; nohup ant -f build_compute.xml runOn -Dport=%i & " % (molgenis_apps_dir, port), dummy)
 
 	print "Waiting for molgenis to start up.."
-	exec_command("sleep 4")
+	exec_command("sleep 4", dummy)
 	print "ok"
 
-def import_workflow():
+def import_workflow(dummy=False):
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
@@ -355,9 +357,10 @@ molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.ja
 org.molgenis.compute.test.util.WorkflowImporterJPA %s %s %s """
 	command = command % (os.path.join(molgenis_apps_dir, '..'), parameters_fn, workflow_fn, protocols_dir)
 	print "Import workflow. Running: " + command
-	os.system(command)
+	if not dummy:
+		os.system(command)
 
-def import_worksheet(run_name = 'test_001'):
+def import_worksheet(run_name = 'test_001', dummy = False):
 	command = """ cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
@@ -388,9 +391,10 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name
 	#Change RUN_ID!
 	command = command % (os.path.join(molgenis_apps_dir, '..'), os.path.split(workflow_fn)[1], 'ui.grid.sara.nl', worksheet_fn, run_name) 
 	print "Import worksheet. Running: " + command
-	os.system(command)
+	if not dummy:
+		os.system(command)
 
-def submit_script_to_grid(username, password):
+def submit_script_to_grid(username, password, dummy=False):
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
@@ -421,20 +425,21 @@ org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
 	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', username, password, 'grid')
 	print 'Submit script to grid. Running: ' + command
-	os.system(command)
+	if not dummy:
+		os.system(command)
 
-def import_workflow_to_molgenis(compile_molg = False, username = None, password = None, run_name = None):
-	clean_compute()
+def import_workflow_to_molgenis(compile_molg = False, username = None, password = None, run_name = None, dummy=False):
+	clean_compute(dummy)
 
 	if compile_molg:
-		compile_molgenis()
+		compile_molgenis(dummy)
 
-	start_molgenis()
-	import_workflow()
-	import_worksheet(run_name)
-	submit_script_to_grid(username, password)
+	start_molgenis(dummy)
+	import_workflow(dummy)
+	import_worksheet(run_name, dummy=dummy)
+	submit_script_to_grid(username, password, dummy=dummy)
 
-def run_command(username=None, password=None, to_exec = True, compile_molg = False, run_name=None):
+def run_command(username=None, password=None, to_exec = True, compile_molg = False, run_name=None, dummy=False):
 	if molgenis_dir:
 		command = ['sh', os.path.join(molgenis_dir, molgenis_script)]
 		command += ['-worksheet=' + worksheet_fn]
@@ -455,7 +460,7 @@ def run_command(username=None, password=None, to_exec = True, compile_molg = Fal
 		print "molgenis_dir is None. Skipping script standalone generation."
 
 	if import_to_molgenis:
-		import_workflow_to_molgenis(compile_molg = compile_molg, username=username, password=password, run_name = None)
+		import_workflow_to_molgenis(compile_molg = compile_molg, username=username, password=password, run_name = None, dummy=dummy)
 
 
 def get_param(name, arguments, default):
@@ -479,6 +484,7 @@ if __name__ == '__main__':
 
 	username, password, to_exec, compile_molg, action = None, None, True, False, 'default' 
 	run_name = None
+	dummy = False
 
 	username = get_param('username', sys.argv, None)
 	password = get_param('password', sys.argv, None)
@@ -486,6 +492,7 @@ if __name__ == '__main__':
 	compile_molg = eval(get_param('compile_molg', sys.argv, 'False'))
 	action = get_param('action', sys.argv, None)
 	run_name = get_param('run_id', sys.argv, None)
+	dummy = eval(get_param('dummy', sys.argv, 'False'))
 
 	#Get custom parameters:
 	custom_parameters = {}
@@ -495,23 +502,24 @@ if __name__ == '__main__':
 			print 'Found custom parameter: %s = %s' % (found.group(1), found.group(2))
 			custom_parameters[found.group(1)] = found.group(2)
 
+	#Generate workflow's script
 	make_scripts(custom_parameters)
  
 	if action == 'default':
 		check_username_password(username, password)
 		check_run_name(run_name)
 
-		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg, run_name = run_name)
+		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg, run_name = run_name, dummy = dummy)
 
 	elif action == 'restart_server':
-		start_molgenis()
+		start_molgenis(dummy = dummy)
 
 	elif action == 'submit_worksheet_grid':
 		check_username_password(username, password)
 		check_run_name(run_name)
 
-		import_worksheet(run_name)
-		submit_script_to_grid(username, password)
+		import_worksheet(run_name, dummy = dummy)
+		submit_script_to_grid(username, password, dummy = dummy)
 
 	else:
 		raise Exception('Unknown action:', action)
