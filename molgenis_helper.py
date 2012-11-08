@@ -540,14 +540,23 @@ if __name__ == '__main__':
 
 		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg, run_name = run_name, dummy = dummy)
 
+	elif action == 'drop_database':
+		clean_compute(dummy)
+
+	elif action == 'import_workflow':
+		import_workflow(dummy)
+
 	elif action == 'restart_server':
 		start_molgenis(dummy = dummy)
+
+	elif action == 'submit_worksheet':
+		check_run_name(run_name)
+		import_worksheet(run_name, dummy = dummy)
 
 	elif action == 'submit_worksheet_grid':
 		check_username_password(username, password)
 		check_run_name(run_name)
 
-		import_worksheet(run_name, dummy = dummy)
 		submit_script_to_grid(username, password, dummy = dummy)
 
 	else:
