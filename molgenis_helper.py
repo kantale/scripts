@@ -249,7 +249,7 @@ def exec_command(command, dummy=False):
 def remove_empty_lines(text):
 	return str.join('\n', [x for x in text.split('\n') if len(x) > 0])
 
-def make_scripts(custom_parameters):
+def make_scripts(custom_parameters, custom_worksheet_parameters):
 
 	#Check scripts directory
 	if not os.path.exists(scripts_dir):
@@ -258,8 +258,22 @@ def make_scripts(custom_parameters):
 	if not os.path.exists(protocols_dir):
 		os.mkdir(protocols_dir)
 
-	#Save worksheet
+	#Get worksheet
 	worksheet_nl = remove_empty_lines(worksheet())
+
+	#Set custom worksheet parameters
+	for param in custom_worksheet_parameters:
+		worksheet_nl_s =  worksheet_nl.split('\n')
+		
+		try:
+			param_index = worksheet_nl_s[0].split(',').index(param)
+		except ValueError:
+			raise Exception('%s is not in the worksheet' % param)
+
+		substituted_s = [y[0:param_index-1] + [custom_worksheet_parameters[param] + y[param_index+1:]] for y in [x.split(',') for x in worksheet_nl_s[1:]]]
+		worksheet_nl = '\n'.join(for y in [','.join(x) for x in worksheet_nl_s[0] + substituted_s]) + '\n'
+
+	#Save worksheet
 	open(worksheet_fn, 'w').write(worksheet_nl + '\n')
 	print "Save worksheet to:", worksheet_fn
 
@@ -500,14 +514,19 @@ if __name__ == '__main__':
 
 	#Get custom parameters:
 	custom_parameters = {}
+	custom_worksheet_parameters = {}
 	for argument in sys.argv:
-		found = re.search(r'p:([\w]*)=([\w\.]*)', argument)
-		if found:
-			print 'Found custom parameter: %s = %s' % (found.group(1), found.group(2))
-			custom_parameters[found.group(1)] = found.group(2)
+		found_p = re.search(r'p:([\w]*)=([\w\.]*)', argument)
+		found_w = re.search(r'w:([\w]*)=([\w\.]*)', argument)
+		if found_p:
+			print 'Found custom parameter: %s = %s' % (found_p.group(1), found_p.group(2))
+			custom_parameters[found_p.group(1)] = found_p.group(2)
+		if found_w:
+			print 'Found worksheet custom parameter: %s = %s' % (found_w.group(1), found_w.group(2))
+			custom_worksheet_parameters[found_w.group(1)] = found_w.group(2)
 
 	#Generate workflow's script
-	make_scripts(custom_parameters)
+	make_scripts(custom_parameters, custom_worksheet_parameters)
  
 	if action == 'default':
 		check_username_password(username, password)
