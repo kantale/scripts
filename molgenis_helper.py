@@ -531,12 +531,13 @@ if __name__ == '__main__':
 			print 'Found worksheet custom parameter: %s = %s' % (found_w.group(1), found_w.group(2))
 			custom_worksheet_parameters[found_w.group(1)] = found_w.group(2)
 
-	#Generate workflow's script
-	make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
  
 	if action == 'default':
 		check_username_password(username, password)
 		check_run_name(run_name)
+
+		#Generate workflow's script
+		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 
 		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg, run_name = run_name, dummy = dummy)
 
@@ -544,6 +545,7 @@ if __name__ == '__main__':
 		clean_compute(dummy)
 
 	elif action == 'import_workflow':
+		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		import_workflow(dummy)
 
 	elif action == 'restart_server':
@@ -551,12 +553,13 @@ if __name__ == '__main__':
 
 	elif action == 'submit_worksheet':
 		check_run_name(run_name)
+		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		import_worksheet(run_name, dummy = dummy)
 
 	elif action == 'submit_worksheet_grid':
 		check_username_password(username, password)
 		check_run_name(run_name)
-
+		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		submit_script_to_grid(username, password, dummy = dummy)
 
 	else:
