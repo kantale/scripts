@@ -249,14 +249,15 @@ def exec_command(command, dummy=False):
 def remove_empty_lines(text):
 	return str.join('\n', [x for x in text.split('\n') if len(x) > 0])
 
-def make_scripts(custom_parameters, custom_worksheet_parameters):
+def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 
-	#Check scripts directory
-	if not os.path.exists(scripts_dir):
-		os.mkdir(scripts_dir)
+	if not dummy:
+		#Check scripts directory
+		if not os.path.exists(scripts_dir):
+			os.mkdir(scripts_dir)
 
-	if not os.path.exists(protocols_dir):
-		os.mkdir(protocols_dir)
+		if not os.path.exists(protocols_dir):
+			os.mkdir(protocols_dir)
 
 	#Get worksheet
 	worksheet_nl = remove_empty_lines(worksheet())
@@ -270,11 +271,12 @@ def make_scripts(custom_parameters, custom_worksheet_parameters):
 		except ValueError:
 			raise Exception('%s is not in the worksheet' % param)
 
-		substituted_s = [y[0:param_index-1] + [custom_worksheet_parameters[param]] + y[param_index+1:] for y in [x.split(',') for x in worksheet_nl_s[1:]]]
-		worksheet_nl = '\n'.join([','.join(x) for x in [worksheet_nl_s[0]] + substituted_s]) + '\n'
+		substituted_s = [y[0:param_index] + [custom_worksheet_parameters[param]] + y[param_index+1:] for y in [x.split(',') for x in worksheet_nl_s[1:]]]
+		worksheet_nl = '\n'.join([worksheet_nl_s[0]] + [','.join(x) for x in  substituted_s]) + '\n'
 
 	#Save worksheet
-	open(worksheet_fn, 'w').write(worksheet_nl + '\n')
+	if not dummy:
+		open(worksheet_fn, 'w').write(worksheet_nl + '\n')
 	print "Save worksheet to:", worksheet_fn
 
 	#Remove empty lines of parameters
@@ -288,28 +290,32 @@ def make_scripts(custom_parameters, custom_worksheet_parameters):
 		parameters_nl = substitute_parameter(param, custom_parameters[param], parameters_nl)
 
 	#Save parameters
-	open(parameters_fn, 'w').write(parameters_nl + '\n')
+	if not dummy:
+		open(parameters_fn, 'w').write(parameters_nl + '\n')
 	print "Saved parameters to:", parameters_fn
 
 	#Remove empty lines of workflow
 	workflow_nl = remove_empty_lines(workflow())
 
 	#Save workflow
-	open(workflow_fn, 'w').write(workflow_nl + '\n')
+	if not dummy:
+		open(workflow_fn, 'w').write(workflow_nl + '\n')
 	print "Saved workflow to:", workflow_fn
 
 	#Save protocols
 	for protocol in protocols:
 		protocol_fn = os.path.join(protocols_dir, protocol['name'] + '.ftl')
-		open(protocol_fn, 'w').write(protocol['content']() + '\n')
+		if not dummy:
+			open(protocol_fn, 'w').write(protocol['content']() + '\n')
 		print "Saved protocol: %s to %s" % (protocol['name'], protocol_fn)
 
 	#Necessary files
-	open(os.path.join(protocols_dir, 'Header.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Header.ftl'))
-	open(os.path.join(protocols_dir, 'Footer.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Footer.ftl'))
-	open(os.path.join(protocols_dir, 'CustomSubmit.sh.ftl'), 'w')
-	open(os.path.join(protocols_dir, 'Macros.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Macros.ftl'))
-	open(os.path.join(protocols_dir, 'Helpers.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Helpers.ftl'))
+	if not dummy:
+		open(os.path.join(protocols_dir, 'Header.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Header.ftl'))
+		open(os.path.join(protocols_dir, 'Footer.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Footer.ftl'))
+		open(os.path.join(protocols_dir, 'CustomSubmit.sh.ftl'), 'w')
+		open(os.path.join(protocols_dir, 'Macros.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Macros.ftl'))
+		open(os.path.join(protocols_dir, 'Helpers.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Helpers.ftl'))
 
 
 def clean_compute(dummy=False):
@@ -526,7 +532,7 @@ if __name__ == '__main__':
 			custom_worksheet_parameters[found_w.group(1)] = found_w.group(2)
 
 	#Generate workflow's script
-	make_scripts(custom_parameters, custom_worksheet_parameters)
+	make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
  
 	if action == 'default':
 		check_username_password(username, password)
