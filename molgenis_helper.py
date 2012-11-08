@@ -453,15 +453,22 @@ def get_param(name, arguments, default):
 if __name__ == '__main__':
 	make_scripts()
 
-	username, password, to_exec, compile_molg = None, None, True, False 
+	username, password, to_exec, compile_molg, action = None, None, True, False, 'default' 
 
 	username = get_param('username', sys.argv, None)
 	password = get_param('password', sys.argv, None)
 	to_exec  = eval(get_param('to_exec' , sys.argv, 'True'))
 	compile_molg = eval(get_param('compile_molg', sys.argv, 'False'))
+	action = get_param('action', sys.argv, None)
 
-	if not username or not password:
-		raise Exception('Please define username and password in arguments\npython molgenis_helper username=... password=...')
+	if action == 'default':
+		if not username or not password:
+			raise Exception('Please define username and password in arguments\npython molgenis_helper username=... password=...')
 
-	run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg)
+		run_command(username=username, password=password, to_exec=to_exec, compile_molg = compile_molg)
+	elif action == 'restart_server':
+		start_molgenis()
+	else:
+		raise Exception('Unknown action:', action)
+		
 
