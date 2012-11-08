@@ -271,7 +271,7 @@ def make_scripts(custom_parameters, custom_worksheet_parameters):
 			raise Exception('%s is not in the worksheet' % param)
 
 		substituted_s = [y[0:param_index-1] + [custom_worksheet_parameters[param] + y[param_index+1:]] for y in [x.split(',') for x in worksheet_nl_s[1:]]]
-		worksheet_nl = '\n'.join(for y in [','.join(x) for x in worksheet_nl_s[0] + substituted_s]) + '\n'
+		worksheet_nl = '\n'.join([','.join(x) for x in worksheet_nl_s[0] + substituted_s]) + '\n'
 
 	#Save worksheet
 	open(worksheet_fn, 'w').write(worksheet_nl + '\n')
