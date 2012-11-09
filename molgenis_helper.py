@@ -102,6 +102,17 @@ molgenis_script = 'molgenis_compute.sh'
 #Script specific parameters
 run_id = 'run_01'
 
+if environment == 'vm':
+	scripts_dir_stem = '/srv/molgenis/alex/runs'
+elif environment == 'gpfs':
+	scripts_dir_stem = '/target/gpfs2/gcc/home/akanterakis/runs'
+elif environment == 'macbookair':
+	scripts_dir_stem = '/Users/alexandroskanterakis/runs'
+else:
+	raise Exception('Unknown value for environment variable: ' ,str(environment))
+
+scripts_dir = os.join(scripts_dir_stem, pipeline)
+
 if pipeline == 'minimac':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Mach_5_Sep_2012/mach_minimach'
 	workflow_name = 'workflowMachMinimac'
@@ -115,14 +126,6 @@ elif pipeline == 'beagle':
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/beagle/workflowBeagle.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
 elif pipeline == 'compare_grid':
-	if environment == 'gpfs':
-		scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Grid_test/grid_compare'
-	elif environment == 'macbookair':
-		scripts_dir = '/Users/alexandroskanterakis/runs/grid_compare'
-	elif environment == 'vm':
-		scripts_dir = '/srv/molgenis/alex/runs/compare_grid'
-	else:
-		raise Exception('Unknown value for environment variable: ' + str(environment))
 
 	#workflow_name = 'workflowComparison' # Step 1
 	workflow_name = 'workflowComparison_step2' # Step 2
@@ -134,8 +137,6 @@ elif pipeline == 'compare_grid':
 
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 elif pipeline == 'custom_command':
-	if environment == 'vm':
-		scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Grid_test/custom_command'
 	workflow_name = 'customCommand'
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/Runcommand.csv')
