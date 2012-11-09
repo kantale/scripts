@@ -111,7 +111,7 @@ elif environment == 'macbookair':
 else:
 	raise Exception('Unknown value for environment variable: ' ,str(environment))
 
-scripts_dir = os.join(scripts_dir_stem, pipeline)
+scripts_dir = os.path.join(scripts_dir_stem, pipeline)
 
 if pipeline == 'minimac':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Mach_5_Sep_2012/mach_minimach'
