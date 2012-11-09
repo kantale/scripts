@@ -53,7 +53,9 @@ if not pipeline:
 
 #environment = 'gpfs'
 #environment = 'macbookair'
-environment = 'vm'
+#environment = 'vm'
+
+environment = get_param('environment', sys.argv, 'vm')
 
 #queue = 'gcc'
 queue = 'test-long'
@@ -132,7 +134,7 @@ elif pipeline == 'compare_grid':
 
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 elif pipeline == 'custom_command':
-	if environment == 'gpfs':
+	if environment == 'vm':
 		scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Grid_test/custom_command'
 	workflow_name = 'customCommand'
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
