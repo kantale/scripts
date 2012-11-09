@@ -34,9 +34,22 @@ import sys
 import random
 import urllib2
 
+def get_param(name, arguments, default):
+
+	for argument in arguments:
+		found = re.search(r'%s=(.*)' % (name), argument)
+		if found:
+			return found.group(1)
+
+	return default
+
 #pipeline = 'minimac'
 #pipeline = 'beagle'
-pipeline = 'compare_grid'
+#pipeline = 'compare_grid'
+
+pipeline = get_param('pipeline', sys.argv, None)
+if not pipeline:
+	raise Exception('pipeline parameter not defined')
 
 #environment = 'gpfs'
 #environment = 'macbookair'
@@ -502,16 +515,6 @@ def run_command(username=None, password=None, to_exec = True, compile_molg = Fal
 
 	if import_to_molgenis:
 		import_workflow_to_molgenis(compile_molg = compile_molg, username=username, password=password, run_name = None, dummy=dummy)
-
-
-def get_param(name, arguments, default):
-
-	for argument in arguments:
-		found = re.search(r'%s=(.*)' % (name), argument)
-		if found:
-			return found.group(1)
-
-	return default
 
 def check_run_name(run_name):
 	if not run_name:
