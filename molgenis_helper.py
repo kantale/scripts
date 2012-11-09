@@ -118,8 +118,15 @@ elif pipeline == 'compare_grid':
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/workflowComparison_step2.csv') # Step 2
 
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
+elif pipeline == 'custom_command':
+	if environment == 'gpfs':
+		scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Grid_test/custom_command'
+	workflow_name = 'customCommand'
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/Runcommand.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 else:
-	raise Exception("Error")
+	raise Exception("Unknow pipeline:", str(pipeline))
 
 protocols_dir = os.path.join(scripts_dir, 'protocols')
 
@@ -204,6 +211,12 @@ protocol_convertGProbs2PEDMAP = {
 	"content" : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/convertGProbs2PEDMAP.ftl')
 }
 
+#Custom command
+protocol_Runcommand = {
+	'name' : 'Runcommand',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/Runcommand.ftl')
+}
+
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -227,6 +240,10 @@ elif pipeline == 'compare_grid':
 	protocols = [
 #		protocol_concatImputationResults, # Step 1
 		protocol_convertGProbs2PEDMAP, # Step 2
+	]
+elif pipeline == 'custom_command':
+	protocols = [
+		protocol_Runcommand,
 	]
 else:
 	raise Exception("Error")
