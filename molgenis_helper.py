@@ -48,8 +48,6 @@ def get_param(name, arguments, default):
 #pipeline = 'compare_grid'
 
 pipeline = get_param('pipeline', sys.argv, None)
-if not pipeline:
-	raise Exception('pipeline parameter not defined')
 
 #environment = 'gpfs'
 #environment = 'macbookair'
@@ -146,8 +144,6 @@ elif pipeline == 'ConvertTPEDtoBED':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
-else:
-	raise Exception("Unknow pipeline:", str(pipeline))
 
 protocols_dir = os.path.join(scripts_dir, 'protocols')
 
@@ -277,16 +273,14 @@ elif pipeline == 'ConvertTPEDtoBED':
 	protocols = [
 		protocol_ConvertTPEDtoBED,
 	]
-else:
-	raise Exception("Error")
 
 #####################################################################
 ########## NO NEED TO EDIT FROM THAT POINT ##########################
 #####################################################################
-
-worksheet_fn = os.path.join(scripts_dir, project_name + '.csv')
-parameters_fn = os.path.join(scripts_dir, parameters_name + '.csv')
-workflow_fn = os.path.join(scripts_dir, workflow_name + '.csv')
+if pipeline:
+	worksheet_fn = os.path.join(scripts_dir, project_name + '.csv')
+	parameters_fn = os.path.join(scripts_dir, parameters_name + '.csv')
+	workflow_fn = os.path.join(scripts_dir, workflow_name + '.csv')
 
 #TODO! Make ftl files in scripts_dir
 
