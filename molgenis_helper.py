@@ -586,10 +586,15 @@ if __name__ == '__main__':
 	elif action == 'restart_server':
 		start_molgenis(dummy = dummy)
 
+	elif action == 'drop_database_restart_server':
+		clean_compute(dummy)
+		start_molgenis(dummy = dummy)
+
 	elif action == 'submit_worksheet':
 		check_run_name(run_name)
 		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		import_worksheet(run_name, dummy = dummy)
+
 
 	elif action == 'submit_grid':
 		check_username_password(username, password)
