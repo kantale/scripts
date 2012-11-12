@@ -141,8 +141,8 @@ elif pipeline == 'custom_command':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/Runcommand.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
-elif pipeline == 'convertTPEDtoBED':
-	workflow_name = 'convertTPEDtoBED'
+elif pipeline == 'ConvertTPEDtoBED':
+	workflow_name = 'ConvertTPEDtoBED'
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
