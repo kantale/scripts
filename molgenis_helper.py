@@ -146,7 +146,8 @@ elif pipeline == 'ConvertTPEDtoBED':
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 
-protocols_dir = os.path.join(scripts_dir, 'protocols')
+if pipeline:
+	protocols_dir = os.path.join(scripts_dir, 'protocols')
 
 def substitute_parameter(parameter_name, new_value, parameters_content):
 	return re.sub(r'%s,[\w\-\/\.]*,' % (parameter_name), r'%s,%s,' % (parameter_name, new_value), parameters_content)
