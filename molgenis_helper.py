@@ -141,6 +141,11 @@ elif pipeline == 'custom_command':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/worksheet_example.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/Runcommand.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
+elif pipeline == 'convertTPEDtoBED':
+	workflow_name = 'convertTPEDtoBED'
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED_worksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 else:
 	raise Exception("Unknow pipeline:", str(pipeline))
 
@@ -233,6 +238,12 @@ protocol_Runcommand = {
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/Runcommand.ftl')
 }
 
+#Convert TPED to BED
+protocol_ConvertTPEDtoBED = {
+	'name' : 'ConvertTPEDtoBED',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/ConvertTPEDtoBED.ftl')
+}
+
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -260,6 +271,11 @@ elif pipeline == 'compare_grid':
 elif pipeline == 'custom_command':
 	protocols = [
 		protocol_Runcommand,
+	]
+
+elif pipeline == 'ConvertTPEDtoBED':
+	protocols = [
+		protocol_ConvertTPEDtoBED,
 	]
 else:
 	raise Exception("Error")
