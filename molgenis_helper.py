@@ -260,7 +260,7 @@ protocol_SelectRegionFromBED = {
 
 #Gt the concordance between two BED file-sets with plink
 protocol_PlinkBEDConcordance = {
-	'name' : 'PlinkBEDConcordance'
+	'name' : 'PlinkBEDConcordance',
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/PlinkBEDConcordance.ftl')
 }
 
