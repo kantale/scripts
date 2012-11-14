@@ -1,6 +1,24 @@
 import os
 import re
 import sys
+import urllib2
+
+def fetch_page(url):
+	print "Fetching: " + url
+	try:
+		fp = urllib2.urlopen(url)
+		ret = fp.read()
+		fp.close()
+	except urllib2.HTTPError:
+		print '   FAIL import'
+		ret = ''
+
+	return ret
+
+def fetch_page_l(url):
+	return lambda : fetch_page(url)
+
+gridShare_script_l = fetch_page_l('https://raw.github.com/georgebyelas/molgenis_apps/master/modules/compute/datatransfer/gridShare.sh')
 
 def get_param(name, arguments, default):
 
@@ -46,3 +64,4 @@ if __name__ == '__main__':
 
 	for command in walker:
 		print command
+		

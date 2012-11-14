@@ -145,6 +145,11 @@ elif pipeline == 'ConvertTPEDtoBED':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
+elif pipeline = 'SelectRegionFromBED':
+	workflow_name = 'SelectRegionFromBED'
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/SelectRegionFromBED_worksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/SelectRegionFromBED.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 
 if pipeline:
 	protocols_dir = os.path.join(scripts_dir, 'protocols')
@@ -242,6 +247,12 @@ protocol_ConvertTPEDtoBED = {
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/ConvertTPEDtoBED.ftl')
 }
 
+#Select region from BED
+protocol_SelectRegionFromBED = {
+	'name' : 'SelectRegionFromBED',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/SelectRegionFromBED.ftl')
+}
+
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -274,6 +285,11 @@ elif pipeline == 'custom_command':
 elif pipeline == 'ConvertTPEDtoBED':
 	protocols = [
 		protocol_ConvertTPEDtoBED,
+	]
+
+elif pipeline == 'SelectRegionFromBED':
+	protocols = [
+		protocol_SelectRegionFromBED,
 	]
 
 #####################################################################
