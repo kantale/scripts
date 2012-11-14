@@ -150,6 +150,11 @@ elif pipeline == 'SelectRegionFromBED':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/SelectRegionFromBED_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/SelectRegionFromBED.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
+elif pipeline == 'PlinkBEDConcordance':
+	workflow_name = 'PlinkBEDConcordance'
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/PlinkBEDConcordance_worksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/PlinkBEDConcordance.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 
 if pipeline:
 	protocols_dir = os.path.join(scripts_dir, 'protocols')
@@ -253,6 +258,12 @@ protocol_SelectRegionFromBED = {
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/SelectRegionFromBED.ftl')
 }
 
+#Gt the concordance between two BED file-sets with plink
+protocol_PlinkBEDConcordance = {
+	'name' : 'PlinkBEDConcordance'
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/PlinkBEDConcordance.ftl')
+}
+
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -290,6 +301,11 @@ elif pipeline == 'ConvertTPEDtoBED':
 elif pipeline == 'SelectRegionFromBED':
 	protocols = [
 		protocol_SelectRegionFromBED,
+	]
+
+elif pipeline == 'PlinkBEDConcordance':
+	protocols = [
+		protocol_PlinkBEDConcordance,
 	]
 
 #####################################################################
