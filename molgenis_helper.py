@@ -145,7 +145,7 @@ elif pipeline == 'ConvertTPEDtoBED':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/ConvertTPEDtoBED.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
-elif pipeline = 'SelectRegionFromBED':
+elif pipeline == 'SelectRegionFromBED':
 	workflow_name = 'SelectRegionFromBED'
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/SelectRegionFromBED_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/SelectRegionFromBED.csv')
