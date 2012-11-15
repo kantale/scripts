@@ -319,7 +319,7 @@ elif pipeline == 'PlinkBEDConcordance':
 		protocol_PlinkBEDConcordance,
 	]
 
-elif pipeline = 'RecodeAllelesACGT':
+elif pipeline == 'RecodeAllelesACGT':
 	protocols = [
 		protocol_RecodeAllelesACGT,
 	]
