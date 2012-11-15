@@ -155,6 +155,11 @@ elif pipeline == 'PlinkBEDConcordance':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/PlinkBEDConcordance_worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/PlinkBEDConcordance.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
+elif pipeline == 'RecodeAllelesACGT':
+	workflow_name = 'RecodeAllelesACGT'
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/RecodeAllelesACGT_worksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/workflows/RecodeAllelesACGT.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/comparison/parameters.csv')
 
 if pipeline:
 	protocols_dir = os.path.join(scripts_dir, 'protocols')
@@ -258,10 +263,16 @@ protocol_SelectRegionFromBED = {
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/SelectRegionFromBED.ftl')
 }
 
-#Gt the concordance between two BED file-sets with plink
+#Get the concordance between two BED file-sets with plink
 protocol_PlinkBEDConcordance = {
 	'name' : 'PlinkBEDConcordance',
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/PlinkBEDConcordance.ftl')
+}
+
+#Change allele codings from 1,2,3,4 to A,C,G,T wi plikn
+protocol_RecodeAllelesACGT = {
+	'name' : 'RecodeAllelesACGT',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/RecodeAllelesACGT.ftl')
 }
 
 if pipeline == 'minimac':
@@ -306,6 +317,11 @@ elif pipeline == 'SelectRegionFromBED':
 elif pipeline == 'PlinkBEDConcordance':
 	protocols = [
 		protocol_PlinkBEDConcordance,
+	]
+
+elif pipeline = 'RecodeAllelesACGT':
+	protocols = [
+		protocol_RecodeAllelesACGT,
 	]
 
 #####################################################################
