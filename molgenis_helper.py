@@ -28,6 +28,9 @@
 #To check script output from the database:
 #select * from ComputeTask;
 
+#The all.txt file:
+#srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/groups/ebiobank/projects/imputation/benchmark/all.txt
+
 import os
 import re
 import sys
@@ -269,7 +272,7 @@ protocol_PlinkBEDConcordance = {
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/PlinkBEDConcordance.ftl')
 }
 
-#Change allele codings from 1,2,3,4 to A,C,G,T wi plikn
+#Change allele codings from 1,2,3,4 to A,C,G,T with plink
 protocol_RecodeAllelesACGT = {
 	'name' : 'RecodeAllelesACGT',
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/RecodeAllelesACGT.ftl')
@@ -429,12 +432,16 @@ def compile_molgenis(dummy=False):
 
 	exec_command("cd %s; sed -i 's/innodb_autoinc_lock_mode=2?//g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir), dummy)
 
-def start_molgenis(port = 8080, dummy=False):
+def stop_molgenis(dummy = False):
 	if environment == 'vm':
 		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy) # This doesn't always word
 		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`", dummy) # So we are running this as well
 	else:
 		exec_command("kill -9 `lsof -i :%i -t`" % (port), dummy)
+
+def start_molgenis(port = 8080, dummy=False):
+
+	stop_molgenis(dummy)
 
 	#Move nohup in a new file
 	hash_string = "%032x" % random.getrandbits(128)
@@ -633,6 +640,9 @@ if __name__ == '__main__':
 	elif action == 'import_workflow':
 		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		import_workflow(dummy)
+
+	elif action == 'stop_server':
+		stop_molgenis(dummy = dummy)
 
 	elif action == 'restart_server':
 		start_molgenis(dummy = dummy)
