@@ -436,6 +436,7 @@ def stop_molgenis(dummy = False):
 	if environment == 'vm':
 		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy) # This doesn't always word
 		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`", dummy) # So we are running this as well
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 4`", dummy) # So we are running this as well
 	else:
 		exec_command("kill -9 `lsof -i :%i -t`" % (port), dummy)
 
