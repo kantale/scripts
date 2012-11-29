@@ -86,10 +86,14 @@ def copy_files(cluster_root_dir, grid_root_dir):
 	for cluster_file_name in cluster_file_list:
 		if cluster_file_name[-1] == '/':
 			#This is a directory
-			cluster_file_name_dir = os.path.split(cluster_file_name)[1]
+			cluster_file_name_dir = os.path.split(cluster_file_name[0:-1])[1]
+			grid_file_name_dir = os.path.join(grid_root_dir, cluster_file_name_dir)
 
-			command = 'srmmkdir %s' % os.path.join(grid_root_dir, cluster_file_name_dir)
+			command = 'srmmkdir %s' % (grid_file_name_dir)
 			print command
+			copy_files(cluster_file_name[0:-1], grid_file_name_dir)
+		else:
+			pass
 
 if __name__ == '__main__':
 
