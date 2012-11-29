@@ -88,7 +88,7 @@ def copy_files(cluster_root_dir, grid_root_dir):
 			#This is a directory
 			cluster_file_name_dir = os.path.split(cluster_file_name)[1]
 
-			command = 'srmmkdir %s' % os.path.join((constants[GRIDROOT]), 
+			command = 'srmmkdir %s' % os.path.join((constants[GRIDROOT]), cluster_file_name_dir)
 
 if __name__ == '__main__':
 
