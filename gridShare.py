@@ -5,8 +5,17 @@ import urllib2
 
 constants = {
 	'GRIDROOT' : 'srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2/resources/imputationReference/gonl_release3.1',
-	'CLUSTERROOT' : 'kanterak@clustervp:/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1'
+	'CLUSTERROOT' : 'akanterakis@clustervp:/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1',
+	'USERNAME' : 'akanterakis',
+	'REMOTEHOST' : 'clustervp'
+	'CLUSTERDIR' : '/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1'
 }
+
+def list_files(dir_name):
+	command = 'ssh %s:%s "ls -1dp --group-directories-first %s/*" > file_list.txt' % (constants['USERNAME'], constants['REMOTEHOST'], dir_name)
+	print command
+	os.system(command)
+	return open('file_list.txt').readlines()
 
 def fetch_page(url):
 	print "Fetching: " + url
@@ -72,13 +81,14 @@ def copy_to_grid(root_name, dir_name):
 
 if __name__ == '__main__':
 
-	grid_root = get_param('grid_root', sys.argv, None)
-	cluster_root = get_param('cluster_root', sys.argv, None)
+#	grid_root = get_param('grid_root', sys.argv, None)
+#	cluster_root = get_param('cluster_root', sys.argv, None)
 
-	walker = copy_to_grid(grid_root, cluster_root)
+#	walker = copy_to_grid(grid_root, cluster_root)
 
-	fetch_gridShareScript()
+#	fetch_gridShareScript()
 
 #	for command in walker:
 #		print command
 
+	print list_files(constants['CLUSTERDIR'])
