@@ -12,7 +12,7 @@ constants = {
 }
 
 def list_files(dir_name):
-	command = 'ssh %s:%s "ls -1dp --group-directories-first %s/*" > file_list.txt' % (constants['USERNAME'], constants['REMOTEHOST'], dir_name)
+	command = 'ssh %s@%s "ls -1dp --group-directories-first %s/*" > file_list.txt' % (constants['USERNAME'], constants['REMOTEHOST'], dir_name)
 	print command
 	os.system(command)
 	return open('file_list.txt').readlines()
