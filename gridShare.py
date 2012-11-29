@@ -5,7 +5,7 @@ import urllib2
 
 constants = {
 	'GRIDROOT' : 'srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2/resources/imputationReference/gonl_release3.1',
-	'CLUSTERROOT' : 'gbyelas@clustervp:/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1'
+	'CLUSTERROOT' : 'kanterak@clustervp:/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1'
 }
 
 def fetch_page(url):
