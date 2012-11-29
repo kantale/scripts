@@ -3,6 +3,11 @@ import re
 import sys
 import urllib2
 
+constants = {
+	'GRIDROOT' : 'srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/byelas',
+	'CLUSTERROOT' : 'gbyelas@clustervp:/target/gpfs2/gcc/home/gbyelas'
+}
+
 def fetch_page(url):
 	print "Fetching: " + url
 	try:
@@ -28,6 +33,16 @@ def get_param(name, arguments, default):
 			return found.group(1)
 
 	return default
+
+def fetch_gridShareScript():
+	content = gridShare_script_l()
+
+	content = re.sub(r'GRIDROOT="[\w\:\/\.]*"', r'GRIDROOT="%s"' % (constants['GRIDROOT']), content)
+	content = re.sub(r'CLUSTERROOT="[\w\:\/\.\@]*"', r'CLUSTERROOT="%s"' % (constants['CLUSTERROOT']), content)
+
+	open('gridShare.sh', 'w').write(content)
+
+
 
 def walk_dir(currentDir):
     for root, dirs, files in os.walk(currentDir): # Walk directory tree
@@ -62,6 +77,8 @@ if __name__ == '__main__':
 
 	walker = copy_to_grid(grid_root, cluster_root)
 
-	for command in walker:
-		print command
-		
+	fetch_gridShareScript()
+
+#	for command in walker:
+#		print command
+
