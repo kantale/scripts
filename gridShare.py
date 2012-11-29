@@ -7,8 +7,8 @@ constants = {
 	'GRIDROOT' : 'srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2/resources/imputationReference/gonl_release3.1',
 	'CLUSTERROOT' : 'akanterakis@clustervp:/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1',
 	'USERNAME' : 'akanterakis',
-	'REMOTEHOST' : 'clustervp'
-	'CLUSTERDIR' : '/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1'
+	'REMOTEHOST' : 'clustervp',
+	'CLUSTERDIR' : '/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1',
 }
 
 def list_files(dir_name):
