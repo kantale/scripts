@@ -84,7 +84,7 @@ def copy_files(cluster_root_dir, grid_root_dir):
 #	content_dirs = lambda x : [os.path.split(x)[1]] + [content_dirs(os.path.split(x)[0])][0] if len(x) else []
 
 	for cluster_file_name in cluster_file_list:
-		if file_name[-1] == '/':
+		if cluster_file_name[-1] == '/':
 			#This is a directory
 			cluster_file_name_dir = os.path.split(cluster_file_name)[1]
 
