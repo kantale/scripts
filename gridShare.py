@@ -83,7 +83,17 @@ def exec_command(command, dummy=False):
 	if not dummy:
 		os.system(command)
 
+def content_dirs(dir_name):
+"""
+This function can be simply defined as:
 content_dirs = lambda x : [os.path.split(x)[1]] + [content_dirs(os.path.split(x)[0])][0] if len(x) else []
+But python 2.4.3 (Grid version) does not support: expr if .. else
+"""
+	if len(x):
+		return [os.path.split(dir_name)[1]] + [content_dirs(os.path.split(dir_name)[0])][0]
+	else:
+		return []
+
 
 def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 	cluster_file_list = list_files(cluster_root_dir)
@@ -121,10 +131,13 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 
 if __name__ == '__main__':
 
+	#Example: python gridShare.py dummy=True skip=gonl_release3.1/jobs,gonl_release3.1/tmp 
  	dummy = get_param('dummy', sys.argv, False)
  	skip = get_param('skip', sys.argv, None)
 
- 	skip_dirs = [content_dirs(x) for x in skip.split(',')] if skip else []
+ 	skip_dirs = []
+ 	if skip:
+ 		skip_dirs = [content_dirs(x) for x in skip.split(',')]
 
 	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs)
 
