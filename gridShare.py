@@ -107,7 +107,6 @@ def content_dirs(dir_name):
 
 def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 	cluster_file_list = list_files(cluster_root_dir)
-	print "dummy:", dummy
 
 	for cluster_file_name in cluster_file_list:
 		if cluster_file_name[-1] == '/':
@@ -118,9 +117,6 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 
 			#Should we skip it?
 			grid_file_name_dir_content = content_dirs(grid_file_name_dir)
-			print skip_dirs
-			print grid_file_name_dir_content
-
 			dont_skip_this_dir = all([grid_file_name_dir_content[0:len(x)] != x for x in skip_dirs])
 
 			if dont_skip_this_dir:
