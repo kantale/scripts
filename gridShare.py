@@ -142,7 +142,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 if __name__ == '__main__':
 
 	#Example: python gridShare.py dummy=True skip=gonl_release3.1/jobs,gonl_release3.1/tmp 
- 	dummy = get_param('dummy', sys.argv, False)
+ 	dummy = eval(get_param('dummy', sys.argv, 'False'))
  	skip = get_param('skip', sys.argv, None)
 
  	skip_dirs = []
