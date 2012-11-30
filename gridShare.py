@@ -104,7 +104,7 @@ def copy_files(cluster_root_dir, grid_root_dir):
 
 			grid_file_name_dir = os.path.join(grid_root_dir, cluster_file_name_last)
 
-			command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (constants['TMPDIR'], grid_file_name_dir)
+			command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last), grid_file_name_dir)
 			print command
 
 
