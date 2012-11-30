@@ -9,6 +9,8 @@ constants = {
 	'USERNAME' : 'akanterakis',
 	'REMOTEHOST' : 'clustervp',
 	'CLUSTERDIR' : '/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1',
+	'TMPDIR' : 'tmptransfer',
+	'HOMEDIR' : 'home/kanterak',
 }
 
 def list_files(dir_name):
@@ -93,7 +95,20 @@ def copy_files(cluster_root_dir, grid_root_dir):
 			print command
 			copy_files(cluster_file_name[0:-1], grid_file_name_dir)
 		else:
-			pass
+			#This is a simple file
+			cluster_file_name_last = os.path.split(cluster_file_name)[1]
+
+			#Move the file to temporary local
+			command = 'scp %s@%s:%s %s' % (constants['USERNAME'], constants['REMOTEHOST'], cluster_file_name, os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
+			print command
+
+			grid_file_name_dir = os.path.join(grid_root_dir, cluster_file_name_last)
+
+			command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (constants['TMPDIR'], grid_file_name_dir)
+			print command
+
+
+
 
 if __name__ == '__main__':
 
