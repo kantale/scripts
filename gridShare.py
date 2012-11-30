@@ -89,7 +89,7 @@ def content_dirs(dir_name):
 	content_dirs = lambda x : [os.path.split(x)[1]] + [content_dirs(os.path.split(x)[0])][0] if len(x) else []
 	But python 2.4.3 (Grid version) does not support: expr if .. else
 	"""
-	if len(x):
+	if len(dir_name):
 		return [os.path.split(dir_name)[1]] + [content_dirs(os.path.split(dir_name)[0])][0]
 	else:
 		return []
