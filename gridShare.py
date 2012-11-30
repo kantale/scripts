@@ -78,6 +78,15 @@ def copy_to_grid(root_name, dir_name):
 			command = ' '.join(['getFile', os.path.join(root_name, name)])
 			yield command
 
+def all(a_list):
+	'''
+	This function is builtin in python >= 2.5 ...
+	'''
+	for x in a_list:
+		if not x return False
+
+	return True
+
 def exec_command(command, dummy=False):
 	print 'Running:', command
 	if not dummy:
