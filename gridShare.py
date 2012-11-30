@@ -119,16 +119,17 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 			#Should we skip it?
 			grid_file_name_dir_content = content_dirs(grid_file_name_dir)
 			print skip_dirs
+			print grid_file_name_dir_content
 
-			skip_this_dir = all([grid_file_name_dir_content[0:len(x)] != x for x in skip_dirs])
+			dont_skip_this_dir = all([grid_file_name_dir_content[0:len(x)] != x for x in skip_dirs])
 
-			if skip_this_dir:
-				print "Skipping dir: ", grid_file_name_dir
-			else:
+			if dont_skip_this_dir:
 				command = 'srmmkdir %s' % (grid_file_name_dir)
 				exec_command(command, dummy)
+				copy_files(cluster_file_name[0:-1], grid_file_name_dir, dummy, skip_dirs)
+			else:
+				print 'Skipping dir:', grid_file_name_dir
 
-			copy_files(cluster_file_name[0:-1], grid_file_name_dir)
 		else:
 			#This is a simple file
 			cluster_file_name_last = os.path.split(cluster_file_name)[1]
