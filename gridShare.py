@@ -10,7 +10,7 @@ constants = {
 	'REMOTEHOST' : 'clustervp',
 	'CLUSTERDIR' : '/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1',
 	'TMPDIR' : 'tmptransfer',
-	'HOMEDIR' : 'home/kanterak',
+	'HOMEDIR' : '/home/kanterak',
 }
 
 def list_files(dir_name):
