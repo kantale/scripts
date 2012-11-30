@@ -83,7 +83,8 @@ def all(a_list):
 	This function is builtin in python >= 2.5 ...
 	'''
 	for x in a_list:
-		if not x return False
+		if not x:
+			return False
 
 	return True
 
