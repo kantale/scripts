@@ -136,7 +136,12 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 
 			grid_file_name_dir = os.path.join(grid_root_dir, cluster_file_name_last)
 
+			#Copy file to grid
 			command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last), grid_file_name_dir)
+			exec_command(command, dummy)
+
+			#Remove the file from temporary local
+			command = 'rm %s' % (os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
 			exec_command(command, dummy)
 
 if __name__ == '__main__':
