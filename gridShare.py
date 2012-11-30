@@ -53,8 +53,6 @@ def fetch_gridShareScript():
 
 	open('gridShare.sh', 'w').write(content)
 
-
-
 def walk_dir(currentDir):
     for root, dirs, files in os.walk(currentDir): # Walk directory tree
 		for dir_name in dirs:
@@ -80,19 +78,33 @@ def copy_to_grid(root_name, dir_name):
 			command = ' '.join(['getFile', os.path.join(root_name, name)])
 			yield command
 
-def copy_files(cluster_root_dir, grid_root_dir):
-	cluster_file_list = list_files(cluster_root_dir)
+def exec_command(command, dummy=False):
+	print 'Running:', command
+	if not dummy:
+		os.system(command)
 
-#	content_dirs = lambda x : [os.path.split(x)[1]] + [content_dirs(os.path.split(x)[0])][0] if len(x) else []
+content_dirs = lambda x : [os.path.split(x)[1]] + [content_dirs(os.path.split(x)[0])][0] if len(x) else []
+
+def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
+	cluster_file_list = list_files(cluster_root_dir)
 
 	for cluster_file_name in cluster_file_list:
 		if cluster_file_name[-1] == '/':
 			#This is a directory
+
 			cluster_file_name_dir = os.path.split(cluster_file_name[0:-1])[1]
 			grid_file_name_dir = os.path.join(grid_root_dir, cluster_file_name_dir)
 
-			command = 'srmmkdir %s' % (grid_file_name_dir)
-			print command
+			#Should we skip it?
+			grid_file_name_dir_content = content_dirs(grid_file_name_dir)
+			skip_this_dir = all([grid_file_name_dir_content[0:len(x)] != x for x in skip_dirs])
+
+			if skip_this_dir:
+				print "Skipping dir: ", grid_file_name_dir
+			else:
+				command = 'srmmkdir %s' % (grid_file_name_dir)
+				exec_command(command, dummy)
+
 			copy_files(cluster_file_name[0:-1], grid_file_name_dir)
 		else:
 			#This is a simple file
@@ -100,27 +112,19 @@ def copy_files(cluster_root_dir, grid_root_dir):
 
 			#Move the file to temporary local
 			command = 'scp %s@%s:%s %s' % (constants['USERNAME'], constants['REMOTEHOST'], cluster_file_name, os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
-			print command
+			exec_command(command, dummy)
 
 			grid_file_name_dir = os.path.join(grid_root_dir, cluster_file_name_last)
 
 			command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last), grid_file_name_dir)
-			print command
-
-
-
+			exec_command(command, dummy)
 
 if __name__ == '__main__':
 
-#	grid_root = get_param('grid_root', sys.argv, None)
-#	cluster_root = get_param('cluster_root', sys.argv, None)
+ 	dummy = get_param('dummy', sys.argv, False)
+ 	skip = get_param('skip', sys.argv, None)
 
-#	walker = copy_to_grid(grid_root, cluster_root)
+ 	skip_dirs = [content_dirs(x) for x in skip.split(',')] if skip else []
 
-#	fetch_gridShareScript()
-
-#	for command in walker:
-#		print command
-
-	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'])
+	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs)
 
