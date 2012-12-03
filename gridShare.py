@@ -56,7 +56,7 @@ def content_dirs(dir_name):
 		return []
 
 
-def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
+def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], delete = False, change_permissions = False):
 	cluster_file_list = list_files(cluster_root_dir)
 
 	for cluster_file_name in cluster_file_list:
@@ -86,7 +86,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 			command = 'srmls %s' % (grid_file_name_dir)
 			print command
 			returned = os.system(command)
-			if returned:
+			if returned and not delete and not change_permissions:
 
 				#Move the file to temporary local
 				command = 'scp %s@%s:%s %s' % (constants['USERNAME'], constants['REMOTEHOST'], cluster_file_name, os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
@@ -100,13 +100,28 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = []):
 				command = 'rm %s' % (os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
 				exec_command(command, dummy)
 			else:
-				print 'File: ', grid_file_name_dir, 'already exists on the grid. Skip copying'
+				if delete:
+					print "Deleting file:", grid_file_name_dir
+					command = 'srmrm %s', %(grid_file_name_dir)
+					exec_command(command, dummy)
+
+				elif change_permissions:
+					print "Changing permissions to file:", grid_file_name_dir
+					command = 'srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE %s' % (grid_file_name_dir)
+					exec_command(command, dummy)
+
+				else:
+					print 'File: ', grid_file_name_dir, 'already exists on the grid. Skip copying'
 
 if __name__ == '__main__':
 
 	#Example: python gridShare.py dummy=True skip=gonl_release3.1/jobs,gonl_release3.1/tmp 
+	#srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2
+
  	dummy = eval(get_param('dummy', sys.argv, 'False'))
  	skip = get_param('skip', sys.argv, None)
+ 	delete = eval(get_param('delete', sys.argv, 'False'))
+ 	change_permissions = eval(get_param('change_permissions', sys.argv, 'False'))
 
  	for x in ['GRIDROOT', 'USERNAME', 'REMOTEHOST', 'CLUSTERDIR', 'TMPDIR', 'HOMEDIR']:
  		constants[x] = get_param(x, sys.argv, constants[x])
@@ -115,5 +130,5 @@ if __name__ == '__main__':
  	if skip:
  		skip_dirs = [content_dirs(x) for x in skip.split(',')]
 
-	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs)
+	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs, delete, change_permissions)
 
