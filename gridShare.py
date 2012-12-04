@@ -138,7 +138,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 				exec_command(command, dummy)
 
 				#Copy file to grid
-				command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last), grid_file_name_dir)
+				command = 'srmcp -server_mode=passive file:///%s %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last), grid_file_name_dir)
 				exec_command(command, dummy)
 
 				#Appply permsissions
