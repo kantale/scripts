@@ -4,7 +4,7 @@ import sys
 import urllib2
 
 
-"""
+help = """
 	Author: Alexandros Kanterakis
 	email: alexandros.kanterakis@gmail.com
 
@@ -24,8 +24,8 @@ import urllib2
 		dummy=True # Doesn't do anything. Just shows the commands that are supposed to be executed
 		skip=gonl_release3.1/jobs,gonl_release3.1/tmp  # Comma separated list of dirs thay will be skipped from copying. Example values.
 		delete=True # Deletes all the files in the grid that locates in the cluster. 
-		change_permissions=RW,W,NONE 	#Changes permission to all the files in the grid that locates in the cluster. 
-										The applied command for this example is: srm-set-permissions -type=CHANGE -owner=RW -group=W -other=NONE 
+		change_permissions=RW,R,NONE 	#Changes permission to all the files in the grid that locates in the cluster. 
+										The applied command for this example is: srm-set-permissions -type=CHANGE -owner=RW -group=R -other=NONE 
 """
 
 constants = {
@@ -84,6 +84,8 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 	cluster_file_list = list_files(cluster_root_dir)
 
 	for cluster_file_name in cluster_file_list:
+		print '-' * 20
+
 		if cluster_file_name[-1] == '/':
 			#This is a directory
 
@@ -105,8 +107,15 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 				elif change_permissions:
 					command = 'srm-set-permissions -type=CHANGE %s %s' % (change_permissions, grid_file_name_dir)
 					exec_command(command, dummy)
+
+					command = 'srm-set-permissions -type=ADD -owner=X -group=X %s' % (grid_file_name_dir)
+					exec_command(command, dummy)
+					
 				else:
 					command = 'srmmkdir %s' % (grid_file_name_dir)
+					exec_command(command, dummy)
+
+					command = 'srm-set-permissions -type=CHANGE -owner=RWX -group=RX -other=NONE %s' % (grid_file_name_dir)
 					exec_command(command, dummy)
 
 				copy_files(cluster_file_name[0:-1], grid_file_name_dir, dummy, skip_dirs)
@@ -133,7 +142,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 				exec_command(command, dummy)
 
 				#Appply permsissions
-				command = 'srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE %s' % (grid_file_name_dir)
+				command = 'srm-set-permissions -type=CHANGE -owner=RW -group=R -other=NONE %s' % (grid_file_name_dir)
 				exec_command(command, dummy)
 
 				#Remove the file from temporary local
@@ -147,7 +156,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 
 				elif change_permissions:
 					print "Changing permissions to file:", grid_file_name_dir
-					command = 'srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE %s' % (grid_file_name_dir)
+					command = 'srm-set-permissions -type=CHANGE %s %s' % (change_permissions, grid_file_name_dir)
 					exec_command(command, dummy)
 
 				else:
