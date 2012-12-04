@@ -3,13 +3,37 @@ import re
 import sys
 import urllib2
 
+
+"""
+	Author: Alexandros Kanterakis
+	email: alexandros.kanterakis@gmail.com
+
+	python gridShare.py \
+		GRIDROOT=srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2/resources/imputationReference/gonl_release3.1 \
+		CLUSTERDIR=/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1 \
+		USERNAME=akanterakis \
+		REMOTEHOST=clustervp \
+		TMPDIR=/home/kanterak/tmptransfer
+	
+	Notes: 
+		USERNAME is the *cluster* username, REMOTEHOST is the *cluster* host and TMPDIR is a temporary directory in the *GRID*
+		This script should run from GRID
+		The GRID and CLUSTER should be configured to connect with SSH through shared pubic keys. 
+
+	Additional options:
+		dummy=True # Doesn't do anything. Just shows the commands that are supposed to be executed
+		skip=gonl_release3.1/jobs,gonl_release3.1/tmp  # Comma separated list of dirs thay will be skipped from copying. Example values.
+		delete=True # Deletes all the files in the grid that locates in the cluster. 
+		change_permissions=True #Changes permission to all the files in the grid that locates in the cluster. 
+								#The applied command is: srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE 
+"""
+
 constants = {
 	'GRIDROOT' : 'srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2/resources/imputationReference/gonl_release3.1',
 	'USERNAME' : 'akanterakis',
 	'REMOTEHOST' : 'clustervp',
 	'CLUSTERDIR' : '/target/gpfs2/gcc/resources/imputationReference/gonl_release3.1',
-	'TMPDIR' : 'tmptransfer',
-	'HOMEDIR' : '/home/kanterak',
+	'TMPDIR' : '/home/kanterak/tmptransfer',
 }
 
 def list_files(dir_name):
@@ -71,8 +95,20 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 			dont_skip_this_dir = all([grid_file_name_dir_content[0:len(x)] != x for x in skip_dirs])
 
 			if dont_skip_this_dir:
-				command = 'srmmkdir %s' % (grid_file_name_dir)
-				exec_command(command, dummy)
+				if delete:
+					pass
+
+					#Attention: The directory should be empty..
+					#command = 'srmrmdir %s' % (grid_file_name_dir)
+					#exec_command(command, dummy)
+
+				elif change_permissions:
+					command = 'srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE %s' % (grid_file_name_dir)
+					exec_command(command, dummy)
+				else:
+					command = 'srmmkdir %s' % (grid_file_name_dir)
+					exec_command(command, dummy)
+
 				copy_files(cluster_file_name[0:-1], grid_file_name_dir, dummy, skip_dirs)
 			else:
 				print 'Skipping dir:', grid_file_name_dir
@@ -89,15 +125,19 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 			if returned and not delete and not change_permissions:
 
 				#Move the file to temporary local
-				command = 'scp %s@%s:%s %s' % (constants['USERNAME'], constants['REMOTEHOST'], cluster_file_name, os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
+				command = 'scp %s@%s:%s %s' % (constants['USERNAME'], constants['REMOTEHOST'], cluster_file_name, os.path.join(constants['TMPDIR'], cluster_file_name_last))
 				exec_command(command, dummy)
 
 				#Copy file to grid
 				command = 'srmcp -server_mode=passive file:///$HOME/%s %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last), grid_file_name_dir)
 				exec_command(command, dummy)
 
+				#Appply permsissions
+				command = 'srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE %s' % (grid_file_name_dir)
+				exec_command(command, dummy)
+
 				#Remove the file from temporary local
-				command = 'rm %s' % (os.path.join(constants['HOMEDIR'], constants['TMPDIR'], cluster_file_name_last))
+				command = 'rm %s' % (os.path.join(constants['TMPDIR'], cluster_file_name_last))
 				exec_command(command, dummy)
 			else:
 				if delete:
@@ -115,15 +155,12 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 
 if __name__ == '__main__':
 
-	#Example: python gridShare.py dummy=True skip=gonl_release3.1/jobs,gonl_release3.1/tmp 
-	#srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2
-
  	dummy = eval(get_param('dummy', sys.argv, 'False'))
  	skip = get_param('skip', sys.argv, None)
  	delete = eval(get_param('delete', sys.argv, 'False'))
  	change_permissions = eval(get_param('change_permissions', sys.argv, 'False'))
 
- 	for x in ['GRIDROOT', 'USERNAME', 'REMOTEHOST', 'CLUSTERDIR', 'TMPDIR', 'HOMEDIR']:
+ 	for x in ['GRIDROOT', 'USERNAME', 'REMOTEHOST', 'CLUSTERDIR', 'TMPDIR']:
  		constants[x] = get_param(x, sys.argv, constants[x])
 
  	skip_dirs = []
