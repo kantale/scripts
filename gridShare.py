@@ -24,8 +24,8 @@ import urllib2
 		dummy=True # Doesn't do anything. Just shows the commands that are supposed to be executed
 		skip=gonl_release3.1/jobs,gonl_release3.1/tmp  # Comma separated list of dirs thay will be skipped from copying. Example values.
 		delete=True # Deletes all the files in the grid that locates in the cluster. 
-		change_permissions=True #Changes permission to all the files in the grid that locates in the cluster. 
-								#The applied command is: srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE 
+		change_permissions=RW,W,NONE 	#Changes permission to all the files in the grid that locates in the cluster. 
+										The applied command for this example is: srm-set-permissions -type=CHANGE -owner=RW -group=W -other=NONE 
 """
 
 constants = {
@@ -103,7 +103,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 					#exec_command(command, dummy)
 
 				elif change_permissions:
-					command = 'srm-set-permissions -type=CHANGE -owner=RW -group=RW -other=NONE %s' % (grid_file_name_dir)
+					command = 'srm-set-permissions -type=CHANGE %s %s' % (change_permissions, grid_file_name_dir)
 					exec_command(command, dummy)
 				else:
 					command = 'srmmkdir %s' % (grid_file_name_dir)
@@ -158,7 +158,7 @@ if __name__ == '__main__':
  	dummy = eval(get_param('dummy', sys.argv, 'False'))
  	skip = get_param('skip', sys.argv, None)
  	delete = eval(get_param('delete', sys.argv, 'False'))
- 	change_permissions = eval(get_param('change_permissions', sys.argv, 'False'))
+ 	change_permissions = get_param('change_permissions', sys.argv, '')
 
  	for x in ['GRIDROOT', 'USERNAME', 'REMOTEHOST', 'CLUSTERDIR', 'TMPDIR']:
  		constants[x] = get_param(x, sys.argv, constants[x])
@@ -167,5 +167,12 @@ if __name__ == '__main__':
  	if skip:
  		skip_dirs = [content_dirs(x) for x in skip.split(',')]
 
+ 	if change_permissions:
+ 		try:
+	 		change_permissions =  ' '.join(map(lambda x: x[0] + x[1], zip(['-owner=', '-group=', '-other='], change_permissions.split(","))))
+ 		except Exception, e:
+ 			print 'Could not process parameter change_permissions. Example: RW,R,NONE '
+ 			raise e
+ 
 	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs, delete, change_permissions)
 
