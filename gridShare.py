@@ -110,7 +110,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 
 					command = 'srm-set-permissions -type=ADD -owner=X -group=X %s' % (grid_file_name_dir)
 					exec_command(command, dummy)
-					
+
 				else:
 					command = 'srmmkdir %s' % (grid_file_name_dir)
 					exec_command(command, dummy)
@@ -151,7 +151,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 			else:
 				if delete:
 					print "Deleting file:", grid_file_name_dir
-					command = 'srmrm %s', %(grid_file_name_dir)
+					command = 'srmrm %s' % (grid_file_name_dir)
 					exec_command(command, dummy)
 
 				elif change_permissions:
