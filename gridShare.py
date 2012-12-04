@@ -118,7 +118,7 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 					command = 'srm-set-permissions -type=CHANGE -owner=RWX -group=RX -other=NONE %s' % (grid_file_name_dir)
 					exec_command(command, dummy)
 
-				copy_files(cluster_file_name[0:-1], grid_file_name_dir, dummy, skip_dirs)
+				copy_files(cluster_file_name[0:-1], grid_file_name_dir, dummy, skip_dirs, delete, change_permissions)
 			else:
 				print 'Skipping dir:', grid_file_name_dir
 
