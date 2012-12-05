@@ -52,6 +52,7 @@ python molgenis_helper.py pipeline=SelectRegionFromBED action=import_workflow
 python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_grid username=kanterak password=1d1iotmega w:plinkInput=OUTPUT_0.9 w:plinkOutput=OUTPUT_0.9 w:fromKB=0 w:toKB=5000 w:chr=1 run_id=SelectRegionFromBED dummy=True
 
 python molgenis_helper.py pipeline=minimac_patrick action=import_workflow 
+python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=${root}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 """
 
 import os
@@ -685,8 +686,8 @@ if __name__ == '__main__':
 	custom_parameters = {}
 	custom_worksheet_parameters = {}
 	for argument in sys.argv:
-		found_p = re.search(r'p:([\w]*)=([\w\.\-]*)', argument)
-		found_w = re.search(r'w:([\w]*)=([\w\.\-]*)', argument)
+		found_p = re.search(r'p:([\w]*)=([\$\{\}\w\.\-]*)', argument)
+		found_w = re.search(r'w:([\w]*)=([\$\{\}\w\.\-]*)', argument)
 		if found_p:
 			print 'Found custom parameter: %s = %s' % (found_p.group(1), found_p.group(2))
 			custom_parameters[found_p.group(1)] = found_p.group(2)
