@@ -686,8 +686,8 @@ if __name__ == '__main__':
 	custom_parameters = {}
 	custom_worksheet_parameters = {}
 	for argument in sys.argv:
-		found_p = re.search(r'p:([\w]*)=([\$\{\}\w\.\-]*)', argument)
-		found_w = re.search(r'w:([\w]*)=([\$\{\}\w\.\-]*)', argument)
+		found_p = re.search(r'p:([\w]*)=([\/\$\{\}\w\.\-]*)', argument)
+		found_w = re.search(r'w:([\w]*)=([\/\$\{\}\w\.\-]*)', argument)
 		if found_p:
 			print 'Found custom parameter: %s = %s' % (found_p.group(1), found_p.group(2))
 			custom_parameters[found_p.group(1)] = found_p.group(2)
