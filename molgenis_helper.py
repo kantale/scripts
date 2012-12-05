@@ -146,9 +146,9 @@ if pipeline == 'minimac':
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
 elif pipeline == 'minimac_patrick':
 	workflow_name = 'workflow_minimac_Patrick'
-	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/exampleWorksheet.csv')
-	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/workflowMinimacStage1.csv')
-	parameters = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/parameters.csv')
+	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/examplePrePhasingWorksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
+	parameters = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'beagle':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Beagle_19_Sep_2012/beagle/'
 	workflow_name = 'workflowBeagle'
@@ -319,7 +319,7 @@ protocol_convertPedMapToTriTyper = {
 
 protocol_prepareStudy = {
 	'name' : 'prepareStudy',
-	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/prepareStudy.ftl')
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/prepareStudy.ftl')
 }
 
 protocol_convertPlinkPedMapToMerlin = {
@@ -334,7 +334,7 @@ protocol_chunkChromosome = {
 
 protocol_startMinimacStage2 = {
 	'name' : 'startMinimacStage2',
-	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/startMinimacStage2.ftl')
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/startMinimacStage2.ftl')
 }
 
 if pipeline == 'minimac':
@@ -349,11 +349,7 @@ if pipeline == 'minimac':
 
 elif pipeline == 'minimac_patrick':
 	protocols = [
-		protocol_preparePedMapForImputationTool,
-		protocol_convertPedMapToTriTyper,
 		protocol_prepareStudy,
-		protocol_convertPlinkPedMapToMerlin,
-		protocol_chunkChromosome,
 		protocol_startMinimacStage2,
 	]
 
