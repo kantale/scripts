@@ -121,6 +121,11 @@ if pipeline == 'minimac':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/worksheet_example.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/workflowMachMinimac.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
+elif pipeline == 'minimac_patrick':
+	workflow_name = 'workflow_minimac_Patrick'
+	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/exampleWorksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/workflowMinimacStage1.csv')
+	parameters = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/parameters.csv')
 elif pipeline == 'beagle':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Beagle_19_Sep_2012/beagle/'
 	workflow_name = 'workflowBeagle'
@@ -278,6 +283,37 @@ protocol_RecodeAllelesACGT = {
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/RecodeAllelesACGT.ftl')
 }
 
+#prepare Ped MAP for Imputation tool
+protocol_preparePedMapForImputationTool = {
+	'name' : 'preparePedMapForImputationTool',
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/preparePedMapForImputationTool.ftl')
+}
+
+protocol_convertPedMapToTriTyper = {
+	'name' : 'convertPedMapToTriTyper',
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/convertPedMapToTriTyper.ftl')
+}
+
+protocol_prepareStudy = {
+	'name' : 'prepareStudy',
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/prepareStudy.ftl')
+}
+
+protocol_convertPlinkPedMapToMerlin = {
+	'name' : 'convertPlinkPedMapToMerlin'
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/convertPlinkPedMapToMerlin.ftl')
+}
+
+protocol_chunkChromosome = {
+	'name' : 'chunkChromosome',
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/chunkChromosome.ftl')
+}
+
+protocol_startMinimacStage2 = {
+	'name' : 'startMinimacStage2'
+	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/startMinimacStage2.ftl')
+}
+
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -287,6 +323,17 @@ if pipeline == 'minimac':
 		protocol_impute_with_minimac,
 		protocol_minimacPostProcessing
 	]
+
+elif pipeline == 'minimac_patrick':
+	protocols = [
+		protocol_preparePedMapForImputationTool,
+		protocol_convertPedMapToTriTyper,
+		protocol_prepareStudy,
+		protocol_convertPlinkPedMapToMerlin,
+		protocol_chunkChromosome,
+		startMinimacStage2,
+	]
+
 elif pipeline == 'beagle':
 	protocols = [
 #		protocol_prepareStudy,
