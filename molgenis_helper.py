@@ -33,6 +33,7 @@
 
 """
 Examples of usage:
+python molgenis_helper.py action=compile
 python molgenis_helper.py action=restart_server
 python molgenis_helper.py action=drop_database
 python molgenis_helper.py action=drop_database_restart_server
@@ -499,7 +500,7 @@ def compile_molgenis(dummy=False):
 	#build/classes/META-INF/persistence.xml
 	exec_command("cd %s; sed -i 's/validate/update/g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir), dummy)
 
-	exec_command("cd %s; sed -i 's/innodb_autoinc_lock_mode=2?//g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir), dummy)
+#	exec_command("cd %s; sed -i 's/innodb_autoinc_lock_mode=2?//g' build/classes/META-INF/persistence.xml" % (molgenis_apps_dir), dummy)
 
 def stop_molgenis(dummy = False):
 	if environment == 'vm':
