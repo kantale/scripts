@@ -321,7 +321,7 @@ protocol_prepareStudy = {
 }
 
 protocol_convertPlinkPedMapToMerlin = {
-	'name' : 'convertPlinkPedMapToMerlin'
+	'name' : 'convertPlinkPedMapToMerlin',
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/convertPlinkPedMapToMerlin.ftl')
 }
 
@@ -331,7 +331,7 @@ protocol_chunkChromosome = {
 }
 
 protocol_startMinimacStage2 = {
-	'name' : 'startMinimacStage2'
+	'name' : 'startMinimacStage2',
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/startMinimacStage2.ftl')
 }
 
