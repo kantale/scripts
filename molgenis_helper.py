@@ -479,11 +479,11 @@ def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 
 	#Necessary files
 	if not dummy:
-		open(os.path.join(protocols_dir, 'Header.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Header.ftl'))
-		open(os.path.join(protocols_dir, 'Footer.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Footer.ftl'))
+		open(os.path.join(protocols_dir, 'Header.ftl'), 'w').write(fetch_page('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/impute2/protocols/Header.ftl'))
+		open(os.path.join(protocols_dir, 'Footer.ftl'), 'w').write(fetch_page('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/impute2/protocols/Footer.ftl'))
 		open(os.path.join(protocols_dir, 'CustomSubmit.sh.ftl'), 'w')
-		open(os.path.join(protocols_dir, 'Macros.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Macros.ftl'))
-		open(os.path.join(protocols_dir, 'Helpers.ftl'), 'w').write(fetch_page('https://raw.github.com/freerkvandijk/molgenis_apps/master/modules/compute/protocols/imputation/impute2/protocols/Helpers.ftl'))
+		open(os.path.join(protocols_dir, 'Macros.ftl'), 'w').write(fetch_page('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/impute2/protocols/Macros.ftl'))
+		open(os.path.join(protocols_dir, 'Helpers.ftl'), 'w').write(fetch_page('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/impute2/protocols/Helpers.ftl'))
 
 
 def clean_compute(dummy=False):
@@ -726,6 +726,8 @@ if __name__ == '__main__':
 		make_scripts(custom_parameters, custom_worksheet_parameters, dummy=dummy)
 		import_worksheet(run_name, dummy = dummy)
 
+	elif action == 'compile':
+		compile_molgenis(dummy)
 
 	elif action == 'submit_grid':
 		check_username_password(username, password)
