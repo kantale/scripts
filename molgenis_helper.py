@@ -504,7 +504,7 @@ def compile_molgenis(dummy=False):
 
 def stop_molgenis(dummy = False):
 	if environment == 'vm':
-		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy) # This doesn't always word
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy) # This doesn't always work
 		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`", dummy) # So we are running this as well
 		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 4`", dummy) # So we are running this as well
 	else:
@@ -551,7 +551,8 @@ molgenis/lib/hibernate-validator-4.1.0.Final/log4j-1.2.14.jar:molgenis/lib/hiber
 molgenis/lib/hibernate-validator-4.1.0.Final/validation-api-1.0.0.GA.jar:\
 molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-1.6.1.jar:molgenis/lib/hibernate/hibernate3.jar:\
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
-molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
+molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar:\
+molgenis/lib/hibernate/c3p0-0.9.1.jar \
 org.molgenis.compute.test.util.WorkflowImporterJPA %s %s %s """
 	command = command % (os.path.join(molgenis_apps_dir, '..'), parameters_fn, workflow_fn, protocols_dir)
 	print "Import workflow. Running: " + command
@@ -584,6 +585,7 @@ molgenis/lib/hibernate-validator-4.1.0.Final/log4j-1.2.14.jar:molgenis/lib/hiber
 molgenis/lib/hibernate-validator-4.1.0.Final/validation-api-1.0.0.GA.jar:\
 molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-1.6.1.jar:molgenis/lib/hibernate/hibernate3.jar:\
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
+molgenis/lib/hibernate/c3p0-0.9.1.jar:\
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
 org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name %s -worksheet_file %s -McId %s """
 	#Change RUN_ID!
@@ -618,6 +620,7 @@ molgenis/lib/hibernate-validator-4.1.0.Final/log4j-1.2.14.jar:molgenis/lib/hiber
 molgenis/lib/hibernate-validator-4.1.0.Final/validation-api-1.0.0.GA.jar:\
 molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-1.6.1.jar:molgenis/lib/hibernate/hibernate3.jar:\
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
+molgenis/lib/hibernate/c3p0-0.9.1.jar:\
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
 org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
