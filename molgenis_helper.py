@@ -31,6 +31,27 @@
 #The all.txt file:
 #srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/groups/ebiobank/projects/imputation/benchmark/all.txt
 
+"""
+Examples of usage:
+python molgenis_helper.py action=restart_server
+python molgenis_helper.py action=drop_database
+python molgenis_helper.py action=drop_database_restart_server
+python molgenis_helper.py action=import_workflow
+
+
+python molgenis_helper.py username=kanterak password=1d1iotmega w:aposterioriThreshold=0.7 action=submit_worksheet_grid run_id=compare_0.7 dummy=True
+
+python molgenis_helper.py pipeline=custom_command action=import_workflow
+python molgenis_helper.py pipeline=custom_command action=submit_worksheet_grid username=kanterak password=1d1iotmega run_id=custom_command_module_avail
+
+python molgenis_helper.py pipeline=ConvertTPEDtoBED action=import_workflow p:plinkInput=OUTPUT_0.9 p:plinkOutput=OUTPUT_0.9 dummy=True
+python molgenis_helper.py pipeline=ConvertTPEDtoBED action=submit_worksheet_grid username=kanterak password=1d1iotmega run_id=convertTPED_BED_09
+
+python molgenis_helper.py pipeline=SelectRegionFromBED action=import_workflow
+python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_grid username=kanterak password=1d1iotmega w:plinkInput=OUTPUT_0.9 w:plinkOutput=OUTPUT_0.9 w:fromKB=0 w:toKB=5000 w:chr=1 run_id=SelectRegionFromBED dummy=True
+
+"""
+
 import os
 import re
 import sys
