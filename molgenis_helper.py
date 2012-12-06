@@ -320,7 +320,11 @@ protocol_convertPedMapToTriTyper = {
 
 protocol_prepareStudy = {
 	'name' : 'prepareStudy',
-	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/prepareStudy.ftl')
+	#Molgenis tesint repo
+#	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/prepareStudy.ftl')
+
+	#Kantale's repo
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/protocols/prepareStudy.ftl')
 }
 
 protocol_convertPlinkPedMapToMerlin = {

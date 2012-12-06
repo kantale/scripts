@@ -79,7 +79,6 @@ def content_dirs(dir_name):
 	else:
 		return []
 
-
 def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], delete = False, change_permissions = False):
 	cluster_file_list = list_files(cluster_root_dir)
 
