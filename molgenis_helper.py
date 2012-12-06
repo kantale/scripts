@@ -52,7 +52,7 @@ python molgenis_helper.py pipeline=SelectRegionFromBED action=import_workflow
 python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_grid username=kanterak password=1d1iotmega w:plinkInput=OUTPUT_0.9 w:plinkOutput=OUTPUT_0.9 w:fromKB=0 w:toKB=5000 w:chr=1 run_id=SelectRegionFromBED dummy=True
 
 python molgenis_helper.py pipeline=minimac_patrick action=import_workflow 
-python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=${root}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 """
 
 import os
@@ -404,10 +404,15 @@ if pipeline:
 
 #TODO! Make ftl files in scripts_dir
 
-def exec_command(command, dummy=False):
+def exec_command(command, dummy=False, exit_if_problem=True):
 	print 'Running:', command
 	if not dummy:
-		os.system(command)
+		return_code = os.system(command)
+		if return_code:
+			print "Received error code: ", return_code
+			if exit_if_problem:
+				print "Exiting.."
+				sys.exit(return_code)
 
 def remove_empty_lines(text):
 	return str.join('\n', [x for x in text.split('\n') if len(x) > 0])
@@ -501,11 +506,11 @@ def compile_molgenis(dummy=False):
 
 def stop_molgenis(dummy = False):
 	if environment == 'vm':
-		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy) # This doesn't always work
-		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`", dummy) # So we are running this as well
-		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 4`", dummy) # So we are running this as well
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 2`", dummy, exit_if_problem = False) # This doesn't always work
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 3`", dummy, exit_if_problem = False) # So we are running this as well
+		exec_command("kill `ps aux | grep ant-launcher | grep -v grep | cut -d ' ' -f 4`", dummy, exit_if_problem = False) # So we are running this as well
 	else:
-		exec_command("kill -9 `lsof -i :%i -t`" % (port), dummy)
+		exec_command("kill -9 `lsof -i :%i -t`" % (port), dummy, exit_if_problem = False)
 
 def start_molgenis(port = 8080, dummy=False):
 
