@@ -50,7 +50,7 @@ python molgenis_helper.py pipeline=ConvertTPEDtoBED action=submit_worksheet_grid
 python molgenis_helper.py pipeline=SelectRegionFromBED action=import_workflow
 python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_grid username=kanterak password=1d1iotmega w:plinkInput=OUTPUT_0.9 w:plinkOutput=OUTPUT_0.9 w:fromKB=0 w:toKB=5000 w:chr=1 run_id=SelectRegionFromBED dummy=True
 
-python molgenis_helper.py pipeline=minimac_patrick action=import_workflow 
+python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
 python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 """
 
