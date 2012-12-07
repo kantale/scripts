@@ -549,11 +549,11 @@ def scp_files(
 
 	actions = [
 		('spawn', 'sftp %s@%s' % (username, host)),
-		('expect', "%s@%s's password:" % (username, host))
+		('expect', "%s@%s's password:" % (username, host)),
 		('send_password', password),
 		('expect', 'ftp> '),
-		('send', 'cd %s' % (remote_dir))
-		('expect', 'ftp> ')
+		('send', 'cd %s' % (remote_dir)),
+		('expect', 'ftp> '),
 		]
 
 	for local_filename in local_filenames:
