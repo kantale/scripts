@@ -556,7 +556,7 @@ def ssh_command(
 	for remote_command in remote_commands:
 		actions += [('send', remote_command)]
 		actions += [('expect', '%s> $' % (username))]
-		actions += [('print_output', None)],
+		actions += [('print_output', None)]
 
 	actions += [('send', 'logout')]
 
@@ -699,13 +699,15 @@ def submit_script_to_grid(username, password, dummy=False):
 	print 'Copying worksheet to ui..'
 	scp_files(username, 'ui.grid.sara.nl', password, '/home/kanterak/worksheets', [worksheet_fn], verbose = True)
 
+	worksheet_fn_lastfile = os.path.split(workflow_fn)[1]
+
 	remote_commands = [
-		'srmrm %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn)),
-		'srmcp -server_mode=passive %s %s' % (os.path.join('file:////home/kanterak/worksheets', worksheet_fn), os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn)),
+		'srmrm %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn_lastfile)),
+		'srmcp -server_mode=passive %s %s' % (os.path.join('file:////home/kanterak/worksheets', worksheet_fn_lastfile), os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn_lastfile)),
 	]
 
 	ssh_command(username, 'ui.grid.sara.nl', password, remote_commands, verbose = True)
-	
+
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
