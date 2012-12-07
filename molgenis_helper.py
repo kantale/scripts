@@ -699,7 +699,7 @@ def submit_script_to_grid(username, password, dummy=False):
 	print 'Copying worksheet to ui..'
 	scp_files(username, 'ui.grid.sara.nl', password, '/home/kanterak/worksheets', [worksheet_fn], verbose = True)
 
-	worksheet_fn_lastfile = os.path.split(workflow_fn)[1]
+	worksheet_fn_lastfile = os.path.split(worksheet_fn)[1]
 
 	remote_commands = [
 		'srmrm %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn_lastfile)),
