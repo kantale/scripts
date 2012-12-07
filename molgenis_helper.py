@@ -567,6 +567,10 @@ molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibern
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar:\
 molgenis/lib/hibernate/c3p0-0.9.1.jar \
 org.molgenis.compute.test.util.WorkflowImporterJPA %s %s %s """
+
+	if environment == 'hudson':
+		command = command.replace('molgenis/lib/hibernate/c3p0-0.9.1.jar', 'molgenis_apps/WebContent/WEB-INF/lib/c3p0.jar')
+
 	command = command % (os.path.join(molgenis_apps_dir, '..'), parameters_fn, workflow_fn, protocols_dir)
 	print "Importing workflow.."
 	exec_command(command, dummy)
