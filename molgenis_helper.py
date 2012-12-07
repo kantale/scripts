@@ -566,9 +566,8 @@ molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.ja
 molgenis/lib/hibernate/c3p0-0.9.1.jar \
 org.molgenis.compute.test.util.WorkflowImporterJPA %s %s %s """
 	command = command % (os.path.join(molgenis_apps_dir, '..'), parameters_fn, workflow_fn, protocols_dir)
-	print "Import workflow. Running: " + command
-	if not dummy:
-		os.system(command)
+	print "Importing workflow.."
+	exec_command(command, dummy)
 
 def import_worksheet(run_name = 'test_001', dummy = False):
 	command = """ cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
@@ -601,9 +600,8 @@ molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.ja
 org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name %s -worksheet_file %s -McId %s """
 	#Change RUN_ID!
 	command = command % (os.path.join(molgenis_apps_dir, '..'), os.path.split(workflow_fn)[1], 'ui.grid.sara.nl', worksheet_fn, run_name) 
-	print "Import worksheet. Running: " + command
-	if not dummy:
-		os.system(command)
+	print "Import worksheet.."
+	exec_command(command, dummy)
 
 def submit_script_to_grid(username, password, dummy=False):
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
@@ -636,9 +634,8 @@ molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.ja
 org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
 
 	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', username, password, 'grid')
-	print 'Submit script to grid. Running: ' + command
-	if not dummy:
-		os.system(command)
+	print 'Submit script to grid..'
+	exec_command(command, dummy)
 
 def import_workflow_to_molgenis(compile_molg = False, username = None, password = None, run_name = None, dummy=False):
 	clean_compute(dummy)
