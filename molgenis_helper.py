@@ -668,7 +668,7 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name
 def submit_script_to_grid(username, password, dummy=False):
 
 	print 'Copying worksheet to ui..'
-	Execute_scp_user_Kantale(username, 'ui.grid.sara.nl', password, '/home/kanterak/worksheets', [worksheet_fn], verbose = True)
+	scp_files(username, 'ui.grid.sara.nl', password, '/home/kanterak/worksheets', [worksheet_fn], verbose = True)
 
 	print 'Deleting pssible worksheet with the same name from grid'
 
