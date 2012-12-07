@@ -39,7 +39,6 @@ python molgenis_helper.py action=drop_database
 python molgenis_helper.py action=drop_database_restart_server
 python molgenis_helper.py action=import_workflow
 
-
 python molgenis_helper.py username=kanterak password=1d1iotmega w:aposterioriThreshold=0.7 action=submit_worksheet_grid run_id=compare_0.7 dummy=True
 
 python molgenis_helper.py pipeline=custom_command action=import_workflow
@@ -121,7 +120,7 @@ elif environment == 'vm':
 	import_to_molgenies = True
 elif environment == 'hudson':
 	molgenis_dir = None
-	molgenis_apps_dir = 'molgenis_apps'
+	molgenis_apps_dir = '/data/hudson/jobs/molgenis_compute_imputation_pipeline/workspace/molgenis_apps'
 	import_to_molgenies = True
 else:
 	raise Exception('Unknown value for environment variable: ' + str(environment))
@@ -138,7 +137,7 @@ elif environment == 'gpfs':
 elif environment == 'macbookair':
 	scripts_dir_stem = '/Users/alexandroskanterakis/runs'
 elif environment == 'hudson':
-	scripts_dir_stem = 'runs'
+	scripts_dir_stem = '/data/hudson/jobs/molgenis_compute_imputation_pipeline/workspace/runs'
 else:
 	raise Exception('Unknown value for environment variable: ' ,str(environment))
 
