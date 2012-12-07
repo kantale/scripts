@@ -544,8 +544,13 @@ def Execute_scp_user_Kantale(
 	password = None,
 	remote_dir = None,
 	local_filenames = None,
-	method = 'pexpect'
+	method = 'pexpect',
+	verbose = False,
 ):
+
+	def this_print(msg):
+		if verbose:
+			print msg
 
 	if method == 'pexpect':
 
@@ -555,16 +560,42 @@ def Execute_scp_user_Kantale(
 			print "pexpect has not been installed. Refer to http://www.noah.org/wiki/Pexpect#Download_and_Installation to download and install"
 			raise inst
 
-		child = pexpect.spawn ('sftp %s@%s' % (username, host))
-		child.expect ("%s@%s's password:" % (username, host))
+		spawn = 'sftp %s@%s' % (username, host)
+		this_print('Spawning: ' + spawn)
+		child = pexpect.spawn (spawn)
+
+		expect = "%s@%s's password:" % (username, host)
+		this_print('Expecting: ' + expect)
+		child.expect (expect)
+
+		this_print('Sending password')
 		child.sendline (password)
-		child.expect ('ftp> ')
-		child.sendline ('cd %s' % (remote_dir))
-		child.expect('ftp> ')
+
+		expect = 'ftp> '
+		this_print('Expecting: ' + expect)
+		child.expect (expect)
+
+		sendline = 'cd %s' % (remote_dir)
+		this_print('Sending: ' + sendline)
+		child.sendline (sendline)
+
+		expect = 'ftp> '
+		this_print('Expecting: ' + expect)
+		child.expect(expect)
+
 		for local_filename in local_filenames:
-			child.sendline ('put %s' % (local_filename))
-			child.expect('ftp> ')
-		child.sendline ('bye')
+			sendline = 'put %s' % (local_filename)
+			this_print('Sending: ' + sendline)
+			child.sendline (sendline)
+
+			expect = 'ftp> '
+			this_print('Expecting: ' + expect)
+			child.expect()
+
+		sendline = 'bye'
+		this_print('Sending: ' + sendline)
+		child.sendline (sendline)
+
 	else:
 		raise Exception("Invalid method for Execute_scp : " + method)
 
@@ -642,7 +673,7 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name
 def submit_script_to_grid(username, password, dummy=False):
 
 	print "Copying worksheet to ui.."
-	Execute_scp_user_Kantale(username, 'ui.grid.sara.nl', password, 'home/kanterak/worksheets', worksheet_fn)
+	Execute_scp_user_Kantale(username, 'ui.grid.sara.nl', password, 'home/kanterak/worksheets', [worksheet_fn], verbose = True)
 
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
