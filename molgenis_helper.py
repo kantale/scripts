@@ -119,6 +119,10 @@ elif environment == 'vm':
 	molgenis_dir = None
 	molgenis_apps_dir = '/srv/molgenis/compute/molgenis_apps' 
 	import_to_molgenies = True
+elif environment == 'hudson':
+	molgenis_dir = None
+	molgenis_apps_dir = 'molgenis_apps'
+	import_to_molgenies = True
 else:
 	raise Exception('Unknown value for environment variable: ' + str(environment))
 
@@ -133,6 +137,8 @@ elif environment == 'gpfs':
 	scripts_dir_stem = '/target/gpfs2/gcc/home/akanterakis/runs'
 elif environment == 'macbookair':
 	scripts_dir_stem = '/Users/alexandroskanterakis/runs'
+elif environment == 'hudson':
+	scripts_dir_stem = 'runs'
 else:
 	raise Exception('Unknown value for environment variable: ' ,str(environment))
 
