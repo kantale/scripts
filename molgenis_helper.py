@@ -558,7 +558,7 @@ def scp_files(
 
 	for local_filename in local_filenames:
 		actions += [('send', 'put %s' % (local_filename))]
-		actions += [('send', 'bye')]  for local_filename in local_filenames]
+		actions += [('send', 'bye')]
 
 	Execute_pexpect_list(actions, verbose)
 
