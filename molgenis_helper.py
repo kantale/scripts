@@ -538,6 +538,30 @@ def start_molgenis(port = 8080, dummy=False):
 	exec_command("sleep 4", dummy)
 	print "ok"
 
+def ssh_command(
+	username = None,
+	host = None,
+	password = None,
+	remote_commands = None,
+	verbose = False,
+	):
+
+	actions = [
+		('spawn', 'ssh %s@%s' % (username, host)),
+		('expect', "%s@%s's password:" % (username, host)),
+		('send_password', password),
+		('expect', '%s> $' % (username)),
+	]
+
+	for remote_command in remote_commands:
+		actions += [('send', remote_command)]
+		actions += [('expect', '%s> $' % (username))]
+		actions += [('print_output', None)],
+
+	actions += [('send', 'logout')]
+
+	Execute_pexpect_list(actions, verbose=verbose)
+
 def scp_files(
 	username = None,
 	host = None,
@@ -558,9 +582,11 @@ def scp_files(
 
 	for local_filename in local_filenames:
 		actions += [('send', 'put %s' % (local_filename))]
-		actions += [('send', 'bye')]
+		actions += [('expect', 'ftp> ')]
 
-	Execute_pexpect_list(actions, verbose)
+	actions += [('send', 'bye')]
+
+	Execute_pexpect_list(actions, verbose=verbose)
 
 
 def Execute_pexpect_list(
@@ -592,6 +618,9 @@ def Execute_pexpect_list(
 		elif action[0] == 'send':
 			this_print('Sending: ' + action[1])
 			child.sendline(action[1])
+		elif action[0] == 'print_output':
+			this_print('Received:')
+			print child.before
 
 
 def import_workflow(dummy=False):
@@ -670,9 +699,13 @@ def submit_script_to_grid(username, password, dummy=False):
 	print 'Copying worksheet to ui..'
 	scp_files(username, 'ui.grid.sara.nl', password, '/home/kanterak/worksheets', [worksheet_fn], verbose = True)
 
-	print 'Deleting pssible worksheet with the same name from grid'
+	remote_commands = [
+		'srmrm %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn)),
+		'srmcp -server_mode=passive %s %s' % (os.path.join('file:////home/kanterak/worksheets', worksheet_fn), os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets', worksheet_fn)),
+	]
 
-
+	ssh_command(username, 'ui.grid.sara.nl', password, remote_commands, verbose = True)
+	
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
