@@ -538,12 +538,33 @@ def start_molgenis(port = 8080, dummy=False):
 	exec_command("sleep 4", dummy)
 	print "ok"
 
-def Execute_scp_user_Kantale(
+def scp_files(
 	username = None,
 	host = None,
 	password = None,
 	remote_dir = None,
 	local_filenames = None,
+	verbose = False,
+	):
+
+	actions = [
+		('spawn', 'sftp %s@%s' % (username, host)),
+		('expect', "%s@%s's password:" % (username, host))
+		('send_password', password),
+		('expect', 'ftp> '),
+		('send', 'cd %s' % (remote_dir))
+		('expect', 'ftp> ')
+		]
+
+	for local_filename in local_filenames:
+		actions += [('send', 'put %s' % (local_filename))]
+		actions += [('send', 'bye')]  for local_filename in local_filenames]
+
+	Execute_pexpect_list(actions, verbose)
+
+
+def Execute_pexpect_list(
+	actions,
 	method = 'pexpect',
 	verbose = False,
 ):
@@ -552,52 +573,26 @@ def Execute_scp_user_Kantale(
 		if verbose:
 			print msg
 
-	if method == 'pexpect':
+	try:
+		import pexpect
+	except ImportError as inst:
+		print "pexpect has not been installed. Refer to http://www.noah.org/wiki/Pexpect#Download_and_Installation to download and install"
+		raise inst
 
-		try:
-			import pexpect
-		except ImportError as inst:
-			print "pexpect has not been installed. Refer to http://www.noah.org/wiki/Pexpect#Download_and_Installation to download and install"
-			raise inst
+	for action in actions:
+		if action[0] == 'spawn':
+			this_print('Spawning: ' + action[1])
+			child = pexpect.spawn(action[1])
+		elif action[0] == 'expect':
+			this_print('Expecting: ' + action[1])
+			child.expect(action[1])
+		elif action[0] == 'send_password':
+			this_print('Sending password')
+			child.sendline(action[1])
+		elif action[0] == 'send':
+			this_print('Sending: ' + action[1])
+			child.sendline(action[1])
 
-		spawn = 'sftp %s@%s' % (username, host)
-		this_print('Spawning: ' + spawn)
-		child = pexpect.spawn (spawn)
-
-		expect = "%s@%s's password:" % (username, host)
-		this_print('Expecting: ' + expect)
-		child.expect (expect)
-
-		this_print('Sending password')
-		child.sendline (password)
-
-		expect = 'ftp> '
-		this_print('Expecting: ' + expect)
-		child.expect (expect)
-
-		sendline = 'cd %s' % (remote_dir)
-		this_print('Sending: ' + sendline)
-		child.sendline (sendline)
-
-		expect = 'ftp> '
-		this_print('Expecting: ' + expect)
-		child.expect(expect)
-
-		for local_filename in local_filenames:
-			sendline = 'put %s' % (local_filename)
-			this_print('Sending: ' + sendline)
-			child.sendline (sendline)
-
-			expect = 'ftp> '
-			this_print('Expecting: ' + expect)
-			child.expect(expect)
-
-		sendline = 'bye'
-		this_print('Sending: ' + sendline)
-		child.sendline (sendline)
-
-	else:
-		raise Exception("Invalid method for Execute_scp : " + method)
 
 def import_workflow(dummy=False):
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
@@ -672,8 +667,11 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name
 
 def submit_script_to_grid(username, password, dummy=False):
 
-	print "Copying worksheet to ui.."
-	Execute_scp_user_Kantale(username, 'ui.grid.sara.nl', password, 'home/kanterak/worksheets', [worksheet_fn], verbose = True)
+	print 'Copying worksheet to ui..'
+	Execute_scp_user_Kantale(username, 'ui.grid.sara.nl', password, '/home/kanterak/worksheets', [worksheet_fn], verbose = True)
+
+	print 'Deleting pssible worksheet with the same name from grid'
+
 
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
