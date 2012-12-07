@@ -420,6 +420,8 @@ def exec_command(command, dummy=False, exit_if_problem=True):
 		if return_code:
 			print "Received error code: ", return_code
 			if exit_if_problem:
+				if return_code > 255: #Check: http://stackoverflow.com/questions/179565/exitcodes-bigger-than-255-possible
+					return_code = 1
 				print "Exiting.."
 				sys.exit(return_code)
 
