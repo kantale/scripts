@@ -538,6 +538,36 @@ def start_molgenis(port = 8080, dummy=False):
 	exec_command("sleep 4", dummy)
 	print "ok"
 
+def Execute_scp_user_Kantale(
+	username = None,
+	host = None,
+	password = None,
+	remote_dir = None,
+	local_filenames = None,
+	method = "pexpect"
+):
+
+	if method == pexpect:
+
+		try:
+			import pexpect
+		except ImportError as inst:
+			print "pexpect has not been installed. Refer to http://www.noah.org/wiki/Pexpect#Download_and_Installation to download and install"
+			raise inst
+
+		child = pexpect.spawn ('sftp %s@%s' % (username, host))
+		child.expect ("%s@%s's password:" % (username, host))
+		child.sendline (password)
+		child.expect ('ftp> ')
+		child.sendline ('cd %s' % (remote_dir))
+		child.expect('ftp> ')
+		for local_filename in local_filenames:
+			child.sendline ('put %s' % (local_filename))
+			child.expect('ftp> ')
+		child.sendline ('bye')
+	else:
+		raise Exception("Invalid method for Execute_scp : " + method)
+
 def import_workflow(dummy=False):
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
@@ -610,6 +640,10 @@ org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name
 	exec_command(command, dummy)
 
 def submit_script_to_grid(username, password, dummy=False):
+
+	print "Copying worksheet to ui.."
+	Execute_scp_user_Kantale(username, 'ui.grid.sara.nl', password, 'home/kanterak/worksheets', worksheet_fn)
+
 	command = """cd %s; java -cp molgenis_apps/build/classes:molgenis/bin:\
 molgenis/lib/ant-1.8.1.jar:molgenis/lib/ant-apache-log4j.jar:molgenis/lib/aopalliance-1.0.jar:molgenis/lib/apache-poi-3.8.2:\
 molgenis/lib/arq.jar:molgenis/lib/asm-3.3.jar:molgenis/lib/axiom-api-1.2.7.jar:molgenis/lib/axiom-impl-1.2.7.jar:\
