@@ -590,7 +590,7 @@ def Execute_scp_user_Kantale(
 
 			expect = 'ftp> '
 			this_print('Expecting: ' + expect)
-			child.expect()
+			child.expect(expect)
 
 		sendline = 'bye'
 		this_print('Sending: ' + sendline)
