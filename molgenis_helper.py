@@ -544,10 +544,10 @@ def Execute_scp_user_Kantale(
 	password = None,
 	remote_dir = None,
 	local_filenames = None,
-	method = "pexpect"
+	method = 'pexpect'
 ):
 
-	if method == pexpect:
+	if method == 'pexpect':
 
 		try:
 			import pexpect
