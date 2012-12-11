@@ -50,7 +50,9 @@ python molgenis_helper.py pipeline=ConvertTPEDtoBED action=submit_worksheet_grid
 python molgenis_helper.py pipeline=SelectRegionFromBED action=import_workflow
 python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_grid username=kanterak password=1d1iotmega w:plinkInput=OUTPUT_0.9 w:plinkOutput=OUTPUT_0.9 w:fromKB=0 w:toKB=5000 w:chr=1 run_id=SelectRegionFromBED dummy=True
 
-python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
+# python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
+# python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
 python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 """
 
@@ -154,7 +156,7 @@ elif pipeline == 'minimac_patrick':
 	workflow_name = 'workflow_minimac_Patrick'
 	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/examplePrePhasingWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
-	parameters = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'beagle':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Beagle_19_Sep_2012/beagle/'
 	workflow_name = 'workflowBeagle'
