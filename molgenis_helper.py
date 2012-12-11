@@ -495,6 +495,7 @@ def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 		open(workflow_fn, 'w').write(workflow_nl + '\n')
 	print "Saved workflow to:", workflow_fn
 
+	#If protocols have not defined. Build from protocols_dir_git
 	if not protocols:
 		protocols = [{'name': y, 'content' : fetch_page_l(os.path.join(protocols_dir_git, y+'.ftl'))} for y in [x.split(',')[1] for x in workflow_nl.split('\n')[1:]]]
 
