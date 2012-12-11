@@ -38,6 +38,7 @@ python molgenis_helper.py action=restart_server
 python molgenis_helper.py action=drop_database
 python molgenis_helper.py action=drop_database_restart_server
 python molgenis_helper.py action=import_workflow
+python molgenis_helper.py action=stop_server
 
 python molgenis_helper.py username=kanterak password=1d1iotmega w:aposterioriThreshold=0.7 action=submit_worksheet_grid run_id=compare_0.7 dummy=True
 
@@ -157,6 +158,12 @@ elif pipeline == 'minimac_patrick':
 	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/examplePrePhasingWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
+elif pipeline == 'ngs':
+	workflow_name = 'ngs'
+	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/ngsWorkflowRealignmentAndSnpCalling/demoWorksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/ngsWorkflowRealignmentAndSnpCalling/workflow.csv')
+	parameters = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/ngsWorkflowRealignmentAndSnpCalling/parameters.csv')
+	protocols_dir_git = 'https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/ngsWorkflowRealignmentAndSnpCalling/protocols'
 elif pipeline == 'beagle':
 	scripts_dir = '/target/gpfs2/gcc/home/akanterakis/runs/Beagle_19_Sep_2012/beagle/'
 	workflow_name = 'workflowBeagle'
@@ -349,6 +356,8 @@ protocol_startMinimacStage2 = {
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/startMinimacStage2.ftl')
 }
 
+protocols = None
+
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -485,6 +494,9 @@ def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 	if not dummy:
 		open(workflow_fn, 'w').write(workflow_nl + '\n')
 	print "Saved workflow to:", workflow_fn
+
+	if not protocols:
+		protocols = [{'name': y, 'content' : fetch_page_l(os.path.join(protocols_dir_git, y+'.ftl'))} for y in [x.split(',')[1] for x in workflow_nl.split('\n')[1:]]]
 
 	#Save protocols
 	for protocol in protocols:
