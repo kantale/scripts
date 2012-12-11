@@ -670,7 +670,7 @@ molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar:\
 molgenis/lib/hibernate/c3p0-0.9.1.jar \
-org.molgenis.compute.test.util.WorkflowImporterJPA %s %s %s """
+org.molgenis.compute.db.util.WorkflowImporterJPA %s %s %s """
 
 	if environment == 'hudson':
 		command = command.replace('molgenis/lib/hibernate/c3p0-0.9.1.jar', 'molgenis_apps/WebContent/WEB-INF/lib/c3p0.jar')
@@ -707,7 +707,7 @@ molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
 molgenis/lib/hibernate/c3p0-0.9.1.jar:\
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
-org.molgenis.compute.test.util.WorksheetImporter -workflow_name %s -backend_name %s -worksheet_file %s -McId %s """
+org.molgenis.compute.db.util.WorksheetImporter -workflow_name %s -backend_name %s -worksheet_file %s -McId %s """
 	#Change RUN_ID!
 	command = command % (os.path.join(molgenis_apps_dir, '..'), os.path.split(workflow_fn)[1], 'ui.grid.sara.nl', worksheet_fn, run_name) 
 	print "Import worksheet.."
@@ -754,7 +754,7 @@ molgenis/lib/hibernate/commons-collections-3.1.jar:molgenis/lib/hibernate/dom4j-
 molgenis/lib/hibernate/hibernate-jpa-2.0-api-1.0.0.Final.jar:molgenis/lib/hibernate/hibernate-search-3.4.1.Final.jar:\
 molgenis/lib/hibernate/c3p0-0.9.1.jar:\
 molgenis/lib/hibernate/javassist-3.12.0.GA.jar:molgenis/lib/hibernate/jta-1.1.jar:slf4j-api-1.6.1.jar \
-org.molgenis.compute.test.RunPilotsOnBackEnd %s %s %s %s"""
+org.molgenis.compute.db.RunPilotsOnBackEnd %s %s %s %s"""
 
 	command = command % (os.path.join(molgenis_apps_dir, '..'), 'ui.grid.sara.nl', username, password, 'grid')
 	print 'Submit script to grid..'
