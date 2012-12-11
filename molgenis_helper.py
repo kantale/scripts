@@ -443,6 +443,8 @@ def remove_empty_lines(text):
 
 def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 
+	global protocols
+
 	if not dummy:
 		#Check scripts directory
 		if not os.path.exists(scripts_dir):
