@@ -55,6 +55,8 @@ python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_g
 # python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
 python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+
+python molgenis_helper.py pipeline=ngs action=import_workflow
 """
 
 import os
@@ -356,8 +358,6 @@ protocol_startMinimacStage2 = {
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/startMinimacStage2.ftl')
 }
 
-protocols = None
-
 if pipeline == 'minimac':
 	protocols = [
 		protocol_prepareStudy, 
@@ -413,6 +413,8 @@ elif pipeline == 'RecodeAllelesACGT':
 	protocols = [
 		protocol_RecodeAllelesACGT,
 	]
+else:
+	protocols = None
 
 #####################################################################
 ########## NO NEED TO EDIT FROM THAT POINT ##########################
