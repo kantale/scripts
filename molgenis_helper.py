@@ -659,7 +659,7 @@ def scp_file_to_local(
 		('expect', 'ftp> '),
 	]
 
-	for remote_dir, remote_filename, local_path in zip(remote_dirs, remote_filenames, remote_paths):
+	for remote_dir, remote_filename, local_path in zip(remote_dirs, remote_filenames, local_paths):
 		actions += [('send', 'cd %s' % (remote_dir))]
 		actions += [('expect', 'ftp> ')]
 		actions += [('send', 'get %s' % (remote_filename))]
