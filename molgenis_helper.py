@@ -55,7 +55,7 @@ python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_g
 # python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv 
 python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
-python molgenis_helper.py action=fetch_from_grid username=kanterak password=1d1iotmega grid_path=groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/Chr20ChunkWorksheet.csv 
+python molgenis_helper.py action=fetch_from_grid username=kanterak password=1d1iotmega grid_path=groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/Chr20ChunkWorksheet.csv ui_path=/home/kanterak/worksheets/Chr20ChunkWorksheet.csv
 
 
 python molgenis_helper.py pipeline=ngs action=import_workflow
@@ -949,9 +949,10 @@ if __name__ == '__main__':
 	elif action == 'fetch_from_grid':
 		check_username_password(username, password)
 		grid_path = get_param('grid_path', sys.argv, None)
+		ui_path = get_param('ui_path', sys.argv, None)
 		remote_commands = [
 			'cd /home/kanterak/worksheets',
-			'srmcp -server_mode=passive %s %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2', grid_path), os.path.join('file:////home/kanterak'))
+			'srmcp -server_mode=passive %s %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2', grid_path), os.path.join('file:///%s' % (ui_path)))
 		]
 		ssh_command(username, 'ui.grid.sara.nl', password, remote_commands, verbose = True)
 
