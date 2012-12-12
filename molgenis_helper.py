@@ -180,20 +180,6 @@ elif pipeline == 'minimac_patrick':
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'minimac_patrickS2':
 	workflow_name = 'workflow_minimac_PatrickS2'
-
-	worksheet = lambda : scp_file_to_local(
-
-	username = 'kanterak',
-	host = 'ui.grid.sara.nl',
-	password = '1d1iotmega',
-	remote_dirs = ,
-	remote_filenames = None,
-	local_paths = None,
-	verbose = False,
-
-		)
-
-
 	worksheet = fetch_page_l('THE ONE GENERATED!')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
