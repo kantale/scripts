@@ -51,6 +51,8 @@ python molgenis_helper.py pipeline=ConvertTPEDtoBED action=submit_worksheet_grid
 python molgenis_helper.py pipeline=SelectRegionFromBED action=import_workflow
 python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_grid username=kanterak password=1d1iotmega w:plinkInput=OUTPUT_0.9 w:plinkOutput=OUTPUT_0.9 w:fromKB=0 w:toKB=5000 w:chr=1 run_id=SelectRegionFromBED dummy=True
 
+---------------------
+minimacV2 Step 1
 # python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
 # python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv 
@@ -58,9 +60,14 @@ python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid 
 # Fetch worksheet:
 python molgenis_helper.py action=fetch_from_grid username=kanterak password=1d1iotmega grid_path=groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/Chr20ChunkWorksheet.csv ui_path=/home/kanterak/worksheets/Chr20ChunkWorksheet.csv local_path=/srv/molgenis/alex/scripts/worksheets/Chr20ChunkWorksheet.csv
 
+minimacV2 Step 2
+python molgenis_helper.py pipeline=minimac_patrickS2 action=import_workflow
 
+---------------------
+NGS pipeline
 python molgenis_helper.py pipeline=ngs action=import_workflow
 python molgenis_helper.py pipeline=ngs action=import_worksheet run_id=test1
+---------------------
 """
 
 import os
@@ -181,7 +188,7 @@ elif pipeline == 'minimac_patrick':
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'minimac_patrickS2':
 	workflow_name = 'workflow_minimac_PatrickS2'
-	worksheet = fetch_page_l('THE ONE GENERATED!')
+	worksheet = fetch_file_l('/srv/molgenis/alex/scripts/worksheets/Chr20ChunkWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'ngs':
