@@ -161,6 +161,11 @@ elif pipeline == 'minimac_patrick':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/examplePrePhasingWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
+elif pipeline == 'minimac_patrickS2':
+	workflow_name = 'workflow_minimac_PatrickS2'
+	worksheet = fetch_page_l('THE ONE GENERATED!')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'ngs':
 	workflow_name = 'ngs'
 	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/ngsWorkflowRealignmentAndSnpCalling/demoWorksheet.csv')
@@ -335,6 +340,7 @@ protocol_convertPedMapToTriTyper = {
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/convertPedMapToTriTyper.ftl')
 }
 
+# minimac_party. MinimacV2
 protocol_prepareStudy = {
 	'name' : 'prepareStudy',
 	#Molgenis tesint repo
@@ -354,10 +360,16 @@ protocol_chunkChromosome = {
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimac/protocols/chunkChromosome.ftl')
 }
 
+# for pipeline: minimac_party. MinimacV2
 protocol_startMinimacStage2 = {
 	'name' : 'startMinimacStage2',
 	'content' : fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/protocols/startMinimacStage2.ftl')
 }
+
+protocol_phaseChunk = {
+	'name' : 'phaseChunk',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/protocols/phaseChunk.ftl')
+	}
 
 if pipeline == 'minimac':
 	protocols = [
@@ -413,6 +425,10 @@ elif pipeline == 'PlinkBEDConcordance':
 elif pipeline == 'RecodeAllelesACGT':
 	protocols = [
 		protocol_RecodeAllelesACGT,
+	]
+elif pipeline = 'workflow_minimac_PatrickS2':
+	protocols = [
+		protocol_phaseChunk,
 	]
 else:
 	protocols = None
@@ -850,7 +866,7 @@ if __name__ == '__main__':
 	elif action == 'stop_server':
 		stop_molgenis(dummy = dummy)
 
-	elif action == 'restart_server':
+	elif action == 'restart_server' or action == 'start_molgenis':
 		start_molgenis(dummy = dummy)
 
 	elif action == 'drop_database_restart_server':
