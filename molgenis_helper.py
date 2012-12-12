@@ -55,6 +55,8 @@ python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_g
 # python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv 
 python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+python molgenis_helper.py action=fetch_from_grid username=kanterak password=1d1iotmega grid_path=groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/Chr20ChunkWorksheet.csv 
+
 
 python molgenis_helper.py pipeline=ngs action=import_workflow
 python molgenis_helper.py pipeline=ngs action=import_worksheet run_id=test1
@@ -115,6 +117,10 @@ def fetch_file(path):
 	fp.close()
 	return ret
 
+def fetch_grid_file(path):
+	print "Fetching from Grid:" + path
+
+
 def fetch_page_l(url):
 	return lambda : fetch_page(url)
 
@@ -174,6 +180,20 @@ elif pipeline == 'minimac_patrick':
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'minimac_patrickS2':
 	workflow_name = 'workflow_minimac_PatrickS2'
+
+	worksheet = lambda : scp_file_to_local(
+
+	username = 'kanterak',
+	host = 'ui.grid.sara.nl',
+	password = '1d1iotmega',
+	remote_dirs = ,
+	remote_filenames = None,
+	local_paths = None,
+	verbose = False,
+
+		)
+
+
 	worksheet = fetch_page_l('THE ONE GENERATED!')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
@@ -635,6 +655,34 @@ def scp_files(
 
 	Execute_pexpect_list(actions, verbose=verbose)
 
+def scp_file_to_local(
+	username = None,
+	host = None,
+	password = None,
+	remote_dirs = None,
+	remote_filenames = None,
+	local_paths = None,
+	verbose = False,
+	):
+
+	actions = [
+		('spawn', 'sftp %s@%s' % (username, host)),
+		('expect', "%s@%s's password:" % (username, host)),
+		('send_password', password),
+		('expect', 'ftp> '),
+	]
+
+	for remote_dir, remote_filename, local_path in zip(remote_dirs, remote_filenames, remote_paths):
+		actions += [('send', 'cd %s' % (remote_dir))]
+		actions += [('expect', 'ftp> ')]
+		actions += [('send', 'get %s' % (remote_filename))]
+		actions += [('expect', 'ftp> ')]
+		actions += [('local_action', 'mv %s %s' % (remote_filename, local_path))]
+	]
+
+	actions += [('send', 'bye')]
+
+	Execute_pexpect_list(actions, verbose=verbose)
 
 def Execute_pexpect_list(
 	actions,
@@ -668,6 +716,11 @@ def Execute_pexpect_list(
 		elif action[0] == 'print_output':
 			this_print('Received:')
 			print child.before
+		elif action[0] == 'local_action':
+			this_print('Running locally: ' + action[1])
+			exec_command(action[1], verbose=verbose)
+		else:
+			raise Exception('Invalid action: ' + str(action[0])
 
 
 def import_workflow(dummy=False):
@@ -838,6 +891,7 @@ if __name__ == '__main__':
 
 	username = get_param('username', sys.argv, None)
 	password = get_param('password', sys.argv, None)
+	grid_host = get_param('grid_host', sys.argv, None)
 	to_exec  = eval(get_param('to_exec' , sys.argv, 'True'))
 	compile_molg = eval(get_param('compile_molg', sys.argv, 'False'))
 	action = get_param('action', sys.argv, None)
@@ -906,6 +960,15 @@ if __name__ == '__main__':
 
 		import_worksheet(run_name, dummy = dummy)
 		submit_script_to_grid(username, password, dummy = dummy)
+
+	elif action == 'fetch_from_grid':
+		check_username_password(username, password)
+		grid_path = get_param('grid_path', sys.argv, None)
+		remote_commands = [
+			'cd /home/kanterak/worksheets',
+			'srmcp -server_mode=passive %s %s' % (os.path.join('srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2', grid_path), os.path.join('file:////home/kanterak'))
+		]
+		ssh_command(username, 'ui.grid.sara.nl', password, remote_commands, verbose = True)
 
 	else:
 		raise Exception('Unknown action:', action)
