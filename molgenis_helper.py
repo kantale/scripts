@@ -455,6 +455,7 @@ elif pipeline == 'minimac_PatrickS2':
 	protocols = [
 		protocol_phaseChunk,
 	]
+	print protocols
 else:
 	protocols = None
 
@@ -489,6 +490,8 @@ def remove_empty_lines(text):
 def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 
 	global protocols
+
+	print protocols
 
 	if not dummy:
 		#Check scripts directory
