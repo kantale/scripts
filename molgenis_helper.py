@@ -451,7 +451,7 @@ elif pipeline == 'RecodeAllelesACGT':
 	protocols = [
 		protocol_RecodeAllelesACGT,
 	]
-elif pipeline == 'workflow_minimac_PatrickS2':
+elif pipeline == 'minimac_PatrickS2':
 	protocols = [
 		protocol_phaseChunk,
 	]
