@@ -705,7 +705,7 @@ def Execute_pexpect_list(
 			this_print('Running locally: ' + action[1])
 			exec_command(action[1], verbose=verbose)
 		else:
-			raise Exception('Invalid action: ' + str(action[0])
+			raise Exception('Invalid action: ' + str(action[0]))
 
 
 def import_workflow(dummy=False):
