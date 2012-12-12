@@ -664,7 +664,6 @@ def scp_file_to_local(
 		actions += [('send', 'get %s' % (remote_filename))]
 		actions += [('expect', 'ftp> ')]
 		actions += [('local_action', 'mv %s %s' % (remote_filename, local_path))]
-	]
 
 	actions += [('send', 'bye')]
 
