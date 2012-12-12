@@ -461,16 +461,19 @@ if pipeline:
 
 #TODO! Make ftl files in scripts_dir
 
-def exec_command(command, dummy=False, exit_if_problem=True):
-	print 'Running:', command
+def exec_command(command, dummy=False, exit_if_problem=True, verbose=True):
+	if verbose:
+		print 'Running:', command
 	if not dummy:
 		return_code = os.system(command)
 		if return_code:
-			print "Received error code: ", return_code
+			if verbose:
+				print "Received error code: ", return_code
 			if exit_if_problem:
 				if return_code > 255: #Check: http://stackoverflow.com/questions/179565/exitcodes-bigger-than-255-possible
 					return_code = 1
-				print "Exiting.."
+				if verbose:
+					print "Exiting.."
 				sys.exit(return_code)
 
 def remove_empty_lines(text):
