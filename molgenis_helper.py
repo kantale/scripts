@@ -608,7 +608,7 @@ def ssh_command(
 
 	for remote_command in remote_commands:
 		actions += [('send', remote_command)]
-		actions += [('expect', '%s> $' % (username))]
+		actions += [('expect', r'> $')]
 		actions += [('print_output', None)]
 
 	actions += [('send', 'logout')]
