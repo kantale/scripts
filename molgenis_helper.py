@@ -187,7 +187,7 @@ elif pipeline == 'minimac_patrick':
 	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'minimac_patrickS2':
-	workflow_name = 'workflow_minimac_PatrickS2'
+	workflow_name = 'workflow_minimac_patrickS2'
 	worksheet = fetch_file_l('/srv/molgenis/alex/scripts/worksheets/Chr20ChunkWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
@@ -451,16 +451,13 @@ elif pipeline == 'RecodeAllelesACGT':
 	protocols = [
 		protocol_RecodeAllelesACGT,
 	]
-elif pipeline == 'minimac_PatrickS2':
+elif pipeline == 'minimac_patrickS2':
 	protocols = [
 		protocol_phaseChunk,
 	]
 	print protocols
 else:
 	protocols = None
-
-print '---------------'
-print protocols
 
 
 #####################################################################
@@ -494,8 +491,6 @@ def remove_empty_lines(text):
 def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 
 	global protocols
-
-	print protocols
 
 	if not dummy:
 		#Check scripts directory
