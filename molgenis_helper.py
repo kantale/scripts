@@ -57,7 +57,7 @@ python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remo
 python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 
 python molgenis_helper.py pipeline=ngs action=import_workflow
-python molgenis_helper.py pipeline=ngs action=submit_worksheet run_id=test1
+python molgenis_helper.py pipeline=ngs action=import_worksheet run_id=test1
 """
 
 import os
@@ -158,7 +158,7 @@ if pipeline == 'minimac':
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
 elif pipeline == 'minimac_patrick':
 	workflow_name = 'workflow_minimac_Patrick'
-	worksheet = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/examplePrePhasingWorksheet.csv')
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/examplePrePhasingWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'ngs':
@@ -502,7 +502,7 @@ def make_scripts(custom_parameters, custom_worksheet_parameters, dummy=False):
 
 	#If protocols have not defined. Build from protocols_dir_git
 	if not protocols:
-		protocols = [{'name': y, 'content' : fetch_page_l(os.path.join(protocols_dir_git, y+'.ftl'))} for y in [x.split(',')[1] for x in workflow_nl.split('\n')[1:]]+['Covariates']]
+		protocols = [{'name': y, 'content' : fetch_page_l(os.path.join(protocols_dir_git, y+'.ftl'))} for y in [x.split(',')[1] for x in workflow_nl.split('\n')[1:]]]
 
 	#Save protocols
 	for protocol in protocols:
