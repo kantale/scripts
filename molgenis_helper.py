@@ -438,7 +438,7 @@ elif pipeline == 'minimac_patrickS2':
 elif pipeline == 'minimac_patrickS3':
 	protocols = [
 		protocol_minimacImputation,
-		protocol_mergeMinimacImputationResults.
+		protocol_mergeMinimacImputationResults,
 	]
 elif pipeline == 'beagle':
 	protocols = [
