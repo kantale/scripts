@@ -30,6 +30,8 @@
 
 #The all.txt file:
 #srmls srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/kanterak/groups/ebiobank/projects/imputation/benchmark/all.txt
+#Notes:
+##        other.GlueCEInfoHostName == "gb-ce-ams.els.sara.nl" ||         # putFile and getFile do not work. Blacklisted in maverick.jdl .
 
 """
 Examples of usage:
@@ -53,16 +55,19 @@ python molgenis_helper.py pipeline=SelectRegionFromBED action=submit_worksheet_g
 
 ---------------------
 minimacV2 Step 1
-# python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
-# python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
-python molgenis_helper.py pipeline=minimac_patrick action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv 
-python molgenis_helper.py pipeline=minimac_patrick action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
-# Fetch worksheet:
+# python molgenis_helper.py pipeline=minimac_patrickS1 action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
+# python molgenis_helper.py pipeline=minimac_patrickS1 action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+python molgenis_helper.py pipeline=minimac_patrickS1 action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv 
+python molgenis_helper.py pipeline=minimac_patrickS1 action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+# Fetch worksheet (CHANGE TMP VALUE!):
 python molgenis_helper.py action=fetch_from_grid username=kanterak password=1d1iotmega grid_path=groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/tmp/ChunkChr20Worksheet.csv ui_path=/home/kanterak/worksheets/ChunkChr20Worksheet.csv local_path=/srv/molgenis/alex/scripts/worksheets/ChunkChr20Worksheet.csv
 
 minimacV2 Step 2
 python molgenis_helper.py pipeline=minimac_patrickS2 action=import_workflow
 python molgenis_helper.py pipeline=minimac_patrickS2 action=submit_worksheet_grid username=kanterak password=1d1iotmega run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1_S2
+
+minimacV2 Step 3
+python molgenis_helper.py pipeline=minimac_patrickS3 action=import_workflow
 ---------------------
 NGS pipeline
 python molgenis_helper.py pipeline=ngs action=import_workflow
@@ -180,8 +185,8 @@ if pipeline == 'minimac':
 	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/worksheet_example.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/workflowMachMinimac.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/mach_minimach/parameters.csv')
-elif pipeline == 'minimac_patrick':
-	workflow_name = 'workflow_minimac_Patrick'
+elif pipeline == 'minimac_patrickS1':
+	workflow_name = 'workflow_minimac_PatrickS1'
 #	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/worksheet.csv')
 	worksheet = fetch_file_l('/srv/molgenis/alex/scripts/worksheets/worksheet_minimacV2_S1.csv')
 	workflow = fetch_page_l('https://raw.github.com/molgenis/molgenis_apps/testing/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv')
@@ -190,6 +195,11 @@ elif pipeline == 'minimac_patrickS2':
 	workflow_name = 'workflow_minimac_patrickS2'
 	worksheet = fetch_file_l('/srv/molgenis/alex/scripts/worksheets/ChunkChr20Worksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv')
+	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
+elif pipeline == 'minimac_patrickS3':
+	workflow_name = 'workflow_minimac_patrickS3'
+	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/imputationWorksheet.csv')
+	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage3.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'ngs':
 	workflow_name = 'ngs'
@@ -394,7 +404,17 @@ protocol_startMinimacStage2 = {
 protocol_phaseChunk = {
 	'name' : 'phaseChunk',
 	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/protocols/phaseChunk.ftl')
-	}
+}
+
+protocol_minimacImputation = {
+	'name' : 'minimacImputation',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/protocols/minimacImputation.ftl'),
+}
+
+protocol_mergeMinimacImputationResults = {
+	'name' : 'mergeMinimacImputationResults',
+	'content' : fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/protocols/mergeMinimacImputationResults.ftl'),
+}
 
 if pipeline == 'minimac':
 	protocols = [
@@ -406,12 +426,20 @@ if pipeline == 'minimac':
 		protocol_minimacPostProcessing
 	]
 
-elif pipeline == 'minimac_patrick':
+elif pipeline == 'minimac_patrickS1':
 	protocols = [
 		protocol_prepareStudy,
 		protocol_startMinimacStage2,
 	]
-
+elif pipeline == 'minimac_patrickS2':
+	protocols = [
+		protocol_phaseChunk,
+	]
+elif pipeline == 'minimac_patrickS3':
+	protocols = [
+		protocol_minimacImputation,
+		protocol_mergeMinimacImputationResults.
+	]
 elif pipeline == 'beagle':
 	protocols = [
 #		protocol_prepareStudy,
@@ -450,10 +478,6 @@ elif pipeline == 'PlinkBEDConcordance':
 elif pipeline == 'RecodeAllelesACGT':
 	protocols = [
 		protocol_RecodeAllelesACGT,
-	]
-elif pipeline == 'minimac_patrickS2':
-	protocols = [
-		protocol_phaseChunk,
 	]
 else:
 	protocols = None
