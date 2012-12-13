@@ -67,7 +67,10 @@ python molgenis_helper.py pipeline=minimac_patrickS2 action=import_workflow
 python molgenis_helper.py pipeline=minimac_patrickS2 action=submit_worksheet_grid username=kanterak password=1d1iotmega run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1_S2
 
 minimacV2 Step 3
+# sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/add_variable.sh -w /srv/molgenis/alex/scripts/worksheets/ChunkChr20Worksheet.csv -v imputationResultDir -p \$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 -o /srv/molgenis/alex/scripts/worksheets/tmp_imputationWorksheet.csv
+# sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/add_variable.sh -w /srv/molgenis/alex/scripts/worksheets/tmp_imputationWorksheet.csv -v referencePanel -p gonl_release3.1 -o /srv/molgenis/alex/scripts/worksheets/imputationWorksheet.csv
 python molgenis_helper.py pipeline=minimac_patrickS3 action=import_workflow
+python molgenis_helper.py pipeline=minimac_patrickS3 action=submit_worksheet_grid username=kanterak password=1d1iotmega run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1_S3
 ---------------------
 NGS pipeline
 python molgenis_helper.py pipeline=ngs action=import_workflow
@@ -198,7 +201,8 @@ elif pipeline == 'minimac_patrickS2':
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'minimac_patrickS3':
 	workflow_name = 'workflow_minimac_patrickS3'
-	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/imputationWorksheet.csv')
+#	worksheet = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/imputationWorksheet.csv')
+	worksheet = fetch_file_l('/srv/molgenis/alex/scripts/worksheets/imputationWorksheet.csv')
 	workflow = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage3.csv')
 	parameters = fetch_page_l('https://raw.github.com/kantale/molgenis_apps/master/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv')
 elif pipeline == 'ngs':
