@@ -58,7 +58,7 @@ minimacV2 Step 1
 # python molgenis_helper.py pipeline=minimac_patrickS1 action=import_workflow p:McWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv
 # python molgenis_helper.py pipeline=minimac_patrickS1 action=submit_worksheet username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
 python molgenis_helper.py pipeline=minimac_patrickS1 action=import_workflow p:remoteWorksheet=\$\{root\}/home/akanterakis/worksheets/myProject.csv 
-python molgenis_helper.py pipeline=minimac_patrickS1 action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1
+python molgenis_helper.py pipeline=minimac_patrickS1 action=submit_worksheet_grid username=kanterak password=1d1iotmega w:studyInputDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/ w:prePhasingResultDir=\$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 run_id=celiacGoldStandardNl_MinimacV2_refGoNL3.1_S1
 # Fetch worksheet (CHANGE TMP VALUE!):
 python molgenis_helper.py action=fetch_from_grid username=kanterak password=1d1iotmega grid_path=groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/tmp/ChunkChr20Worksheet.csv ui_path=/home/kanterak/worksheets/ChunkChr20Worksheet.csv local_path=/srv/molgenis/alex/scripts/worksheets/ChunkChr20Worksheet.csv
 
@@ -76,6 +76,37 @@ NGS pipeline
 python molgenis_helper.py pipeline=ngs action=import_workflow
 python molgenis_helper.py pipeline=ngs action=import_worksheet run_id=test1
 ---------------------
+"""
+
+"""
+#Pull from blessed: molgenis_ass testing
+git pull https://github.com/molgenis/molgenis_apps.git testing
+
+To make standalone
+ant -f build_compute.xml makedistro
+
+# Drop database
+echo 'DROP DATABASE IF EXISTS compute; CREATE DATABASE compute;' | mysql -u molgenis -pmolgenis
+
+#Import workflow
+sh molgenis_apps/modules/compute4/deployment/importWorkflow.sh molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
+
+#A samples worksheet:
+project,studyInputDir,prePhasingResultDir,imputationPipeline,genomeBuild,chr,remoteWorksheet,autostart
+hapmapCEUr22b37,${root}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1,minimac,b37,20,srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets/worksheet_S1.csv,FALSE
+
+#Copy to ui:
+scp /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/worksheet_S1.csv kanterak@ui.grid.sara.nl:/home/kanterak/tmptransfer/worksheet_S1.csv
+
+#cp to srm:
+srmcp -server_mode=passive file:////home/kanterak/tmptransfer/worksheet_S1.csv srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets/worksheet_S1.csv
+
+#Import worksheet
+sh molgenis_apps/modules/compute4/deployment/importWorksheet.sh workflowMinimacStage1.csv ui.grid.sara.nl molgenis_apps/modules/compute/protocols/imputation/minimacV2/worksheet_S1.csv step01
+
+#Submit to grid
+sh molgenis_apps/modules/compute4/deployment/runPilots.sh ui.grid.sara.nl kanterak 1d1iotmega grid
+
 """
 
 import os
