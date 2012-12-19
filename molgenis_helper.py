@@ -79,6 +79,11 @@ python molgenis_helper.py pipeline=ngs action=import_worksheet run_id=test1
 """
 
 """
+#Login to molgenis18:
+ssh akanterakis@proxy.gcc.rug.nl
+
+ssh molgenis18
+
 #Pull from blessed: molgenis_ass testing
 git pull https://github.com/molgenis/molgenis_apps.git testing
 
@@ -93,7 +98,7 @@ sh molgenis_apps/modules/compute4/deployment/importWorkflow.sh molgenis_apps/mod
 
 #A samples worksheet:
 project,studyInputDir,prePhasingResultDir,imputationPipeline,genomeBuild,chr,remoteWorksheet,autostart
-hapmapCEUr22b37,${root}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1,minimac,b37,20,srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets/worksheet_S1.csv,FALSE
+hapmapCEUr22b37,${root}/groups/gonl/projects/imputationBenchmarking/goldStandard/celiacNlSelectedSnps/pedmap/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1,minimac,b37,20,${root}/home/akanterakis/worksheets/worksheet_S1.csv,FALSE
 
 #Copy to ui:
 scp /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/worksheet_S1.csv kanterak@ui.grid.sara.nl:/home/kanterak/tmptransfer/worksheet_S1.csv
@@ -101,12 +106,49 @@ scp /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/min
 #cp to srm:
 srmcp -server_mode=passive file:////home/kanterak/tmptransfer/worksheet_S1.csv srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/worksheets/worksheet_S1.csv
 
-#Import worksheet
+#Import worksheet. Step 1
 sh molgenis_apps/modules/compute4/deployment/importWorksheet.sh workflowMinimacStage1.csv ui.grid.sara.nl molgenis_apps/modules/compute/protocols/imputation/minimacV2/worksheet_S1.csv step01
 
 #Submit to grid
 sh molgenis_apps/modules/compute4/deployment/runPilots.sh ui.grid.sara.nl kanterak 1d1iotmega grid
 
+
+am90-17.gina.sara.nl:
+am91-17.gina.sara.nl
+module load jdk/1.6.0_33
+java -version
+
+Error occurred during initialization of VM
+Could not reserve enough space for object heap
+Could not create the Java virtual machine.
+
+State-> from Generated to Ready
+
+#Fetch generated worksheet
+srmcp -server_mode=passive srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/fvandijk/minimacV2fulltest5/prePhasingResult/generatedJobs/../concattedChunkWorksheet.csv file:////home/kanterak/worksheets/concattedChunkWorksheet.csv
+scp kanterak@ui.grid.sara.nl:/home/kanterak/worksheets/concattedChunkWorksheet.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/concattedChunkWorksheet.csv
+
+#Import forkflow step 2
+sh molgenis_apps/modules/compute4/deployment/importWorkflow.sh molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage2.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
+
+#Import worksheet step 2
+sh molgenis_apps/modules/compute4/deployment/importWorksheet.sh workflowMinimacStage2.csv ui.grid.sara.nl molgenis_apps/modules/compute/protocols/imputation/minimacV2/concattedChunkWorksheet.csv step02
+
+#Submit to grid
+sh molgenis_apps/modules/compute4/deployment/runPilots.sh ui.grid.sara.nl kanterak 1d1iotmega grid
+
+#Import workflow step 3
+sh molgenis_apps/modules/compute4/deployment/importWorkflow.sh molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage3.csv molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
+
+#Fix step3 worksheet
+sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/add_variable.sh -w molgenis_apps/modules/compute/protocols/imputation/minimacV2/concattedChunkWorksheet.csv -v imputationResultDir -p \$\{root\}/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1 -o molgenis_apps/modules/compute/protocols/imputation/minimacV2/tmp_imputationWorksheet.csv
+sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/add_variable.sh -w molgenis_apps/modules/compute/protocols/imputation/minimacV2/tmp_imputationWorksheet.csv -v referencePanel -p gonl_release3.1 -o molgenis_apps/modules/compute/protocols/imputation/minimacV2/imputationWorksheet_S3.csv
+
+#Import worksheet step 3
+sh molgenis_apps/modules/compute4/deployment/importWorksheet.sh workflowMinimacStage3.csv ui.grid.sara.nl molgenis_apps/modules/compute/protocols/imputation/minimacV2/imputationWorksheet_S3.csv step03
+
+#Submit to grid
+sh molgenis_apps/modules/compute4/deployment/runPilots.sh ui.grid.sara.nl kanterak 1d1iotmega grid
 """
 
 import os
