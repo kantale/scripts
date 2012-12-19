@@ -31,7 +31,11 @@ either expressed or implied, of the FreeBSD Project.
 
 """
 
-Safe in a file pw.py:
+Requires: 
+	oauth2
+	To install: sudo pip install oauth2
+
+Create a file pw.py:
 
 pw = {
 	'CONSUMER_KEY' : 'API_KEY',
@@ -129,7 +133,7 @@ def save_posts_to_file(blogname, filename, use_oauth=False, verbose=False):
 	pickle.dump(all_posts, fp)
 	fp.close()
 
-def get_oauth_access_tokens():
+def get_oauth_access_tokens(verbose=False):
 
 	from pw import pw	
 
@@ -146,16 +150,17 @@ def get_oauth_access_tokens():
 
 	request_token = dict(urlparse.parse_qsl(content))
 
-	print "Request Token:"
-	print "    - oauth_token        = %s" % request_token['oauth_token']
-	print "    - oauth_token_secret = %s" % request_token['oauth_token_secret']
+	if verbose:
+		print "Request Token:"
+		print "    - oauth_token        = %s" % request_token['oauth_token']
+		print "    - oauth_token_secret = %s" % request_token['oauth_token_secret']
 
 	oauth_callback = pw['oauth_callback']
 
 	goto_url = '%s?oauth_token=%s&oauth_callback=%s' % (AUTHORIZATION_URL, request_token['oauth_token'], oauth_callback)
 
 	print "Goto: ", goto_url
-	oauth_verifier = raw_input('What is the PIN? ')
+	oauth_verifier = raw_input('What is the oauth_verifier? ')
 
 	token = oauth2.Token(request_token['oauth_token'], request_token['oauth_token_secret'])
 	token.set_verifier(oauth_verifier)
@@ -164,12 +169,11 @@ def get_oauth_access_tokens():
 	resp, content = client.request(ACCESS_TOKEN_URL, "POST")
 	access_token = dict(urlparse.parse_qsl(content))
 
-	print "Access Token:"
-	print "    - oauth_token        = %s" % access_token['oauth_token']
-	print "    - oauth_token_secret = %s" % access_token['oauth_token_secret']
-	print
-
-	print "Save these values to pw['access_oauth_token'] and pw['access_oauth_token_secret']"
+	if verbose:
+		print "Access Token:"
+		print "    - oauth_token        = %s" % access_token['oauth_token']
+		print "    - oauth_token_secret = %s" % access_token['oauth_token_secret']
+		print
 
 	return access_token
 
@@ -177,7 +181,7 @@ def get_oauth_parameters(blogname, api_parameters, verbose=False):
 
 	from pw import pw
 
-	access_token = get_oauth_access_tokens()
+	access_token = get_oauth_access_tokens(verbose=verbose)
 
 
 	CONSUMER_KEY = pw['CONSUMER_KEY']
