@@ -177,7 +177,7 @@ def delete_grid_dir(grid_dir, dummy=False):
 	exec_command(command, dummy)
 
 	#Read contents
-	contents = open('dir_contents').readlines()[1:]
+	contents = [x for x in open('dir_contents').readlines()[1:] if len(x.strip()) > 1]
 	for entry in contents:
 		entry_name = entry.split()[1]
 		full_entry_name = ''.join([prefix, entry_name])
