@@ -177,7 +177,8 @@ def delete_grid_dir(grid_dir, dummy=False):
 	contents = open('dir_contents').readlines()[1:]
 	for entry in contents:
 		entry_name = entry.split()[1]
-		full_entry_name = os.path.join(prefix, entry_name)
+		full_entry_name = '/'.join([prefix, entry_name])
+		print "Full name:", full_entry_name
 		if full_entry_name[-1] == '/':
 			#This is a directory
 			delete_grid_dir(full_entry_name[0:-1], dummy=dummy)
