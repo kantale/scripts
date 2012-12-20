@@ -163,11 +163,14 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 
 def delete_grid_dir(grid_dir, dummy=False):
 
+	print 'Deleting dir:', grid_dir
+
 	#Get preffix
 	sub_dirs = content_dirs(grid_dir)
 	last_two = sub_dirs[-2:]
 	last_two.reverse()
 	prefix = '//'.join(last_two)
+	print 'Prefix is:', prefix
 
 	#Get all the contents of this directory
 	command = 'srmls %s > dir_contents' % (grid_dir)
@@ -178,7 +181,6 @@ def delete_grid_dir(grid_dir, dummy=False):
 	for entry in contents:
 		entry_name = entry.split()[1]
 		full_entry_name = '/'.join([prefix, entry_name])
-		print "Full name:", full_entry_name
 		if full_entry_name[-1] == '/':
 			#This is a directory
 			delete_grid_dir(full_entry_name[0:-1], dummy=dummy)
