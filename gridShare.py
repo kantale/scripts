@@ -31,6 +31,11 @@ help = """
 		python gridShare.py GRIDROOT=<SRM DIRECTORY> delete_grid=True
 """
 
+"""
+Examples:
+python gridShare.py GRIDROOT=srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/groups/gonl/projects/imputationBenchmarking/imputationResult/celiacGoldStandardNl_MinimacV2_refGoNL3.1/ delete_grid=True
+"""
+
 constants = {
 	'GRIDROOT' : 'srm://srm.grid.sara.nl/pnfs/grid.sara.nl/data/bbmri.nl/RP2/resources/imputationReference/gonl_release3.1',
 	'USERNAME' : 'akanterakis',
