@@ -180,11 +180,13 @@ def delete_grid_dir(grid_dir, dummy=False):
 		full_entry_name = os.path.join(prefix, entry_name)
 		if full_entry_name[-1] == '/':
 			#This is a directory
-			delete_grid_dir(full_entry_name, dummy=dummy)
+			delete_grid_dir(full_entry_name[0:-1], dummy=dummy)
 		else:
 			command = 'srmrm %s' % (full_entry_name)
 			print command
 
+	command = 'srmrmdir %s' % (grid_dir)
+	print command
 
 
 if __name__ == '__main__':
