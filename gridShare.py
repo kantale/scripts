@@ -197,7 +197,7 @@ def delete_grid_dir(grid_dir, dummy=False):
 			exec_command(command, dummy=dummy)
 
 	command = 'srmrmdir %s' % (grid_dir)
-	exec_command(command, dumme=dummy)
+	exec_command(command, dummy=dummy)
 
 
 if __name__ == '__main__':
