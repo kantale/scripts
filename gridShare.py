@@ -162,9 +162,29 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 					print 'File: ', grid_file_name_dir, 'already exists on the grid. Skip copying'
 
 def delete_grid_dir(grid_dir, dummy=False):
+
+	#Get preffix
+	sub_dirs = content_dirs(grid_dir)
+	last_two = sub_dirs[-2:]
+	last_two.reverse()
+	prefix = '//'.join(last_two)
+
 	#Get all the contents of this directory
 	command = 'srmls %s > dir_contents' % (grid_dir)
 	exec_command(command, dummy)
+
+	#Read contents
+	contents = open('dir_contents').readlines()[1:]
+	for entry in contents:
+		entry_name = entry.split()[1]
+		full_entry_name = os.path.join(prefix, entry_name)
+		if full_entry_name[-1] == '/':
+			#This is a directory
+			delete_grid_dir(full_entry_name, dummy=dummy)
+		else:
+			command = 'srmrm %s' % (full_entry_name)
+			print command
+
 
 
 if __name__ == '__main__':
