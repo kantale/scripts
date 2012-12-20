@@ -161,12 +161,19 @@ def copy_files(cluster_root_dir, grid_root_dir, dummy = False, skip_dirs = [], d
 				else:
 					print 'File: ', grid_file_name_dir, 'already exists on the grid. Skip copying'
 
+def delete_grid_dir(grid_dir, dummy=False):
+	#Get all the contents of this directory
+	command = 'srmls %s > dir_contents' % (grid_dir)
+	exec_command(command, dummy)
+
+
 if __name__ == '__main__':
 
  	dummy = eval(get_param('dummy', sys.argv, 'False'))
  	skip = get_param('skip', sys.argv, None)
  	delete = eval(get_param('delete', sys.argv, 'False'))
  	change_permissions = get_param('change_permissions', sys.argv, '')
+ 	delete_grid = eval(get_param('delete_grid', sys.argv, 'False'))
 
  	for x in ['GRIDROOT', 'USERNAME', 'REMOTEHOST', 'CLUSTERDIR', 'TMPDIR']:
  		constants[x] = get_param(x, sys.argv, constants[x])
@@ -182,5 +189,8 @@ if __name__ == '__main__':
  			print 'Could not process parameter change_permissions. Example: RW,R,NONE '
  			raise e
  
-	copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs, delete, change_permissions)
+ 	if delete_grid:
+ 		delete_grid_dir(constants['GRIDROOT'], dummy)
+	else:
+		copy_files(constants['CLUSTERDIR'], constants['GRIDROOT'], dummy, skip_dirs, delete, change_permissions)
 
