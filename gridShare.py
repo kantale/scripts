@@ -26,6 +26,9 @@ help = """
 		delete=True # Deletes all the files in the grid that locates in the cluster. 
 		change_permissions=RW,R,NONE 	#Changes permission to all the files in the grid that locates in the cluster. 
 										The applied command for this example is: srm-set-permissions -type=CHANGE -owner=RW -group=R -other=NONE 
+
+		To delete a complete directory on the grid (withour any involvement of a cluster dir) use:
+		python gridShare.py GRIDROOT=<SRM DIRECTORY> delete_grid=True
 """
 
 constants = {
@@ -186,10 +189,10 @@ def delete_grid_dir(grid_dir, dummy=False):
 			delete_grid_dir(full_entry_name[0:-1], dummy=dummy)
 		else:
 			command = 'srmrm %s' % (full_entry_name)
-			print command
+			exec_command(command, dummy=dummy)
 
 	command = 'srmrmdir %s' % (grid_dir)
-	print command
+	exec_command(command, dumme=dummy)
 
 
 if __name__ == '__main__':
