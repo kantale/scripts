@@ -7,3 +7,6 @@ http://www.molgenis.org/ticket/1252
 /target/gpfs2/gcc/groups/gcc/projects/lifelines-imputation/liftover_to_b37
 
 3. Locate command line molgenis
+/target/gpfs2/gcc/tools/molgenis_compute4
+
+4. Locate protools
