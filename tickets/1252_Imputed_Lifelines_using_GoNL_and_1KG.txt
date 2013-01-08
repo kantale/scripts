@@ -4,3 +4,6 @@ http://www.molgenis.org/ticket/1252
 /target/gpfs2/gcc/groups/gonl/resources/imputationReference/gonl_release4/vcf/
 
 2. Locate Lifelines Data
+/target/gpfs2/gcc/groups/gcc/projects/lifelines-imputation/liftover_to_b37
+
+3. Locate command line molgenis
