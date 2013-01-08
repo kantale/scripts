@@ -76,3 +76,5 @@ Command line:
 * Generate scripts.  
 Locations: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/scripts  
 Submit: sh submit.sh
+
+## WAITING FOR END OF STEP 1 in CLUSTER
