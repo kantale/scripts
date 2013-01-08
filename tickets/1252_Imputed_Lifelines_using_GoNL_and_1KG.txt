@@ -63,3 +63,6 @@ sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_co
    -worksheet=input/worksheet.csv
    -id=output
 
+What are the inputdir and outputdir parameters?
+email sent: https://mail.google.com/mail/ca/?shva=1#sent/13c1b09610d553c9
+
