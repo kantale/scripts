@@ -15,4 +15,11 @@ Check: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationR
 4. Locate protools
 /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2
 
+5. Locate / Create results directory:
+***
+
 5. Create worksheet
+Example from examplePrePhasingWorksheet.csv
+
+project,studyInputDir,prePhasingResultDir,imputationPipeline,genomeBuild,chr,autostart
+lifelines_gonl,${root}/groups/gcc/projects/lifelines-imputation/liftover_to_b37,
