@@ -10,3 +10,6 @@ http://www.molgenis.org/ticket/1252
 /target/gpfs2/gcc/tools/molgenis_compute4
 
 4. Locate protools
+/target/gpfs2/gcc/tools/molgenis_compute4/protocols
+
+5. Create worksheet
