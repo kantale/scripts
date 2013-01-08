@@ -7,9 +7,12 @@ http://www.molgenis.org/ticket/1252
 /target/gpfs2/gcc/groups/gcc/projects/lifelines-imputation/liftover_to_b37
 
 3. Locate command line molgenis
-/target/gpfs2/gcc/tools/molgenis_compute4
+/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6
+The symlink in the tools/molgenis_compute4 directory is outdated
+We are using the "0a00dd6" version because Freerk has used this to do the Prevend imputation
+Check: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/prevend_MinimacV2_refGiant1000gv3.20101123/createPhasingScripts.sh
 
 4. Locate protools
-/target/gpfs2/gcc/tools/molgenis_compute4/protocols
+/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2
 
 5. Create worksheet
