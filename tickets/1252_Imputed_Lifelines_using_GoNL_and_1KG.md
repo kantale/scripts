@@ -1,9 +1,10 @@
 http://www.molgenis.org/ticket/1252
 
-Resource:
+### Resources:
 *  Documentation for molgenis compute imputation:
     * https://github.com/kantale/molgenis_apps/blob/master/doc/compute/02_compute_imputation.md
 
+### Actions:
 1. Locate GoNL version 4 data
 /target/gpfs2/gcc/groups/gonl/resources/imputationReference/gonl_release4/vcf/
 
