@@ -77,4 +77,4 @@ Command line:
 Locations: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/scripts  
 Submit: sh submit.sh
 
-## WAITING FOR END OF STEP 1 in CLUSTER
+## WAITING FOR END OF STEP 1 in CLUSTER. Cluster down for maintenance
