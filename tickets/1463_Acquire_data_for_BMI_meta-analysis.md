@@ -13,6 +13,7 @@ On mac OSX: ld: library not found for -lcrt0.o
       * http://appliedprocrastination.blogspot.nl/2008/12/dread-lcrt0o-error-on-mac-os-x.html
       * Remove the static from the last compilation command. Diff:
 .
+
     31d30
     < CFLAGS_no_static=-O2 -I./libsrc -I./pdf  -D_FILE_OFFSET_BITS=64
     97,98c96
