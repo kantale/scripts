@@ -1,5 +1,22 @@
 http://www.molgenis.org/ticket/1463
 
+### Resources
+* How to generate EFFECT, STDERR and P values for a GWAS: 
+    * http://pngu.mgh.harvard.edu/~purcell/plink/anal.shtml#qt
+    * Requires Quantitative trait association analysis
+* Typical METAL input fields for a study:
+
+.
+
+    MARKER   SNP
+    WEIGHT   N
+    ALLELE   EFFECT_ALLELE NON_EFFECT_ALLELE
+    FREQ     EFFECT_ALLELE_FREQ
+    EFFECT   BETA
+    STDERR   SE
+    PVAL     P_VAL
+
+### Actions
 * Get location of Celiac Disease data (including phenotype)
 
 ## MAIL SENT TO PATRICK https://mail.google.com/mail/ca/?shva=1#sent/13c1b48cd61f94b4 Cluster down for maintenance
