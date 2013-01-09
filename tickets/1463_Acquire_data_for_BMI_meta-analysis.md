@@ -22,3 +22,5 @@ On mac OSX: ld: library not found for -lcrt0.o
     < #  $(CXX) $(CFLAGS) -o $@ -include version/VersionInfo.h $(TOOL)/*.cpp $(PDFLIB) $(LIBFILE) -lm -lz
     ---
     > 	$(CXX) $(CFLAGS) -o $@ -include version/VersionInfo.h $(TOOL)/*.cpp $(PDFLIB) $(LIBFILE) -lm -lz
+
+* Meeting with Jana at 10 January 2013. https://mail.google.com/mail/ca/?shva=1#sent/13c1f324ddccc98d
