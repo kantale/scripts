@@ -115,6 +115,10 @@ Create scripts by running:
         command = a % (x, x, x)
         print command
         os.system(command)
+        command = b % (x, x, x)
+        print command
+        os.system(command)
+        print '-' * 20
 
 
 ### We do not submit. Blocked by: https://mail.google.com/mail/ca/?shva=1#inbox/13c249982d273c41
