@@ -160,4 +160,15 @@ Create scripts by running:
 * Submitting GoNL.
     * cd /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2/giant1000
     * NO NEED TO DO THIS: sed  's/sleep 0/sleep 1/g' submit.sh > submit_sleep_1.sh 
-    * sh submit.sh
+    * sh submit.sh . THIS BLOATS THE SCHEDULER. DO NOT DO THIS
+    * Instead (for chromosome 1):
+
+.
+
+    head -n 3  submit.sh > header.txt
+    grep s00_prePhasingMach_s00_lifelines_gonl_1_  submit.sh > submit_chr1_nh.sh
+    cat header.txt submit_chr1_nh.sh > submit_chr1.sh 
+    sh submit_chr1.sh
+    
+    
+### Waiting for chromosome 1. GoNL
