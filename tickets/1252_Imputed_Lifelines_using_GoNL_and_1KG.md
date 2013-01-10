@@ -170,5 +170,6 @@ Create scripts by running:
     cat header.txt submit_chr1_nh.sh > submit_chr1.sh 
     sh submit_chr1.sh
     
-    
+* The complete Step 2 Has to be done. ONLY ONCE. For both reference sets
+
 ### Waiting for chromosome 1. PrePhasing (regardless reference panel)
