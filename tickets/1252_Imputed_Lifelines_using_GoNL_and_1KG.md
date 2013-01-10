@@ -3,6 +3,7 @@ http://www.molgenis.org/ticket/1252
 ### Resources:
 *  Documentation for molgenis compute imputation:
     * https://github.com/kantale/molgenis_apps/blob/master/doc/compute/02_compute_imputation.md
+* Scripts already used: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/prevend_MinimacV2_refGiant1000gv3.20101123
 
 ### Actions:
 * Locate GoNL version 4 data  
