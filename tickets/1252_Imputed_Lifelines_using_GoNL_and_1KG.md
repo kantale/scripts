@@ -77,4 +77,11 @@ Command line:
 Locations: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/scripts  
 Submit: sh submit.sh
 
-## WAITING FOR END OF STEP 1 in CLUSTER. Cluster down for maintenance
+WAITING FOR END OF STEP 1 in CLUSTER. Cluster down for maintenance. Job finished.
+
+* Step 2 of workflow. (Imputation step)  
+Running:
+
+.
+
+    sh protocols/imputation/minimacV2/add_variable.sh -w /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/Chr1ChunkWorksheet.csv -v imputationResultDir -p /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ -o /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/Chr1ImputationWorksheet.csv
