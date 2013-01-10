@@ -121,9 +121,9 @@ Create scripts by running:
         print '-' * 20
 
 
-### We do not submit. Blocked by: https://mail.google.com/mail/ca/?shva=1#inbox/13c249982d273c41
+### We do not submit GoNL. Blocked by: https://mail.google.com/mail/ca/?shva=1#inbox/13c249982d273c41
 
-* Submit GoNL
+* Submit 1000G
    * Problem: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2/giant1000_chr1/s00_prePhasingMach_s00__1_10_1.sh 
    * /target/gpfs2/gcc//tools/mach.1.0.18/executables/mach1 -d /tmp//studyMerlin//chr1//chunk10-chr1_sampleChunk1.dat 
    * Why /tmp//studyMerlin//chr1//chunk10-chr1_sampleChunk1.dat ???
