@@ -97,7 +97,10 @@ Running:
         print '-' * 20
         
 
-* Generating scripts for step 2
+* Generating scripts for step 2  
+Copying parameters file to: cp /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/  
+Change value: clusterQueue from defaultValue to test  
+Create scripts by running:
 
 .
 
@@ -109,3 +112,4 @@ Running:
         os.system(command)
 
 
+### We do not submit. Blocked by: https://mail.google.com/mail/ca/?shva=1#inbox/13c249982d273c41
