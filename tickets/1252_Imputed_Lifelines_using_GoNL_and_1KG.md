@@ -128,3 +128,4 @@ Create scripts by running:
    * /target/gpfs2/gcc//tools/mach.1.0.18/executables/mach1 -d /tmp//studyMerlin//chr1//chunk10-chr1_sampleChunk1.dat 
    * Why /tmp//studyMerlin//chr1//chunk10-chr1_sampleChunk1.dat ???
    * variable in parameters studyMerlinChrDir --> prePhasingResultDir
+   * Worksheet /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/Chr1ImputationWorksheet_usethis_giant1000.csv correct..
