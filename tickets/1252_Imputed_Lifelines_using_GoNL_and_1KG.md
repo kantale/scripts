@@ -171,4 +171,4 @@ Create scripts by running:
     sh submit_chr1.sh
     
     
-### Waiting for chromosome 1. GoNL
+### Waiting for chromosome 1. PrePhasing (regardless reference panel)
