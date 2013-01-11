@@ -188,3 +188,4 @@ Create scripts by running:
 
 ### Waiting for chromosome 1
 ### Should I redo the first step? The reference set is not defined anywhere in the first step https://mail.google.com/mail/ca/?shva=1#sent/13c28fc5ea60dd5f
+### New mail sent: https://mail.google.com/mail/ca/?shva=1#sent/13c2a1cb2296f3c3
