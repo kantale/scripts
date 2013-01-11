@@ -175,4 +175,13 @@ Create scripts by running:
 ### Waiting for chromosome 1. PrePhasing (regardless reference panel)
 
 * I should have submitted to test scheduler. Not test-long queue
+* Regenerate with default queue: Use default parameters.
 
+.
+
+    sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_compute.sh -inputdir=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/ -outputdir=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2/GoNLV4 -workflow=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/workflowMinimacStage2.csv -protocols=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/protocols/ -parameters=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv -worksheet=/target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ImputationWorksheet_gonl_release4.csv -id=lifelines_gonlv4_2
+
+* To login to test scheduler:
+    * ssh scheduler02
+    * cd /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2/GoNLV4
+    * sh submit_chr_1.sh
