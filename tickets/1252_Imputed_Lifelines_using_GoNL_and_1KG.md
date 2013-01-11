@@ -174,5 +174,5 @@ Create scripts by running:
 
 ### Waiting for chromosome 1. PrePhasing (regardless reference panel)
 
-* I should have submitted to test scheduler. Not test-long pipeline
+* I should have submitted to test scheduler. Not test-long queue
 
