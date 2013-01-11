@@ -50,7 +50,7 @@ cd /root/tools/ATLAS/ATLAS_LINUX; ../configure -Fa alg -fPIC --with-netlib-lapac
 python setup.py install  
 
 
-*Old verions..:  
+* Old verions..:  
 apt-get install python-numpy  
 
 apt-get install curl  
