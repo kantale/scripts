@@ -1,4 +1,3 @@
-
 ## Resources
 * ip: 83.212.99.245
 * ssh edet
@@ -29,30 +28,30 @@ apt-get install libc6-dev-amd64
 
 mkdir tools  
 
-#Building LAPACK
+* Building LAPACK
 curl http://www.netlib.org/lapack/lapack-3.1.1.tgz > /root/tools/lapack-3.1.1.tgz  
 cd /root/tools; tar zxvf lapack-3.1.1.tgz  
 cp /root/tools/lapack-3.1.1/INSTALL/make.inc.gfortran /root/tools/lapack-3.1.1/make.inc  
 
-#Edit make.inc  
-#OPTS = -O2 -fPIC  
-#NOOPT = -O0 -fPIC  
+* Edit make.inc  
+OPTS = -O2 -fPIC  
+NOOPT = -O0 -fPIC  
 
 cd /root/tools/lapack-3.1.1/SRC; make  
 
-#BUILD  
+* BUILD  
 
 curl https://dl.dropbox.com/u/5548517/atlas3.10.0.tar.bz2 > /root/tools/atlas3.10.0.tar.bz2  
 cd /root/tools/; bunzip2 atlas3.10.0.tar.bz2 ; tar xvf atlas3.10.0.tar  
 mkdir /root/tools/ATLAS/ATLAS_LINUX  
 cd /root/tools/ATLAS/ATLAS_LINUX; ../configure -Fa alg -fPIC --with-netlib-lapack-tarfile=/root/tools/lapack-3.1.1/lapack_LINUX.a  
 
-#Download numpy  
-#python setup.py install  
+* Download numpy  
+python setup.py install  
 
 
-#Old verions..:  
-#apt-get install python-numpy  
+*Old verions..:  
+apt-get install python-numpy  
 
 apt-get install curl  
 
