@@ -5,6 +5,7 @@
 * Web serving from: /var/lib/mediawiki/
 * Mediawiki installatation dir: /var/lib/mediawiki/
 * LocalSettings: /etc/LocalSettings.php
+* PyPedia_Server location: /var/lib/mediawiki/extensions/PyPedia_server/
 
 ## How to setup a root jail:
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
