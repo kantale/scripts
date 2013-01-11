@@ -7,6 +7,7 @@
 * LocalSettings: /etc/LocalSettings.php
 * PyPedia_Server location: /var/lib/mediawiki/extensions/PyPedia_server/
 * Restart apache: /etc/init.d/apache2 restart
+* Apache configuration: /etc/mediawiki/apache.conf
 
 ## How to setup a root jail:
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
