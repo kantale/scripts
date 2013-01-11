@@ -1,4 +1,5 @@
 ## Resources
+* http://83.212.99.245/mediawiki/index.php/Main_Page
 * ip: 83.212.99.245
 * ssh edet
 
