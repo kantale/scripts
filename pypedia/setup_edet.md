@@ -2,6 +2,9 @@
 * http://83.212.99.245/mediawiki/index.php/Main_Page
 * ip: 83.212.99.245
 * ssh edet
+* Web serving from: /var/lib/mediawiki/
+* Mediawiki installatation dir: /var/lib/mediawiki/
+* LocalSettings: /etc/LocalSettings.php
 
 ## How to setup a root jail:
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
