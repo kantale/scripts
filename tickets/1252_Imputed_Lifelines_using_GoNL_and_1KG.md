@@ -185,3 +185,6 @@ Create scripts by running:
     * ssh scheduler02
     * cd /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2/GoNLV4
     * sh submit_chr_1.sh
+
+### Waiting for chromosome 1
+### Should I redo the first step? The reference set is not defined anywhere in the first step https://mail.google.com/mail/ca/?shva=1#sent/13c28fc5ea60dd5f
