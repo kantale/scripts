@@ -173,3 +173,6 @@ Create scripts by running:
 * The complete Step 2 Has to be done. ONLY ONCE. For both reference sets
 
 ### Waiting for chromosome 1. PrePhasing (regardless reference panel)
+
+* I should have submitted to test scheduler. Not test-long pipeline
+
