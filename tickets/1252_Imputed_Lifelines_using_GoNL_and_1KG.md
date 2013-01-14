@@ -188,3 +188,14 @@ Create scripts by running:
 
 ### Should I redo the first step? The reference set is not defined anywhere in the first step https://mail.google.com/mail/ca/?shva=1#sent/13c28fc5ea60dd5f
 ### New mail sent: https://mail.google.com/mail/ca/?shva=1#sent/13c2a1cb2296f3c3
+
+* WC is done offline and is not described in the documentation. ImputationTool has to be called explicitly. Freerk made a script for QC with ImputationTool. 
+    * This tool is located here: /target/gpfs2/gcc/groups/gcc/projects/prevend/prevend_b37/align_to_ref.sh
+    * Current local dir: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/
+    * Copy the scipt to local directory: cp /target/gpfs2/gcc/groups/gcc/projects/prevend/prevend_b37/align_to_ref.sh ./
+    * Copy ped and map files to local dir: cp /target/gpfs2/gcc/groups/gcc/projects/lifelines-imputation/liftover_to_b37/chr* ./
+    * Edit align_to_ref.sh and edit second line to: INPUTDIR="/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/"
+    * Edit align_to_ref.sh and edit line 40: --hap /target/gpfs2//gcc/resources/imputationReference/gonl_release4/TriTyper/Chr$CHR/
+    * Execute align_to_ref.sh as a bash script: . align_to_ref.sh (not sh align_to_ref.sh)
+
+### Waiting for initial QC (running on head node)
