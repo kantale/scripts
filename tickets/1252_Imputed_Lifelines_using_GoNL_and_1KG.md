@@ -199,5 +199,7 @@ Create scripts by running:
     * Execute align_to_ref.sh as a bash script: . align_to_ref.sh (not sh align_to_ref.sh)
 
 * /target/gpfs2//gcc/resources/imputationReference/gonl_release4/ I don't have read permission. FIXED
+* C-bash: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252//result/chr2.ped: No such file or directory 
+    * FIXED: mkdir result
 
 ### Waiting for initial QC (running on head node)
