@@ -203,3 +203,39 @@ Create scripts by running:
     * FIXED: mkdir result
 
 ### Waiting for initial QC (running on head node)
+
+* Create PrePhasingWorksheet.csv with contents:
+
+.
+
+    project,studyInputDir,prePhasingResultDir,imputationPipeline,genomeBuild,chr,autostart
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr1/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr1,minimac,b37,1,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr2/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr2,minimac,b37,2,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr3/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr3,minimac,b37,3,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr4/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr4,minimac,b37,4,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr5/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr5,minimac,b37,5,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr6/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr6,minimac,b37,6,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr7/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr7,minimac,b37,7,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr8/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr8,minimac,b37,8,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr9/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr9,minimac,b37,9,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr10/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr10,minimac,b37,10,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr11/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr11,minimac,b37,11,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr12/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr12,minimac,b37,12,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr13/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr13,minimac,b37,13,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr14/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr14,minimac,b37,14,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr15/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr15,minimac,b37,15,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr16/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr16,minimac,b37,16,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr17/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr17,minimac,b37,17,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr18/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr18,minimac,b37,18,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr19/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr19,minimac,b37,19,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr20/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr20,minimac,b37,20,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr21/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr21,minimac,b37,21,FALSE
+    lifelines_gonlV4,${root}/home/akanterakis/runs/ticket_1252/chr22/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/chr22,minimac,b37,22,FALSE
+
+* Execute:
+
+.
+
+    sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_compute.sh -inputdir=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/ -outputdir=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/scripts_step1 -workflow=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/workflowMinimacStage1.csv -protocols=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/protocols/ -parameters=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv -worksheet=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/PrePhasingWorksheet.csv -id=lifelines_GoNLv4
+
+## Waiting for Step 1 for all chromosomes in scheduler02
