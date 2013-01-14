@@ -40,4 +40,11 @@ On mac OSX: ld: library not found for -lcrt0.o
     ---
     > 	$(CXX) $(CFLAGS) -o $@ -include version/VersionInfo.h $(TOOL)/*.cpp $(PDFLIB) $(LIBFILE) -lm -lz
 
-* Meeting with Jana at 10 January 2013. https://mail.google.com/mail/ca/?shva=1#sent/13c1f324ddccc98d
+* Meeting with Jana at 10 January 2013. https://mail.google.com/mail/ca/?shva=1#sent/13c1f324ddccc98d Postponed.
+* Agreed to not experiment wth Celiac Data. Javier can help with showing around
+* Analysis plan sent to Jana. New datasets that she might include is TRAILS (and perhaps NESDA)
+* Invited to apply the comments about (1) family realationships and (2) additional traits.
+* Mail: https://mail.google.com/mail/ca/?shva=1#sent/13c1f324ddccc98d
+
+### Submit analysis plan
+### Meeting with Javier to discuss it https://mail.google.com/mail/ca/?shva=1#sent/13c3988431b1943a
