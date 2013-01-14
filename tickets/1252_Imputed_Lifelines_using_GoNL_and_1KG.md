@@ -247,3 +247,12 @@ Create scripts by running:
     sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/add_variable.sh -w /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/concattedChunkWorksheet.csv -v imputationResultDir -p /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ -o /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/tmpImputationWorksheet.csv
     sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/add_variable.sh -w /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/tmpImputationWorksheet.csv -v referencePanel -p gonl_release4 -o /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ImputationWorksheet_gonl_release4.csv
     sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/add_variable.sh -w /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/tmpImputationWorksheet.csv -v referencePanel -p giant1000gv3.20101123 -o /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ImputationWorksheet_giant1000gv3.20101123.csv
+
+* Generate jobs:
+
+.
+
+    sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_compute.sh -inputdir=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/ -outputdir=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2_GONLv4/ -workflow=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/workflowMinimacStage2.csv -protocols=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/protocols/ -parameters=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv -worksheet=/target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ImputationWorksheet_gonl_release4.csv -id=lifelines_gonlv4_2
+    
+* Submitting:
+    * cd /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2_GONLv4
