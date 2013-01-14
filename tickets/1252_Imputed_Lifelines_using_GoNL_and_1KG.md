@@ -256,3 +256,12 @@ Create scripts by running:
     
 * Submitting:
     * cd /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_2_GONLv4
+
+.
+
+    head -n 3  submit.sh > header.txt
+    grep s00_prePhasingMach_s00_lifelines_gonlV4_1_  submit.sh > submit_chr1_nh.sh
+    cat header.txt submit_chr1_nh.sh > submit_chr1.sh 
+    sh submit_chr1.sh
+    
+### Waiting for chromosome 1. GONL V4. 
