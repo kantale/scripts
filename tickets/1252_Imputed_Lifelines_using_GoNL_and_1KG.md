@@ -199,3 +199,4 @@ Create scripts by running:
     * Execute align_to_ref.sh as a bash script: . align_to_ref.sh (not sh align_to_ref.sh)
 
 ### Waiting for initial QC (running on head node)
+### /target/gpfs2//gcc/resources/imputationReference/gonl_release4/ I don't have read permission.
