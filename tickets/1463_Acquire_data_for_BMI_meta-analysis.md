@@ -92,6 +92,7 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Is this OK?
 * Also added: Data should be reported on NCBI build 37 (hg19).
 * Also added: Details about imputation
+* Resolved comment from Jana: **do we have family members in other studies? in LL GWA2 we excluded the subjects based on family relatedness QC step**
 * Comments about the analysis plan from Elisa:
     * who is ...? (right after the title). **Corrected**
     * the second row of the methods still contains release 3.1 of GoNL... **Corrected**
