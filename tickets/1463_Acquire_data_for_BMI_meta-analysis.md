@@ -92,3 +92,10 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Is this OK?
 * Also added: Data should be reported on NCBI build 37 (hg19).
 * Also added: Details about imputation
+* Comments about the analysis plan from Elisa:
+    * who is ...? (right after the title). **Corrected**
+    * the second row of the methods still contains release 3.1 of GoNL... **Corrected**
+    * you never explain that BMI is body mass index, but you do explain WHR. **Corrected**
+    * why do you want date of birth? you never use this. **Corrected** Although we had a discussion about this with Jana who insisted this is important
+    * Carolina will be the person to contact for ERGO, Lennart and I for ERF. **Corrected**
+    * why do you want people to use minimac? what if cohorts used impute to impute their cohorts with 1kG?
