@@ -102,5 +102,6 @@ On mac OSX: ld: library not found for -lcrt0.o
     * why do you want people to use minimac? what if cohorts used impute to impute their cohorts with 1kG? Reply: It only mentions once that we explicitlu prefer MACH and this was removed.. **Corrected**
     * section 3, you first say "adjustment for age and gender", but lateron you also mention age^2. **Corrected**. Removed the part: "and adjustment for age and gender."
         * Jana's comment: age and ageˆ2 is THE adjustment for age, there are different ways to do that of course... don't understand the comments actually...
+        * Elisa's comment: Maybe use: adjustment for age, age^2 and gender. It is just that you want to be consistent in the whole plan, to make sure that people do the right analysis. **Finally changed to:** and adjustment for age, age^2 and gender. 
         * Jana's comment: (gender) should be removed as we will not have the analysis in a combined sample
 
