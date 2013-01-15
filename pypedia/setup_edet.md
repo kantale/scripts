@@ -66,3 +66,46 @@ curl http://python-distribute.org/distribute_setup.py | python
 curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python  
 
 pip install nose  
+
+## Backup script from gandi
+
+    rm -f /home/kantale/backup/pypedia.xml.gz
+    rm -f /home/kantale/backup/pypedia_test.xml.gz
+    rm -f /home/kantale/backup/mywiki.xml.gz
+    rm -f /home/kantale/backup/pypedia.tgz
+    rm -f /home/kantale/backup/mywiki.tgz
+    rm -f /home/kantale/backup/pypedia.tar
+    rm -f /home/kantale/backup/mywiki.tar
+    rm -f /home/kantale/backup/pypedia.sql.gz
+    rm -f /home/kantale/backup/mywiki.sql.gz
+
+    #Backing up pypedia maintenance --> pypedia.xml.gz
+    php /var/www/pypedia/maintenance/dumpBackup.php --full | gzip > /home/kantale/backup/pypedia.xml.gz
+
+    #Backing up pypedia_test maintenance --> pypedia_test.xml.gz
+    php /var/www/pypedia/pyp_test/maintenance/dumpBackup.php --full | gzip > /home/kantale/backup/pypedia_test.xml.gz
+
+    #Backing up mywiki maintenance --> mywiki.xml.gz
+    php /var/www/kantale/maintenance/dumpBackup.php --full | gzip > /home/kantale/backup/mywiki.xml.gz
+
+    #Taring complete pypedia directory --> pypedia.tgz
+    tar zcvf /home/kantale/backup/pypedia.tgz /var/www/pypedia
+
+    #Taring complete mywiki directory --> mywiki.tgz
+    tar zcvf /home/kantale/backup/mywiki.tgz /var/www/kantale/
+
+    #mysqldump pypedia --> pypedia.sql.gz
+    mysqldump -u root -p<PASSWORD> pypedia -c | gzip > /home/kantale/backup/pypedia.sql.gz
+
+    #mysqldump mywiki --> mywiki.sql.gz
+    mysqldump -u root -p<PASSWORD> kantale -c | gzip > /home/kantale/backup/mywiki.sql.gz
+
+    #Taring pypedia
+    tar cvf /home/kantale/backup/pypedia.tar /home/kantale/backup/pypedia.xml.gz /home/kantale/backup/pypedia_test.xml.gz /home/kantale/backup/pypedia.tgz /home/kantale/backup/pypedia.sql.gz
+
+    #Taring mywiki
+    tar cvf /home/kantale/backup/mywiki.tar /home/kantale/backup/mywiki.xml.gz /home/kantale/backup/mywiki.tgz /home/kantale/backup/mywiki.sql.gz
+
+    echo "Backup files: "
+    echo "/home/kantale/backup/pypedia.tar" 
+    echo "/home/kantale/backup/mywiki.tar"
