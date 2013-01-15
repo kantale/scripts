@@ -58,7 +58,7 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Graphs and plots that show population stratification after PCA or MDS
 * The association analysis (linear refression, additive model) can be done in R
 * The most important data that we require from the databanks is: N (Total number of samples analyzed)
-
+* Phenotype data looks like this:
 <table>
     <tr>
         <td>BMI</td>
@@ -72,4 +72,15 @@ On mac OSX: ld: library not found for -lcrt0.o
         <td>PC_20</td>
     </tr>
 </table>
-
+* The popylation stratification (PCA) can be done with EIGENSTRAT: http://genepath.med.harvard.edu/~reich/EIGENSTRAT.htm
+* For meta-analysis:
+    * Fixed weight analysis (if you consider all GWASes equal) or variable weight anlaysis
+    * BETA, SE and PVAL will be the input for every GWAS
+* Results of association. If we have cases / controls studies:
+    * Search for hidden family relationships with tools like plink and king (http://people.virginia.edu/~wc9c/KING/)
+    * This tools extract a PHAT value. 
+    * If PHAT ~= 1m then monozygotic twins
+    * if PHAT > 0.5 then siblings
+    * if PHAT > 0.25 the cousins or other form of relatedness
+    * if PHAT < 0.25 unrelated
+* Look for inverse BMI and inverse WHR. Inverse BMI is height^2 / mass. Check: http://www.ncbi.nlm.nih.gov/pubmed/21846303
