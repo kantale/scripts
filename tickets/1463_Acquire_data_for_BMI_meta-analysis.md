@@ -48,3 +48,28 @@ On mac OSX: ld: library not found for -lcrt0.o
 
 ### Submit analysis plan
 ### Meeting with Javier to discuss it https://mail.google.com/mail/ca/?shva=1#sent/13c3988431b1943a
+
+### Meeting notes:
+* BMI is a continuous trait so the association will be done with linear refression
+    * If it was a discrete train it would be done with logistic regression
+* We should ask the biobanks for:
+    * Format of data. Ask from them the first 10 lines fo their data files.
+    * Supply the command lines for data conversion and data analysis 
+    * Graphs and plots that show population stratification after PCA or MDS
+* The association analysis (linear refression, additive model) can be done in R
+* The most important data that we require from the databanks is: N (Total number of samples analyzed)
+
+<table>
+    <tr>
+        <td>BMI</td>
+        <td>SNP_1</td>
+        <td>SNP_2</td>
+        <td>SNP_N</td>
+        <td>Age</td>
+        <td>Gender</td>
+        <td>PC_1</td>
+        <td>PC_2</td>
+        <td>PC_20</td>
+    </tr>
+</table>
+
