@@ -90,3 +90,5 @@ On mac OSX: ld: library not found for -lcrt0.o
 * The analysis files requested per study are more:
     * (4 traits: BMI, BMI_inv, WHR, WHR_inv) X 3 (sample subsets: all, male, female) X (2 analysis: common, rare) = 24
     * Is this OK?
+* Also added: Data should be reported on NCBI build 37 (hg19).
+* Also added: Details about imputation
