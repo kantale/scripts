@@ -84,3 +84,5 @@ On mac OSX: ld: library not found for -lcrt0.o
     * if PHAT > 0.25 the cousins or other form of relatedness
     * if PHAT < 0.25 unrelated
 * Look for inverse BMI and inverse WHR. Inverse BMI is height^2 / mass. Check: http://www.ncbi.nlm.nih.gov/pubmed/21846303
+
+### Analysis plan updated with Javier's notes, new version sent to Jana
