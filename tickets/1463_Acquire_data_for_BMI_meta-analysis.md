@@ -86,3 +86,7 @@ On mac OSX: ld: library not found for -lcrt0.o
 * Look for inverse BMI and inverse WHR. Inverse BMI is height^2 / mass. Check: http://www.ncbi.nlm.nih.gov/pubmed/21846303
 
 ### Analysis plan updated with Javier's notes, new version sent to Jana
+
+* The analysis files requested per study are more:
+    * (4 traits: BMI, BMI_inv, WHR, WHR_inv) X 3 (sample subsets: all, male, female) X (2 analysis: common, rare) = 24
+    * Is this OK?
