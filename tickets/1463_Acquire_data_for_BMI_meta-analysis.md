@@ -105,3 +105,5 @@ On mac OSX: ld: library not found for -lcrt0.o
         * Elisa's comment: Maybe use: adjustment for age, age^2 and gender. It is just that you want to be consistent in the whole plan, to make sure that people do the right analysis. **Finally changed to:** and adjustment for age, age^2 and gender. 
         * Jana's comment: (gender) should be removed as we will not have the analysis in a combined sample
 
+* Comments about analysis plan from :
+    * "It is preferable a smaller sample size but measured under objective condition rather a larger sample size with a careless phenotype reporting". **Deleted**
