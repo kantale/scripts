@@ -106,4 +106,5 @@ On mac OSX: ld: library not found for -lcrt0.o
         * Jana's comment: (gender) should be removed as we will not have the analysis in a combined sample
 
 * Comments about analysis plan from :
+    * J.vanSetten: Restructured the 'traits' paragraph in order to look more like a to-do list. 
     * "It is preferable a smaller sample size but measured under objective condition rather a larger sample size with a careless phenotype reporting". **Deleted**
