@@ -99,4 +99,7 @@ On mac OSX: ld: library not found for -lcrt0.o
     * why do you want date of birth? you never use this. **Corrected** Although we had a discussion about this with Jana who insisted this is important
     * Carolina will be the person to contact for ERGO, Lennart and I for ERF. **Corrected**
     * why do you want people to use minimac? what if cohorts used impute to impute their cohorts with 1kG? Reply: It only mentions once that we explicitlu prefer MACH and this was removed.. **Corrected**
-    * section 3, you first say "adjustment for age and gender", but lateron you also mention age^2. 
+    * section 3, you first say "adjustment for age and gender", but lateron you also mention age^2. **Corrected**. Removed the part: "and adjustment for age and gender."
+        * Jana's comment: age and ageˆ2 is THE adjustment for age, there are different ways to do that of course... don't understand the comments actually...
+        * Jana's comment: (gender) should be removed as we will not have the analysis in a combined sample
+
