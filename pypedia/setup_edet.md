@@ -121,5 +121,17 @@ pip install nose
 
 ### Create image:
 
+    sudo apt-get update
     sudo apt-get install apache2
-    
+    sudo apt-get install php5
+    sudo apt-get install git
+    sudo apt-get install mysql-server mysql-client 
+    sudo apt-get install php5-mysql
+    sudo apt-get install zip
+    sudo apt-get install automake
+    sudo apt-get install php-pear
+    sudo apt-get install make
+    sudo apt-get install libpcre3-dev
+    sudo apt-get install imagemagick
+    sudo apt-get install highlight
+    sudo apt-get install php5-curl
