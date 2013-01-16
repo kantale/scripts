@@ -117,3 +117,9 @@ pip install nose
 * PyPedia2
 * password: https://mail.google.com/mail/#inbox/13c4313f13dc0d1b
 * ip: 83.212.107.55
+* Connect: ssh user@snf-13900.vm.okeanos.grnet.gr
+
+### Create image:
+
+    sudo apt-get install apache2
+    
