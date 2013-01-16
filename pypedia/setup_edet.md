@@ -184,6 +184,8 @@ pip install nose
     sudo apt-get install imagemagick
     sudo apt-get install highlight
     sudo apt-get install php5-curl
+    sudo apt-get install libicu-dev
+    sudo apt-get install g++
 
     sudo pecl install apc
     #     edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
@@ -197,7 +199,10 @@ pip install nose
     sudo pecl install ssh2 channel://pecl.php.net/ssh2-0.12
     #edit file: /etc/php5/apache2/php.ini ADD: extension=ssh2.so
     sudo python -c "a = open('/etc/php5/apache2/php.ini', 'a'); a.write('extension=ssh2.so\n'); a.close()"
-    
+  
+    sudo pecl install intl
+    sudo python -c "a = open('/etc/php5/apache2/php.ini', 'a'); a.write('extension=intl.so\n'); a.close()"
+  
     #Restart apache
     sudo /etc/init.d/apache2 restart
     
