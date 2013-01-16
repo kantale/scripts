@@ -135,3 +135,14 @@ pip install nose
     sudo apt-get install imagemagick
     sudo apt-get install highlight
     sudo apt-get install php5-curl
+
+    sudo pecl install apc
+
+    edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
+    sudo vim /etc/php5/apache2/php.ini
+    
+    mkdir tools
+    cd tools; git clone git://git.libssh2.org/libssh2.git
+    cd libssh2; ./buildconf; ./configure ; make; make install
+    
+    
