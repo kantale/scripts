@@ -145,4 +145,5 @@ pip install nose
     cd tools; git clone git://git.libssh2.org/libssh2.git
     cd libssh2; ./buildconf; ./configure ; make; make install
     
+    sudo pecl install ssh2 channel://pecl.php.net/ssh2-0.12
     
