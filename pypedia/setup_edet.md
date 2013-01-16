@@ -236,6 +236,8 @@ pip install nose
     cd $HOME/restore/home/kantale/backup; tar zxvf pypedia.tgz
     sudo php importImages.php $HOME/restore/home/kantale/backup/var/www/pypedia/images/
 
+    #Copy secert key value from old wiki. 
+    $Copy $wgSecretKey from $HOME/restore/home/kantale/backup/var/www/pypedia/LocalSettings.php /var/www/LocalSettings.php
 
 ### Initial Main_Page content:
 
