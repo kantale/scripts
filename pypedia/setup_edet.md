@@ -236,3 +236,38 @@ pip install nose
     cd $HOME/restore/home/kantale/backup; tar zxvf pypedia.tgz
     sudo php importImages.php $HOME/restore/home/kantale/backup/var/www/pypedia/images/
 
+
+### Initial Main_Page content:
+
+    ==Introduction==
+    PyPedia is a collaborative programming web environment. Each article in this wiki is a function or class or any other piece of [http://www.python.org/ Python] code. No need to import anything. Just call the function or instantiate the class that belongs to any other article. 
+
+    '''Simple as this:'''
+    {{#input:type=textarea|name=whatever|rows=8|cols=20|id=main_form}}
+    {{#form:id=parameters_form}} 
+    {{#input:type=ajax|value=Run|id=eobm}}
+    {{#formend:}}
+
+    [[Pascal_triangle]] and [[Hanoi_towers]] are articles in this wiki! Check out all [[:Category:Validated|validated methods]].
+
+    ==Documentation==
+    *First time in PyPedia? please read this [http://www.slideshare.net/kantale/pypedia presentation] or download it: [http://dl.dropbox.com/u/5548517/PyPedia.pptx powerpoint], [http://dl.dropbox.com/u/5548517/PyPedia.pdf pdf]
+    *Are you more of a visual type? Watch this [http://www.youtube.com/watch?v=25jMEivICD8 video]. It is only 2 minutes..
+    *For more read: [[PyPedia:Documentation|Documentation]].
+    *To execute locally the code hosted here, install the PyPedia python library:
+    <pre>
+    git clone git://github.com/kantale/pypedia.git
+    </pre>
+    Then you can download and run the code:
+    <pre>
+    >>> import pypedia
+    >>> from pypedia import Hello_world
+    >>> Hello_world()
+    Hello world!
+    >>>
+    </pre>
+    * Request an article: [[PyPedia:Wanted algorithms|Wanted algorithms]], request a feature: [[PyPedia_talk:Feature_requests|Feature requests discussion]]
+    * Sign in our mailing list: http://groups.google.com/group/pypedia
+    * Follow on twitter : [https://twitter.com/#!/pypedia @PyPedia]
+    * A blog about developing PyPedia: http://pypedia.blogspot.nl/
+
