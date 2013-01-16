@@ -110,3 +110,9 @@ pip install nose
     echo "Backup files: "
     echo "/home/kantale/backup/pypedia.tar" 
     echo "/home/kantale/backup/mywiki.tar"
+
+### New instance configuration in edet
+* Ubuntu Server system1.01 GB Ubuntu 12.04.1 LTS. Kernel 3.2.0
+* 2 CPUs, 2048MB RAM, 10 GB Disk space
+* PyPedia2
+* password: https://mail.google.com/mail/#inbox/13c4313f13dc0d1b
