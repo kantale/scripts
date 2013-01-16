@@ -118,6 +118,55 @@ pip install nose
 * password: https://mail.google.com/mail/#inbox/13c4313f13dc0d1b
 * ip: 83.212.107.55
 * Connect: ssh user@snf-13900.vm.okeanos.grnet.gr
+* Try to install here: /var/www/pypedia
+
+* Apache configuration file:
+
+.
+
+    <VirtualHost *:80>
+        ServerAdmin admin@www.pypedia.com
+	    ServerName www.pypedia.com:80
+	    DocumentRoot /var/www/pypedia
+	    <Directory />
+		    Options FollowSymLinks
+		    AllowOverride None
+	    </Directory>
+	    <Directory /var/www/pypedia>
+		    Options Indexes FollowSymLinks MultiViews
+		    AllowOverride None
+		    Order allow,deny
+		    allow from all
+	    </Directory>
+
+	    ScriptAlias /cgi-bin/ /usr/lib/cgi-bin/
+	    <Directory "/usr/lib/cgi-bin">
+		    AllowOverride None
+		    Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+		    Order allow,deny
+		    Allow from all
+	    </Directory>
+
+	    ErrorLog ${APACHE_LOG_DIR}/pypedia/error.log
+
+	    # Possible values include: debug, info, notice, warn, error, crit,
+	    # alert, emerg.
+	    LogLevel warn
+
+	    CustomLog ${APACHE_LOG_DIR}/pypedia/access.log combined
+
+        Alias /doc/ "/usr/share/doc/"
+        <Directory "/usr/share/doc/">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride None
+            Order deny,allow
+            Deny from all
+            Allow from 127.0.0.0/255.0.0.0 ::1/128
+        </Directory>
+
+    </VirtualHost>
+
+
 
 ### Create image:
 
