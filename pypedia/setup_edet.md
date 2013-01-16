@@ -258,6 +258,13 @@ pip install nose
     cd /var/www/pypedia/extensions; sudo git clone https://github.com/kantale/PyPedia_server.git
     
     #Add extra settings to LocalSettings.php
+    
+    cp /var/www/pypedia/index.php /var/www/pypedia/index.php.backup
+    cp /var/www/pypedia/extensions/PyPedia_server/index.php /var/www/pypedia/index.php
+    cp /var/www/pypedia/skins/Vector.php /var/www/pypedia/skins/Vector.php.backup
+    cp /var/www/pypedia/extensions/PyPedia_server/Vector.php /var/www/pypedia/skins/Vector.php
+    
+    
 ### Initial Main_Page content:
 
     ==Introduction==
