@@ -264,6 +264,7 @@ pip install nose
     cp /var/www/pypedia/skins/Vector.php /var/www/pypedia/skins/Vector.php.backup
     cp /var/www/pypedia/extensions/PyPedia_server/Vector.php /var/www/pypedia/skins/Vector.php
     
+    #From: https://github.com/kantale/PyPedia_server/blob/master/INSTALL STEP 5: Create file with passwords
     
 ### Initial Main_Page content:
 
