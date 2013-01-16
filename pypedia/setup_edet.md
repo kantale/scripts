@@ -233,3 +233,6 @@ pip install nose
     cd /var/www/pypedia/maintenance; sudo php importDump.php  /home/user/restore/home/kantale/backup/pypedia.xml
     cd /var/www/pypedia/maintenance; sudo php rebuildrecentchanges.php 
     
+    cd $HOME/restore/home/kantale/backup; tar zxvf pypedia.tgz
+    sudo php importImages.php $HOME/restore/home/kantale/backup/var/www/pypedia/images/
+
