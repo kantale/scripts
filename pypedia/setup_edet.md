@@ -198,4 +198,7 @@ pip install nose
     #edit file: /etc/php5/apache2/php.ini ADD: extension=ssh2.so
     sudo python -c "a = open('/etc/php5/apache2/php.ini', 'a'); a.write('extension=ssh2.so\n'); a.close()"
     
+    #Get data from gandi:
+    scp kantale@www.pypedia.com:backup/pypedia.tar $HOME/from_gandi/pypedia.tar
+    scp kantale@www.pypedia.com:backup/mywiki.tar $HOME/from_gandi/mywiki.tar
 
