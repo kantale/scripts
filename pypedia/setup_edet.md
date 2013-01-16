@@ -219,4 +219,10 @@ pip install nose
     
     #Point to: 
     #http://83.212.107.55/pypedia/mw-config/index.php
-    #and install mediawiki
+    #and install mediawiki. Admin's account: admin
+    
+    #Load backup data to wiki
+    mkdir $HOME/restore
+    cp $HOME/from_gandi/pypedia.tar /$HOME/restore/pypedia.tar
+    cd $HOME/restore/; tar xvf pypedia.tar 
+    cd $HOME/restore/; 
