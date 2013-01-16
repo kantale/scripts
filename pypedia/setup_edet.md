@@ -254,6 +254,10 @@ pip install nose
     #use pypedia
     #source /home/user/restore/home/kantale/backup/pypedia_ipblocks_donotdrop.sql
 
+    #Install pypedia..
+    cd /var/www/pypedia/extensions; sudo git clone https://github.com/kantale/PyPedia_server.git
+    
+    #Add extra settings to LocalSettings.php
 ### Initial Main_Page content:
 
     ==Introduction==
@@ -288,3 +292,24 @@ pip install nose
     * Follow on twitter : [https://twitter.com/#!/pypedia @PyPedia]
     * A blog about developing PyPedia: http://pypedia.blogspot.nl/
 
+### Extra settings for LocalSettings.php
+
+    $wgUseAjax = true;
+    require_once( "{$IP}/extensions/PyPedia_server/pypedia.php");
+    #Before wgLogo (No particular reason)
+
+    #Hooks for PyPedia
+    $wgHooks['EditPage::attemptSave'][] = 'pypediaEditPageAttemptSave';
+    $wgHooks['EditFormPreloadText'][] = array('pypediaPrefill');
+    $wgHooks['EditFilter'][] = 'pypediaEditFilter';
+    $wgHooks['DoEditSectionLink'][] = 'pypediaDoEditSectionLink';
+    $wgHooks['EditPage::showEditForm:initial'][] = 'pypediaEditForm';
+
+    #The group that can edit the code
+    $wgGroupPermissions['codeeditor'] = $wgGroupPermissions['user'];
+
+    #The administrators.
+    $wgGroupPermissions['pypediaadmin'] = $wgGroupPermissions['user'];
+
+    # Do not have to, but it is a good idea, for Anonymous not to be able to create pages
+    $wgGroupPermissions['*']['createpage'] = false;
