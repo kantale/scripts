@@ -236,8 +236,23 @@ pip install nose
     cd $HOME/restore/home/kantale/backup; tar zxvf pypedia.tgz
     sudo php importImages.php $HOME/restore/home/kantale/backup/var/www/pypedia/images/
 
-    #Copy secert key value from old wiki. 
+    #Copy secret key value from old wiki. 
     $Copy $wgSecretKey from $HOME/restore/home/kantale/backup/var/www/pypedia/LocalSettings.php /var/www/LocalSettings.php
+    
+    #Insert user information
+    #scp kantale@www.pypedia.com:/home/kantale/backup/pypedia_user.sql ./pypedia_user.sql
+    #mysql -u root -p<PASSWORD>
+    #use pypedia
+    #drop table pypuser;
+    #source /home/user/restore/home/kantale/backup/pypedia_user.sql
+    
+    #Insert blocked ips
+    #From source: mysqldump -u root -p<PASSWORD> pypedia pypipblocks -c > /home/kantale/backup/pypedia_ipblocks.sql
+    #From target: scp kantale@www.pypedia.com:/home/kantale/backup/pypedia_ipblocks.sql $HOME/restore/home/kantale/backup/pypedia_ipblocks.sql
+    #REMOVE THE PART WHERE IT DROPS AND CREATES THE TABLE. KEEP ONLY THE INSERT STATEMENT and create the file /home/user/restore/home/kantale/backup/pypedia_ipblocks_donotdrop.sql
+    #mysql -u root -p<PASSWORD>
+    #use pypedia
+    #source /home/user/restore/home/kantale/backup/pypedia_ipblocks_donotdrop.sql
 
 ### Initial Main_Page content:
 
