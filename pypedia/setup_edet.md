@@ -8,6 +8,7 @@
 * PyPedia_Server location: /var/lib/mediawiki/extensions/PyPedia_server/
 * Restart apache: /etc/init.d/apache2 restart
 * Apache configuration: /etc/mediawiki/apache.conf
+* Login on oceanos: https://cyclades.okeanos.grnet.gr/ui/ Username: chazapis@grnet.gr password: https://mail.google.com/mail/#inbox/139bca9d87a4f4d9
 
 ## How to setup a root jail:
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
