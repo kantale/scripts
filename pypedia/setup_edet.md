@@ -137,13 +137,16 @@ pip install nose
     sudo apt-get install php5-curl
 
     sudo pecl install apc
-
-    edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
-    sudo vim /etc/php5/apache2/php.ini
+    #     edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
+    sudo python -c "a = open('/etc/php5/apache2/php.ini', 'a'); a.write('extension=apc.so\n'); a.close()"
     
-    mkdir tools
-    cd tools; git clone git://git.libssh2.org/libssh2.git
-    cd libssh2; ./buildconf; ./configure ; make; make install
+    mkdir -p $HOME/tools
+    cd $HOME/tools; git clone git://git.libssh2.org/libssh2.git
+    cd $HOME/tools/libssh2; ./buildconf; ./configure ; make; make install
+    cd $HOME
     
     sudo pecl install ssh2 channel://pecl.php.net/ssh2-0.12
+    #edit file: /etc/php5/apache2/php.ini ADD: extension=ssh2.so
+    sudo python -c "a = open('/etc/php5/apache2/php.ini', 'a'); a.write('extension=ssh2.so\n'); a.close()"
     
+
