@@ -321,3 +321,7 @@ pip install nose
 
     # Do not have to, but it is a good idea, for Anonymous not to be able to create pages
     $wgGroupPermissions['*']['createpage'] = false;
+
+## Commanted out the line in pypedia.php: #require_once( "{$IP}/extensions/PyPedia_server/MyVariables/MyVariables.php" );
+## Refer here: http://83.212.107.55/pypedia/index.php/Main_Page
+
