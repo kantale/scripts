@@ -120,7 +120,7 @@ pip install nose
 * Connect: ssh user@snf-13900.vm.okeanos.grnet.gr
 * Try to install here: /var/www/pypedia
 
-* Apache configuration file:
+* Apache configuration file: /etc/apache2/sites-available/default
 
 .
 
