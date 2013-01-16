@@ -324,4 +324,4 @@ pip install nose
 
 ## Commanted out the line in pypedia.php: #require_once( "{$IP}/extensions/PyPedia_server/MyVariables/MyVariables.php" );
 ## Refer here: http://83.212.107.55/pypedia/index.php/Main_Page
-
+## Logs: tail /var/log/apache2/error.log 
