@@ -225,4 +225,11 @@ pip install nose
     mkdir $HOME/restore
     cp $HOME/from_gandi/pypedia.tar /$HOME/restore/pypedia.tar
     cd $HOME/restore/; tar xvf pypedia.tar 
-    cd $HOME/restore/; 
+    cd $HOME/restore/home/kantale/backup; gunzip pypedia.xml.gz
+
+    #If problems with importDump:
+    sudo python -c "a = open('/var/www/pypedia/LocalSettings.php').read(); a = a.replace('$wgMainCacheType = CACHE_ACCEL;', '$wgMainCacheType = CACHE_ANYTHING;'); b = open('/var/www/pypedia/LocalSettings.php', 'w').write(a)"
+    
+    cd /var/www/pypedia/maintenance; sudo php importDump.php  /home/user/restore/home/kantale/backup/pypedia.xml
+    cd /var/www/pypedia/maintenance; sudo php rebuildrecentchanges.php 
+    
