@@ -202,3 +202,10 @@ pip install nose
     scp kantale@www.pypedia.com:backup/pypedia.tar $HOME/from_gandi/pypedia.tar
     scp kantale@www.pypedia.com:backup/mywiki.tar $HOME/from_gandi/mywiki.tar
 
+    #Get mediawiki
+    cd /var/www
+    sudo wget http://download.wikimedia.org/mediawiki/1.20/mediawiki-1.20.2.tar.gz
+    sudo tar zxvf mediawiki-1.20.2.tar.gz
+    sudo rm mediawiki-1.20.2.tar.gz
+    sudo mv mediawiki-1.20.2/ pypedia/
+    
