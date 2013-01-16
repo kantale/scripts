@@ -209,3 +209,6 @@ pip install nose
     sudo rm mediawiki-1.20.2.tar.gz
     sudo mv mediawiki-1.20.2/ pypedia/
     
+    #Point to: 
+    #http://83.212.107.55/pypedia/mw-config/index.php
+    #and install mediawiki
