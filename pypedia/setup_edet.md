@@ -9,6 +9,8 @@
 * Restart apache: /etc/init.d/apache2 restart
 * Apache configuration: /etc/mediawiki/apache.conf
 * Login on oceanos: https://cyclades.okeanos.grnet.gr/ui/ Username: chazapis@grnet.gr password: https://mail.google.com/mail/#inbox/139bca9d87a4f4d9
+* http://83.212.107.55/pypedia/index.php/Main_Page
+* Logs: tail /var/log/apache2/error.log
 
 ## How to setup a root jail:
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
@@ -257,8 +259,11 @@ pip install nose
     #Install pypedia..
     cd /var/www/pypedia/extensions; sudo git clone https://github.com/kantale/PyPedia_server.git
     
+    #Install MyVariables extension
+    cd /var/www/pypedia/extensios/PyPedia_server; sudo git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/MyVariables.git
     #Add extra settings to LocalSettings.php
     
+    #This is problematic for some versions of mediawiki..
     cp /var/www/pypedia/index.php /var/www/pypedia/index.php.backup
     cp /var/www/pypedia/extensions/PyPedia_server/index.php /var/www/pypedia/index.php
     cp /var/www/pypedia/skins/Vector.php /var/www/pypedia/skins/Vector.php.backup
@@ -322,7 +327,4 @@ pip install nose
     # Do not have to, but it is a good idea, for Anonymous not to be able to create pages
     $wgGroupPermissions['*']['createpage'] = false;
 
-## Commanted out the line in pypedia.php: #require_once( "{$IP}/extensions/PyPedia_server/MyVariables/MyVariables.php" );
-## Refer here: http://83.212.107.55/pypedia/index.php/Main_Page
-## Logs: tail /var/log/apache2/error.log 
-## FIXED! get fresh MyVariables.. git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/MyVariables.git
+
