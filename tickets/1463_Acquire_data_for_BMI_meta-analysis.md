@@ -109,3 +109,8 @@ On mac OSX: ld: library not found for -lcrt0.o
     * J.vanSetten: Restructured the 'traits' paragraph in order to look more like a to-do list. 
     * "It is preferable a smaller sample size but measured under objective condition rather a larger sample size with a careless phenotype reporting". **Deleted**
     * So what is the optimal tradeoff between asking too much from cohorts and satisfying reviewers?
+
+* TC 17 January 2013.
+    * BMI and Height is (additionaly) for comparing GoNL and 1000G. Lipds differs because it seeks novel biology meaning in data imputed with Dutch reference. This is why Lipids ask fewer files (do not include imputation with 1000G).
+    * Analysis deadline for data submission from the biobanks is 15 March (1 March too soo, 1 April too late and too relaxing!)
+    * Cohorts have already done the submitted analysis many times and they know what to do. They shouldn't expect from us to provide any anaysis scripts
