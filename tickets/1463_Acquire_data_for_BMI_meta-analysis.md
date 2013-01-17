@@ -111,6 +111,10 @@ On mac OSX: ld: library not found for -lcrt0.o
     * So what is the optimal tradeoff between asking too much from cohorts and satisfying reviewers?
 
 * TC 17 January 2013.
+    * https://mail.google.com/mail/#inbox/13c480a6ec0b52bb
     * BMI and Height is (additionaly) for comparing GoNL and 1000G. Lipds differs because it seeks novel biology meaning in data imputed with Dutch reference. This is why Lipids ask fewer files (do not include imputation with 1000G).
     * Analysis deadline for data submission from the biobanks is 15 March (1 March too soo, 1 April too late and too relaxing!)
     * Cohorts have already done the submitted analysis many times and they know what to do. They shouldn't expect from us to provide any anaysis scripts
+    * Checked for age and age^2. There is no confusion
+
+### Send final version
