@@ -310,6 +310,7 @@ pip install nose
     $wgUseAjax = true;
     require_once( "{$IP}/extensions/PyPedia_server/pypedia.php");
     #Before wgLogo (No particular reason)
+    $wgLogo = "$wgScriptPath/extensions/PyPedia_server/pypedia.png";
 
     #Hooks for PyPedia
     $wgHooks['EditPage::attemptSave'][] = 'pypediaEditPageAttemptSave';
