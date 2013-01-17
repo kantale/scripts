@@ -271,6 +271,9 @@ pip install nose
     
     #From: https://github.com/kantale/PyPedia_server/blob/master/INSTALL STEP 5: Create file with passwords
     
+    #Fix /etc/apache2/sites-available/default
+    #Set: $wgScriptPath       = ""; in LocalSettings.php
+
 ### Initial Main_Page content:
 
     ==Introduction==
