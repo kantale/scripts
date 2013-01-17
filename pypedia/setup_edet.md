@@ -273,6 +273,13 @@ pip install nose
     
     #Fix /etc/apache2/sites-available/default
     #Set: $wgScriptPath       = ""; in LocalSettings.php
+    
+    #Add to LocalSettings.php regarding copyright:
+    $wgRightsPage = "PyPedia:License"; # Set to the title of a wiki page that describes your license/copyright
+    $wgRightsUrl = "http://opensource.org/licenses/bsd-license.php";
+    $wgRightsText = "Simplified BSD License";
+    $wgRightsIcon = "{$wgStylePath}/common/images/bsd.gif";
+
 
 ### Initial Main_Page content:
 
