@@ -278,8 +278,9 @@ pip install nose
     $wgRightsPage = "PyPedia:License"; # Set to the title of a wiki page that describes your license/copyright
     $wgRightsUrl = "http://opensource.org/licenses/bsd-license.php";
     $wgRightsText = "Simplified BSD License";
-    $wgRightsIcon = "{$wgStylePath}/common/images/bsd.gif";
+    $wgRightsIcon = "{$wgStylePath}/common/images/License_icon-bsd-88x31.png";
 
+    cd /var/www/pypedia/skins/common/images; sudo wget http://upload.wikimedia.org/wikipedia/commons/4/42/License_icon-bsd-88x31.png
 
 ### Initial Main_Page content:
 
