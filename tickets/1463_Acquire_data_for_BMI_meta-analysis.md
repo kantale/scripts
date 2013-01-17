@@ -116,5 +116,6 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Analysis deadline for data submission from the biobanks is 15 March (1 March too soo, 1 April too late and too relaxing!)
     * Cohorts have already done the submitted analysis many times and they know what to do. They shouldn't expect from us to provide any anaysis scripts
     * Checked for age and age^2. There is no confusion
+* Created two versions. One for with double analysis (all, rare) = 32 files and another with single analysis.
 
-### Send final version
+### Submitted two versions in gonl-impute list.
