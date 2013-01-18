@@ -11,6 +11,7 @@
 * Login on oceanos: https://cyclades.okeanos.grnet.gr/ui/ Username: chazapis@grnet.gr password: https://mail.google.com/mail/#inbox/139bca9d87a4f4d9
 * http://83.212.107.55/pypedia/index.php/Main_Page
 * Logs: tail /var/log/apache2/error.log
+* Root jail machine: ssh user@snf-14105.vm.okeanos.grnet.gr
 
 ## How to setup a root jail:
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
