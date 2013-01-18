@@ -27,6 +27,12 @@
     sudo mount -o bind /proc /var/chroot/proc
     sudo chroot /var/chroot
 
+* How to destroy a root jail:
+
+.
+
+    sudo umount /var/chroot/proc
+    sudo rm -rf  /var/chroot
 
 libblas3gf  
 libblas-doc  
