@@ -51,7 +51,8 @@ liblapack-dev
     apt-get -y install python-dev  
     apt-get -y install git
     apt-get -y install gfortran  
-    apt-get -y install libc6-dev-amd64  
+    apt-get -y install libc6-dev-amd64
+    apt-get -y install curl
 
     mkdir /root/tools
     cd /root/tools; git git clone https://github.com/haypo/pysandbox.git
