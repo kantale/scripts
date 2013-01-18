@@ -118,4 +118,8 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Checked for age and age^2. There is no confusion
 * Created two versions. One for with double analysis (all, rare) = 32 files and another with single analysis.
 
-### Submitted two versions in gonl-impute list.
+* Submitted two versions in gonl-impute list. https://mail.google.com/mail/?shva=1#inbox/13c48e2e3fb932f5
+    * **FINAL SELECTION:** We remove the double analysis. We request for 16 files per cohort.
+    * Sent final to Jana. https://mail.google.com/mail/?shva=1#sent/13c4dfd4d5ec2f14
+
+## Wait for data !
