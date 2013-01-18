@@ -53,6 +53,11 @@ liblapack-dev
     apt-get -y install gfortran  
     apt-get -y install libc6-dev-amd64  
 
+    mkdir /root/tools
+    cd /root/tools; git git clone https://github.com/haypo/pysandbox.git
+    cd /root/tools/pysandbox; python setup.py build
+    cd /root/tools/pysandbox; python setup.py install
+
     useradd puser
     passwd puser
     
