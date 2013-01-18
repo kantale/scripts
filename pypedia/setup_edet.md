@@ -20,7 +20,7 @@
 .
 
     sudo apt-get update
-    sudo apt-get install debootstrap
+    sudo apt-get -y install debootstrap
     sudo apt-get -y install schroot
 
     sudo debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
@@ -39,10 +39,10 @@ liblapack-dev
 ## INSIDE THE ROOT JAIL:
 
     apt-get update  
-    apt-get install python  
-    apt-get install python-dev  
-    apt-get install gfortran  
-    apt-get install libc6-dev-amd64  
+    apt-get -y install python  
+    apt-get -y install python-dev  
+    apt-get -y install gfortran  
+    apt-get -y install libc6-dev-amd64  
 
 mkdir tools  
 
@@ -181,21 +181,21 @@ pip install nose
 ### Create image:
 
     sudo apt-get update
-    sudo apt-get install apache2
-    sudo apt-get install php5
-    sudo apt-get install git
-    sudo apt-get install mysql-server mysql-client 
-    sudo apt-get install php5-mysql
-    sudo apt-get install zip
-    sudo apt-get install automake
-    sudo apt-get install php-pear
-    sudo apt-get install make
-    sudo apt-get install libpcre3-dev
-    sudo apt-get install imagemagick
-    sudo apt-get install highlight
-    sudo apt-get install php5-curl
-    sudo apt-get install libicu-dev
-    sudo apt-get install g++
+    sudo apt-get -y install apache2
+    sudo apt-get -y install php5
+    sudo apt-get -y install git
+    sudo apt-get -y install mysql-server mysql-client 
+    sudo apt-get -y install php5-mysql
+    sudo apt-get -y install zip
+    sudo apt-get -y install automake
+    sudo apt-get -y install php-pear
+    sudo apt-get -y install make
+    sudo apt-get -y install libpcre3-dev
+    sudo apt-get -y install imagemagick
+    sudo apt-get -y install highlight
+    sudo apt-get -y install php5-curl
+    sudo apt-get -y install libicu-dev
+    sudo apt-get -y install g++
 
     sudo pecl install apc
     #     edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
