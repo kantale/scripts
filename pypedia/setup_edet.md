@@ -23,7 +23,8 @@
     sudo apt-get -y install debootstrap
     sudo apt-get -y install schroot
 
-    sudo debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
+    #sudo debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu
+    sudo debootstrap --variant=buildd --arch i386 precise /var/chroot/ http://archive.ubuntu.com/ubuntu
     sudo mount -o bind /proc /var/chroot/proc
     sudo chroot /var/chroot
 
@@ -44,12 +45,17 @@ liblapack-dev
 
 ## INSIDE THE ROOT JAIL:
 
+
     apt-get update  
     apt-get -y install python  
     apt-get -y install python-dev  
+    apt-get -y install git
     apt-get -y install gfortran  
     apt-get -y install libc6-dev-amd64  
 
+    useradd puser
+    passwd puser
+    
 mkdir tools  
 
 * Building LAPACK
