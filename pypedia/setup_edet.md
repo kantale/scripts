@@ -24,8 +24,8 @@
     sudo apt-get -y install schroot
 
     sudo debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
-    mount -o bind /proc /var/chroot/proc
-    chroot /var/chroot
+    sudo mount -o bind /proc /var/chroot/proc
+    sudo chroot /var/chroot
 
 
 libblas3gf  
