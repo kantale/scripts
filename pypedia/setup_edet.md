@@ -14,7 +14,12 @@
 * Root jail machine: ssh user@snf-14105.vm.okeanos.grnet.gr
 
 ## How to setup a root jail:
+sudo apt-get update
+sudo apt-get install debootstrap
+sudo apt-get -y install schroot
+
 debootstrap --variant=buildd --arch i386 lucid /var/chroot/ http://archive.ubuntu.com/ubuntu  
+
 mount -o bind /proc /var/chroot/proc
 
 https://help.ubuntu.com/community/BasicChroot
