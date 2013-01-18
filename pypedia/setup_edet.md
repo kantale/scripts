@@ -36,13 +36,13 @@ liblapack3gf
 liblapack-doc  
 liblapack-dev  
 
-INSIDE THE ROOT JAIL:
+## INSIDE THE ROOT JAIL:
 
-apt-get update  
-apt-get install python  
-apt-get install python-dev  
-apt-get install gfortran  
-apt-get install libc6-dev-amd64  
+    apt-get update  
+    apt-get install python  
+    apt-get install python-dev  
+    apt-get install gfortran  
+    apt-get install libc6-dev-amd64  
 
 mkdir tools  
 
