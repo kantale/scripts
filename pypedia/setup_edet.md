@@ -54,11 +54,19 @@ liblapack-dev
     apt-get -y install libc6-dev-amd64
     apt-get -y install curl
     apt-get -y install python.numpy
+    apt-get -y install ibblas3gf libblas-doc libblas-dev
+    apt-get -y install liblapack3gf liblapack-doc liblapack-dev
 
     mkdir /root/tools
+
     cd /root/tools; git git clone https://github.com/haypo/pysandbox.git
     cd /root/tools/pysandbox; python setup.py build
     cd /root/tools/pysandbox; python setup.py install
+    
+    cd /root/tools; curl https://dl.dropbox.com/u/5548517/scipy-0.11.0.tar.gz > scipy-0.11.0.tar.gz
+    cd /root/tools; tar zxvf scipy-0.11.0.tar.gz
+    cd /root/tools/scipy-0.11.0; python setup.py build
+    cd /root/tools/scipy-0.11.0; python setup.py install
 
     useradd puser
     passwd puser
