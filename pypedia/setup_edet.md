@@ -68,6 +68,10 @@ liblapack-dev
     cd /root/tools/scipy-0.11.0; python setup.py build
     cd /root/tools/scipy-0.11.0; python setup.py install
 
+    curl http://python-distribute.org/distribute_setup.py | python  
+    curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python  
+    pip install nose  
+
     useradd puser
     passwd puser
     
@@ -100,10 +104,6 @@ apt-get install python-numpy
 
 apt-get install curl  
 
-curl http://python-distribute.org/distribute_setup.py | python  
-curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python  
-
-pip install nose  
 
 ## Backup script from gandi
 
