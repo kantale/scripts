@@ -81,6 +81,13 @@ liblapack-dev
     mkdir /home/puser
     cd /home/puser; curl https://raw.github.com/kantale/PyPedia_server/master/utils/pyp_sandbox2.py > pyp_sandbox2.py
     
+    touch /home/puser/nohup.out
+    chmod 622 /home/puser/nohup.out
+    
+    su - puser
+    
+    #As a puser
+    #cd /home/puser; nohup python pyp_sandbox2.py &
 mkdir tools  
 
 * Building LAPACK
