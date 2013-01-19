@@ -12,6 +12,7 @@
 * http://83.212.107.55/pypedia/index.php/Main_Page
 * Logs: tail /var/log/apache2/error.log
 * Root jail machine: ssh user@snf-14105.vm.okeanos.grnet.gr
+* Web server: ssh user@snf-13900.vm.okeanos.grnet.gr
 
 ## How to setup a root jail:
 * https://help.ubuntu.com/community/BasicChroot
