@@ -55,7 +55,7 @@ liblapack-dev
     apt-get -y install libc6-dev-amd64
     apt-get -y install curl
     apt-get -y install python.numpy
-    apt-get -y install ibblas3gf libblas-doc libblas-dev
+    apt-get -y install libblas3gf libblas-doc libblas-dev
     apt-get -y install liblapack3gf liblapack-doc liblapack-dev
 
     echo 'none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0' >> /etc/fstab
