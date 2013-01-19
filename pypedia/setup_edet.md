@@ -74,7 +74,12 @@ liblapack-dev
 
     curl http://python-distribute.org/distribute_setup.py | python  
     curl https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python  
-    pip install nose  
+    pip install nose 
+    
+    cd /root/tools; curl  http://sympy.googlecode.com/files/sympy-0.7.1.tar.gz > sympy-0.7.1.tar.gz
+    cd /root/tools; tar zxvf sympy-0.7.1.tar.gz
+    cd /root/tools/sympy-0.7.1; python setup.py build
+    cd /root/tools/sympy-0.7.1; python setup.py install
 
     useradd puser
     passwd puser
