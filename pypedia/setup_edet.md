@@ -57,6 +57,9 @@ liblapack-dev
     apt-get -y install ibblas3gf libblas-doc libblas-dev
     apt-get -y install liblapack3gf liblapack-doc liblapack-dev
 
+    echo 'none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0' >> /etc/fstab
+    mount -a
+
     mkdir /root/tools
 
     cd /root/tools; git git clone https://github.com/haypo/pysandbox.git
@@ -74,6 +77,9 @@ liblapack-dev
 
     useradd puser
     passwd puser
+    
+    mkdir /home/puser
+    cd /home/puser; curl https://raw.github.com/kantale/PyPedia_server/master/utils/pyp_sandbox2.py > pyp_sandbox2.py
     
 mkdir tools  
 
