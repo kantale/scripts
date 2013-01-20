@@ -333,6 +333,13 @@ apt-get install curl
     $wgRightsUrl = "http://opensource.org/licenses/bsd-license.php";
     $wgRightsText = "Simplified BSD License";
     $wgRightsIcon = "{$wgStylePath}/common/images/License_icon-bsd-88x31.png";
+    
+    #Add spam control tools
+    require_once( "$IP/extensions/ConfirmEdit/ConfirmEdit.php" );
+    require_once( "$IP/extensions/ConfirmEdit/QuestyCaptcha.php");
+    $wgCaptchaClass = 'QuestyCaptcha';
+    $wgCaptchaQuestions[] = array( 'question' => "What is this wiki's name?", 'answer' => "$wgSitename" );
+
 
     cd /var/www/pypedia/skins/common/images; sudo wget http://upload.wikimedia.org/wikipedia/commons/4/42/License_icon-bsd-88x31.png
 
