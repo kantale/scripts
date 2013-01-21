@@ -265,3 +265,4 @@ Create scripts by running:
     sh submit_chr1.sh
     
 ### Waiting for chromosome 1. GONL V4. 
+* Scheduler crashed at Friday 18 January. Resubmitted Monday 21 January 2013.
