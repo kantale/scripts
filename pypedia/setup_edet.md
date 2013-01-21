@@ -283,6 +283,9 @@ apt-get install curl
     #Install Math extension
     cd /var/www/pypedia/extensions; sudo git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Math.git
     cd /var/www/pypedia/extensions/Math/math; sudo make
+    #Add to LocalSettings.php: 
+    # require_once("$IP/extensions/Math/Math.php");
+    # $wgTexvc = "$wgScriptPath/extensions/Math/math/texvc";
     
     #Load backup data to wiki
     mkdir $HOME/restore
