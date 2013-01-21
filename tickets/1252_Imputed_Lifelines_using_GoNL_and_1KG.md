@@ -4,6 +4,7 @@ http://www.molgenis.org/ticket/1252
 *  Documentation for molgenis compute imputation:
     * https://github.com/kantale/molgenis_apps/blob/master/doc/compute/02_compute_imputation.md
 * Scripts already used: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/prevend_MinimacV2_refGiant1000gv3.20101123
+* Results: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/
 
 ### Actions:
 * Locate GoNL version 4 data  
@@ -265,4 +266,4 @@ Create scripts by running:
     sh submit_chr1.sh
     
 ### Waiting for chromosome 1. GONL V4. 
-* Scheduler crashed at Friday 18 January. Resubmitted Monday 21 January 2013.
+* Scheduler crashed at Friday 18 January. Resubmitted Monday 21 January 2013. (We shouldn't. scheduler didn't crashed. Jobs finished normally)
