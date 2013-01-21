@@ -244,6 +244,7 @@ apt-get install curl
     sudo apt-get -y install php5-curl
     sudo apt-get -y install libicu-dev
     sudo apt-get -y install g++
+    sudo apt-get -y install ocaml
 
     sudo pecl install apc
     #     edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
@@ -278,6 +279,10 @@ apt-get install curl
     #Point to: 
     #http://83.212.107.55/pypedia/mw-config/index.php
     #and install mediawiki. Admin's account: admin
+    
+    #Install Math extension
+    cd /var/www/pypedia/extensions; sudo git clone https://gerrit.wikimedia.org/r/p/mediawiki/extensions/Math.git
+    cd /var/www/pypedia/extensions/Math/math; sudo make
     
     #Load backup data to wiki
     mkdir $HOME/restore
