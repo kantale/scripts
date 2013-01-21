@@ -121,5 +121,9 @@ On mac OSX: ld: library not found for -lcrt0.o
 * Submitted two versions in gonl-impute list. https://mail.google.com/mail/?shva=1#inbox/13c48e2e3fb932f5
     * **FINAL SELECTION:** We remove the double analysis. We request for 16 files per cohort.
     * Sent final to Jana. https://mail.google.com/mail/?shva=1#sent/13c4dfd4d5ec2f14
+* Jana sent some final remarks the last minute! https://mail.google.com/mail/?shva=1#inbox/13c4dfd4d5ec2f14 Major edits: 
+    * Remove the gender from the model (the analysis is stratified for gender)
+    * Explicitly request to send the software and version of imputation software
+    * Added IMPREF indicates the imputation reference panel (GoNL or 1000Genome) for the requested file names!
 
 ## Wait for data !
