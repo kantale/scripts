@@ -125,5 +125,6 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Remove the gender from the model (the analysis is stratified for gender)
     * Explicitly request to send the software and version of imputation software
     * Added IMPREF indicates the imputation reference panel (GoNL or 1000Genome) for the requested file names!
+* Data sent to biobanks! https://mail.google.com/mail/?shva=1#inbox/13c4e0869c936243
 
-## Wait for data !
+## Wait for data files from cohorts !
