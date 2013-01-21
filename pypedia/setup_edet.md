@@ -1,8 +1,8 @@
 ## Resources
 * http://www.pypedia.com
 * ip: 83.212.107.55
-* <strike>http://83.212.99.245/mediawiki/index.php/Main_Page</strike>
-* <strike>ip: 83.212.99.245</strike>
+* <del>http://83.212.99.245/mediawiki/index.php/Main_Page</del>
+* <del>ip: 83.212.99.245</del>
 * ssh edet
 * Web serving from: /var/lib/mediawiki/
 * Mediawiki installatation dir: /var/lib/mediawiki/
