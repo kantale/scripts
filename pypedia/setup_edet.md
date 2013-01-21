@@ -245,6 +245,7 @@ apt-get install curl
     sudo apt-get -y install libicu-dev
     sudo apt-get -y install g++
     sudo apt-get -y install ocaml
+    sudo apt-get -y install texlive-latex-base
 
     sudo pecl install apc
     #     edit file: /etc/php5/apache2/php.ini ADD: extension=apc.so
