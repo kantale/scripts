@@ -267,3 +267,4 @@ Create scripts by running:
     
 ### Waiting for chromosome 1. GONL V4. 
 * Scheduler crashed at Friday 18 January. Resubmitted Monday 21 January 2013. (We shouldn't. scheduler didn't crashed. Jobs finished normally)
+* Chrosome 1 finished. Submitted: chromosome 2
