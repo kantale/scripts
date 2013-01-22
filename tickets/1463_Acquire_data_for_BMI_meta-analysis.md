@@ -126,5 +126,9 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Explicitly request to send the software and version of imputation software
     * Added IMPREF indicates the imputation reference panel (GoNL or 1000Genome) for the requested file names!
 * Data sent to biobanks! https://mail.google.com/mail/?shva=1#inbox/13c4e0869c936243
-
+* Two concerns from Jana:
+    * TRAILs/NESDA ask if they can do the imputation in impute2. No problem
+    * Can it be a confusion? The authors of the reference regarding inverse refer as **1000/BMI**
+    * Whereas what we want is:  inverse normally transformed BMI is calculated based on the inverse normal transformation where you first rank the values and then assign values to the ranks using the inverse normal distribution. This transformation results in the mean and the sd of the transformed variable as 0 and 1
+    * Hopefully there be no confusion..
 ## Wait for data files from cohorts !
