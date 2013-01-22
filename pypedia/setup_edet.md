@@ -85,8 +85,21 @@ liblapack-dev
     cd /root/tools/sympy-0.7.1; python setup.py build
     cd /root/tools/sympy-0.7.1; python setup.py install
     
+    #Install matplotlib
     pip install matplotlib
     sed -i 's/^backend[ \t]*:.*$/backend : Agg/g' `python -c 'import matplotlib; print matplotlib.matplotlib_fname()'`
+
+    #Install mpmath
+    apt-get -y install libmpc-dev
+    apt-get -y install libmpfr-dev
+    apt-get -y install libgmp3-dev
+    cd /root/tools; curl http://www.multiprecision.org/mpc/download/mpc-1.0.1.tar.gz > mpc-1.0.1.tar.gz
+    cd /root/tools; tar zxvf mpc-1.0.1.tar.gz
+    cd /root/tools/mpc-1.0.1; ./configure; make; make install
+    pip install gmpy2
+    cd /root/tools; curl http://mpmath.googlecode.com/files/mpmath-all-0.17.tar.gz > mpmath-all-0.17.tar.gz
+    cd /root/tools; tar zxvf mpmath-all-0.17.tar.gz 
+    cd /root/tools/mpmath-all-0.17; python setup.py build; python setup.py install
 
     useradd puser
     passwd puser
