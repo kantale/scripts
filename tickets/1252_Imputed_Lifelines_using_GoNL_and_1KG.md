@@ -278,7 +278,7 @@ Create scripts by running:
       os.system(command)
       command = "cat header.txt submit_chr%i_nh.sh > submit_chr%i.sh" % (x, x)
       print command
-      os.system(command
+      os.system(command)
 
     
 ### Waiting for chromosome 1. GONL V4. 
