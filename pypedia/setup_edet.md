@@ -59,6 +59,8 @@ liblapack-dev
     apt-get -y install python.numpy
     apt-get -y install libblas3gf libblas-doc libblas-dev
     apt-get -y install liblapack3gf liblapack-doc liblapack-dev
+    apt-get -y install libfreetype6 libfreetype6-dev
+    apt-get -y install libpng-dev libjpeg8-dev
 
     echo 'none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0' >> /etc/fstab
     mount -a
@@ -82,6 +84,8 @@ liblapack-dev
     cd /root/tools; tar zxvf sympy-0.7.1.tar.gz
     cd /root/tools/sympy-0.7.1; python setup.py build
     cd /root/tools/sympy-0.7.1; python setup.py install
+    
+    pip install matplotlib
 
     useradd puser
     passwd puser
