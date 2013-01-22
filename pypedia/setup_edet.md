@@ -289,6 +289,9 @@ apt-get install curl
     # require_once("$IP/extensions/Math/Math.php");
     # $wgTexvc = "$wgScriptPath/extensions/Math/math/texvc";
     cd /var/www/pypedia/maintenance; sudo php update.php
+    sudo mkdir /var/www/pypedia/images/math
+    sudo chown www-data /var/www/pypedia/images/math
+    sudo chgrp www-data /var/www/pypedia/images/math
     
     #Load backup data to wiki
     mkdir $HOME/restore
