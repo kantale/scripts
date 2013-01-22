@@ -86,6 +86,7 @@ liblapack-dev
     cd /root/tools/sympy-0.7.1; python setup.py install
     
     pip install matplotlib
+    sed -i 's/^backend[ \t]*:.*$/backend : Agg/g' `python -c 'import matplotlib; print matplotlib.matplotlib_fname()'`
 
     useradd puser
     passwd puser
