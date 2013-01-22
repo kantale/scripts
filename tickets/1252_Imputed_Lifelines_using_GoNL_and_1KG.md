@@ -265,6 +265,22 @@ Create scripts by running:
     cat header.txt submit_chr1_nh.sh > submit_chr1.sh 
     sh submit_chr1.sh
     
+    To separate in chromosomes run the script:
+
+    import os
+    
+    command = "head -n 3  submit.sh > header.txt"
+    print command
+    os.system(command)
+    for x in range(1,23):
+      command = "grep s00_prePhasingMach_s00_lifelines_gonlV4_%i_  submit.sh > submit_chr%i_nh.sh" % (x, x)
+      print command
+      os.system(command)
+      command = "cat header.txt submit_chr%i_nh.sh > submit_chr%i.sh" % (x, x)
+      print command
+      os.system(command
+
+    
 ### Waiting for chromosome 1. GONL V4. 
 * Scheduler crashed at Friday 18 January. Resubmitted Monday 21 January 2013. (We shouldn't. scheduler didn't crashed. Jobs finished normally)
 * Chrosome 1 finished. Submitted: chromosome 2, 3
