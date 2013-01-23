@@ -319,5 +319,7 @@ Create scripts by running:
     * VISIT: http://molgenis18.target.rug.nl:8080/compute/molgenis.do (In order to generate tables)
 * Impot workflow:
     * sudo sh importWorkflow_alex.sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
-* Kill molgenis web server: 
+* Create exactly the same worksheet as before. Location: /srv/molgenis/compute/PrePhasingWorksheet.csv
+* Submit worksheet1:
+    * cd /srv/molgenis/compute; sudo sh importWorkSheet_alex.sh workflowMinimacStage1.csv /srv/molgenis/compute/PrePhasingWorksheet.csv test1
     
