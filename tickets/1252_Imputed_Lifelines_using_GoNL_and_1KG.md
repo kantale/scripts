@@ -309,4 +309,11 @@ Create scripts by running:
 
     python gridShare.py GRIDROOT=srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/runs/ticket_1252/results CLUSTERDIR=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/result
 
-###Copying the data..
+* Copying the data. Done.
+* ssh akanterakis@molgenis18.target.rug.nl
+* Create datbase: echo 'DROP DATABASE IF EXISTS compute; CREATE DATABASE compute;' | mysql -u molgenis -pmolgenis
+* sudo  mv /srv/molgenis/compute/molgenis_apps/nohup.out /srv/molgenis/compute/molgenis_apps/nohup.out.001
+* sudo su - molgenis
+* cd /srv/molgenis/compute/molgenis_apps/; nohup ant -f /srv/molgenis/compute/molgenis_apps/build_compute.xml runOn -Dport=8080 &
+* Impot workflow:
+    * sudo sh importWorkflow_alex.sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
