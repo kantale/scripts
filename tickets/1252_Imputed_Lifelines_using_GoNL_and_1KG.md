@@ -317,3 +317,5 @@ Create scripts by running:
 * cd /srv/molgenis/compute/molgenis_apps/; nohup ant -f /srv/molgenis/compute/molgenis_apps/build_compute.xml runOn -Dport=8080 &
 * Impot workflow:
     * sudo sh importWorkflow_alex.sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
+* Kill molgenis web server: 
+    * sudo kill `ps aux | grep apache-ant | grep -v grep | cut -d ' ' -f 2`
