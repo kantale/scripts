@@ -283,4 +283,13 @@ Create scripts by running:
     
 ### Waiting for chromosome 1. GONL V4. 
 * Scheduler crashed at Friday 18 January. Resubmitted Monday 21 January 2013. (We shouldn't. scheduler didn't crashed. Jobs finished normally)
-* Chrosome 1,2 finished. Submitted: chromosome  3, 4, 5, 6, 7, 8, 9, 10
+* Chrosome 1,2,3 finished. Submitted: chromosome  **4, 5, 6, 7, 8, 9, 10**
+
+* Generated scripts for step 3 (without step 2 having finished):
+
+.
+
+   sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_compute.sh -inputdir=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/ -worksheet=/target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ImputationWorksheet_gonl_release4.csv -parameters=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv -workflow=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/workflowMinimacStage3.csv -protocols=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/protocols/ -outputdir=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_3_GoNL -id=lifelines_gonlv4_3
+
+* scripts dir: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_3_GoNL
+
