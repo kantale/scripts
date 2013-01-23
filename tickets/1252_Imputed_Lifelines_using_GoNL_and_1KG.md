@@ -303,11 +303,12 @@ Create scripts by running:
 * curl  https://raw.github.com/kantale/scripts/master/gridShare.py > gridShare.py
 * Finding copy directory in Grid:
     * srmmkdir srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/runs/ticket_1252/results
-* Command to copy data: `python gridShare.py GRIDROOT=srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/runs/ticket_1252/results CLUSTERDIR=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/result`
+* Command to copy data: python gridShare.py GRIDROOT=srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/runs/ticket_1252/results CLUSTERDIR=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/result
 * Copying the study data. Done.
 * create dir in grid for redference: srmmkdir srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/groups/gonl/resources/imputationReference/gonl_release4/vcf
 * Command to copy the data: `python gridShare.py GRIDROOT=srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/groups/gonl/resources/imputationReference/gonl_release4/vcf CLUSTERDIR=/target/gpfs2/gcc/groups/gonl/resources/imputationReference/gonl_release4/vcf`
-* **WAITING FOR DATA TO BE COPIED**
+* **WAITING FOR DATA TO BE COPIED**. DONE
+* Create directory on grid: srmmkdir srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4
 * ssh akanterakis@molgenis18.target.rug.nl
 * This sequence:
     * sudo kill `ps aux | grep apache-ant | grep -v grep | cut -d ' ' -f 2`
