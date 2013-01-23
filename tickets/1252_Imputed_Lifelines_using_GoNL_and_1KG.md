@@ -295,3 +295,18 @@ Create scripts by running:
 * grep to create a subset that contains only chromosome 1
 
 ### Submitted chromosome 1, on main scheduler. Waiting
+
+## Impute on Grid
+* ssh grid
+* startGridSession bbmri.nl
+* cd copy_data_to_grid/
+* curl  https://raw.github.com/kantale/scripts/master/gridShare.py > gridShare.py
+* Finding copy directory in Grid:
+    * srmmkdir srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/runs/ticket_1252/results
+* Command to copy data:
+
+.
+
+    python gridShare.py GRIDROOT=srm://srm.grid.sara.nl:8443/pnfs/grid.sara.nl/data/bbmri.nl/RP2/home/akanterakis/runs/ticket_1252/results CLUSTERDIR=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/result
+
+###Copying the data..
