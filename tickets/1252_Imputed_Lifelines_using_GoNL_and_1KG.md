@@ -311,11 +311,14 @@ Create scripts by running:
 
 * Copying the data. Done.
 * ssh akanterakis@molgenis18.target.rug.nl
-* Create datbase: echo 'DROP DATABASE IF EXISTS compute; CREATE DATABASE compute;' | mysql -u molgenis -pmolgenis
-* sudo  mv /srv/molgenis/compute/molgenis_apps/nohup.out /srv/molgenis/compute/molgenis_apps/nohup.out.001
-* sudo su - molgenis
-* cd /srv/molgenis/compute/molgenis_apps/; nohup ant -f /srv/molgenis/compute/molgenis_apps/build_compute.xml runOn -Dport=8080 &
+* This sequence:
+    * sudo kill `ps aux | grep apache-ant | grep -v grep | cut -d ' ' -f 2`
+    * Create datbase: echo 'DROP DATABASE IF EXISTS compute; CREATE DATABASE compute;' | mysql -u molgenis -pmolgenis
+    * sudo  mv /srv/molgenis/compute/molgenis_apps/nohup.out /srv/molgenis/compute/molgenis_apps/nohup.out.001
+    * sudo su - molgenis
+    * cd /srv/molgenis/compute/molgenis_apps/; nohup ant -f /srv/molgenis/compute/molgenis_apps/build_compute.xml runOn -Dport=8080 &
+    * VISIT: http://molgenis18.target.rug.nl:8080/compute/molgenis.do (In order to generate tables)
 * Impot workflow:
     * sudo sh importWorkflow_alex.sh /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/parametersMinimac.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/workflowMinimacStage1.csv /srv/molgenis/compute/molgenis_apps/modules/compute/protocols/imputation/minimacV2/protocols/
 * Kill molgenis web server: 
-    * sudo kill `ps aux | grep apache-ant | grep -v grep | cut -d ' ' -f 2`
+    
