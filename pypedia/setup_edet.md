@@ -101,6 +101,12 @@ liblapack-dev
     cd /root/tools; tar zxvf mpmath-all-0.17.tar.gz 
     cd /root/tools/mpmath-all-0.17; python setup.py build; python setup.py install
 
+    #Install biopython
+    cd /root/tools; curl http://biopython.org/DIST/biopython-1.60.tar.gz > biopython-1.60.tar.gz
+    cd /root/tools; tar zxvf biopython-1.60.tar.gz
+    cd /root/tools/biopython-1.60/; python setup.py build
+    cd /root/tools/biopython-1.60/; python setup.py install
+    
     useradd puser
     passwd puser
     
