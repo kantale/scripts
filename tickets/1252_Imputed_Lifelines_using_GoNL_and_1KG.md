@@ -323,6 +323,7 @@ Create scripts by running:
 * Submit worksheet1:
     * cd /srv/molgenis/compute; sudo sh importWorkSheet_alex.sh workflowMinimacStage1.csv /srv/molgenis/compute/PrePhasingWorksheet.csv test1
 * Run pilot:
+    * Delete previous jobs: glite-wms-job-status -i pilot-one
     * sudo sh runPilot_alex.sh ui.grid.sara.nl kanterak GRID_PASSWORD grid
 
 ### Everything that was done in the grid was wrong!!
