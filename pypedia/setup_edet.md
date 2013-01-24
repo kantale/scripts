@@ -107,6 +107,9 @@ liblapack-dev
     cd /root/tools/biopython-1.60/; python setup.py build
     cd /root/tools/biopython-1.60/; python setup.py install
     
+    #install  sckikit-learn
+    pip install -U scikit-learn
+    
     useradd puser
     passwd puser
     
