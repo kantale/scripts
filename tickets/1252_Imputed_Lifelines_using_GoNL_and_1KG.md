@@ -324,3 +324,35 @@ Create scripts by running:
     * cd /srv/molgenis/compute; sudo sh importWorkSheet_alex.sh workflowMinimacStage1.csv /srv/molgenis/compute/PrePhasingWorksheet.csv test1
 * Run pilot:
     * sudo sh runPilot_alex.sh ui.grid.sara.nl kanterak GRID_PASSWORD grid
+
+### Everything that was done in the grid was wrong!!
+* The align_to_ref.sh script generates two sets of outputs:
+    * the first is in /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/chrXX directories. These are TEMPORARY data
+    * the second is in the /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/result/ directory this is the correct
+    * In my PrePhasingWorksheet.csv I declared the first! The correct worksheet is:
+
+.
+
+    project,studyInputDir,prePhasingResultDir,imputationPipeline,genomeBuild,chr,autostart
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr1,minimac,b37,1,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr2,minimac,b37,2,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr3,minimac,b37,3,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr4,minimac,b37,4,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr5,minimac,b37,5,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr6,minimac,b37,6,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr7,minimac,b37,7,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr8,minimac,b37,8,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr9,minimac,b37,9,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr10,minimac,b37,10,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr11,minimac,b37,11,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr12,minimac,b37,12,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr13,minimac,b37,13,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr14,minimac,b37,14,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr15,minimac,b37,15,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr16,minimac,b37,16,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr17,minimac,b37,17,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr18,minimac,b37,18,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr19,minimac,b37,19,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr20,minimac,b37,20,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr21,minimac,b37,21,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252/result/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/zz_MinimacV2_refGoNLv4/chr22,minimac,b37,22,FALSE
