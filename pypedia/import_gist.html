@@ -1,0 +1,76 @@
+
+<html>
+	<head>
+
+		<script>
+			function import_gist(button_id) {
+				var url_textbox = "Gist URL: <input type='text' value='' id='text_gist_url' size='50'/><p>";
+				url_textbox += "Function or Class name: <input type='text' value='' id='text_gist_name'/><p>";
+				url_textbox += "  Number of parameters: <select id='combo_gist_param_n' onchange='change_gist_param_n()''>";
+				for (var i=0; i<=10; i++) {
+					url_textbox += '<option value="' + i + '">' + i + '</option>\n';
+				}
+				url_textbox += '</select><p>';	
+
+				var div_ig = document.getElementById('ig');
+				div_ig.innerHTML = url_textbox;
+			}
+
+			function change_gist_param_n() {
+				var div_ig = document.getElementById('ig');
+				var combo_gist_param_n = document.getElementById('combo_gist_param_n');
+				var selected_index = combo_gist_param_n.selectedIndex
+				var selected_value = combo_gist_param_n.options[selected_index].value;
+				var gist_parameters_div = document.getElementById('gist_parameters_div');
+				if (gist_parameters_div) {
+					div_ig.removeChild(gist_parameters_div);
+				}
+				var gist_parameters_div = document.createElement("div");
+				gist_parameters_div.id = 'gist_parameters_div';
+				
+				for (var i=0; i<selected_index; i++) {
+					gist_parameters_div.innerHTML += 'Parameter name: <input type="text" id="gist_param_name_' + i + '"/>';
+					gist_parameters_div.innerHTML += ' Type: <select id="gist_param_type_' + i + '"><option value="expression">expression</option><option value="string">string</option></select>'
+					gist_parameters_div.innerHTML += ' Default: <input type="text" id="gist_param_def_' + i + '"/>';
+					gist_parameters_div.innerHTML += ' Label: <input type="text" id="gist_param_label_' + i + '"/>';
+					gist_parameters_div.innerHTML += '<p>';
+				}
+				gist_parameters_div.innerHTML += '<input type="button" value="Import!" id="import_gist_f" onClick="import_gist_f()"/>\n';
+				div_ig.insertBefore(gist_parameters_div, null);
+
+				//div_ig.innerHTML += selected_value;
+				combo_gist_param_n = document.getElementById('combo_gist_param_n');
+				combo_gist_param_n.value = selected_value;
+			}
+
+			function import_gist_f() {
+				//Create a JSON object with all parameters
+				var json_gist = {
+					'url' : document.getElementById('text_gist_url').value,
+					'n_params' : document.getElementById('combo_gist_param_n').selectedIndex, 
+					'fun_name' : document.getElementById('text_gist_name').value
+				};
+				params = [];
+				for (var i=0; i<json_gist['n_params']; i++) {
+					params.push({'name' : document.getElementById('gist_param_name_' + i).value, 'type' : document.getElementById('gist_param_type_' + i).selectedIndex, 'value' : document.getElementById('gist_param_def_' + i).value, 'label' : document.getElementById('gist_param_label_' + i).value});
+				}
+				json_gist['params'] = params
+				var str = JSON.stringify(json_gist, undefined, 2);
+
+				alert(str);
+			}
+
+		</script>
+
+	</head>
+	<body>
+
+
+		<input type="button" value="Import a gist!" id="import_gist" onClick="import_gist(this.id)"></input>
+
+		<div id="ig"></div>
+
+	</body>
+
+
+</html>
