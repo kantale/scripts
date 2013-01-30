@@ -383,6 +383,8 @@ apt-get install curl
     $wgCaptchaClass = 'QuestyCaptcha';
     $wgCaptchaQuestions[] = array( 'question' => "What is this wiki's name?", 'answer' => "$wgSitename" );
 
+    #Allow for first letter of articles to be lowercase
+    $wgCapitalLinks = false;
 
     cd /var/www/pypedia/skins/common/images; sudo wget http://upload.wikimedia.org/wikipedia/commons/4/42/License_icon-bsd-88x31.png
 
