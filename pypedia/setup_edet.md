@@ -361,10 +361,24 @@ apt-get install curl
     #Add extra settings to LocalSettings.php
     
     #This is problematic for some versions of mediawiki..
-    cp /var/www/pypedia/index.php /var/www/pypedia/index.php.backup
-    cp /var/www/pypedia/extensions/PyPedia_server/index.php /var/www/pypedia/index.php
+    #Add to index.php: after $mediaWiki = new MediaWiki();
+    pypedia_REST_API($wgRequest);
+    
+    #This might not work (it is better to edit explicitly and add the particular code)
     cp /var/www/pypedia/skins/Vector.php /var/www/pypedia/skins/Vector.php.backup
     cp /var/www/pypedia/extensions/PyPedia_server/Vector.php /var/www/pypedia/skins/Vector.php
+    
+    #Edit line 2738 of includes/OutputPage.php before:
+    #if ( $wgResourceLoaderExperimentalAsyncLoading ) {
+    #Add the following: (substitute www.pypedia.com with your's installation domain name)
+
+    $scripts .= '
+    <!-- PYPEDIA JS SCRIPTS -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script src="http://www.pypedia.com/extensions/PyPedia_server/pypedia.js"></script>
+    <script src="http://www.pypedia.com/extensions/PyPedia_server/import_gist.js"></script>
+    <!-- END OF PYPEDIA JS SCRIPTS -->
+    ';
     
     #From: https://github.com/kantale/PyPedia_server/blob/master/INSTALL STEP 5: Create file with passwords
     
