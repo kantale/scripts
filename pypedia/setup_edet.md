@@ -113,7 +113,7 @@ liblapack-dev
     #Install basemap
     cd /root/tools; wget http://download.osgeo.org/geos/geos-3.3.7.tar.bz2
     cd /root/tools; bzip2 -d geos-3.3.7.tar.bz2
-    cd /root/toos; tar xvf geos-3.3.7.tar.bz2
+    cd /root/toos; tar xvf geos-3.3.7.tar
     cd /root/tools/geos-3.3.7; ./configure; make; make install
     cd /root/tools; wget "http://downloads.sourceforge.net/project/matplotlib/matplotlib-toolkits/basemap-1.0.6/basemap-1.0.6.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Fmatplotlib%2Ffiles%2Fmatplotlib-toolkits%2Fbasemap-1.0.6%2F&ts=1359637493&use_mirror=superb-dca3" -O basemap-1.0.6.tar.gz
     cd /root/tools; tar zxvf basemap-1.0.6.tar.gz
