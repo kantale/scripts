@@ -100,6 +100,9 @@ liblapack-dev
     cd /root/tools; curl http://mpmath.googlecode.com/files/mpmath-all-0.17.tar.gz > mpmath-all-0.17.tar.gz
     cd /root/tools; tar zxvf mpmath-all-0.17.tar.gz 
     cd /root/tools/mpmath-all-0.17; python setup.py build; python setup.py install
+    
+    #Fix Bug: https://bugs.archlinux.org/task/30020
+    chmod ag+r /usr/local/lib/python2.7/dist-packages/python_dateutil-2.1-py2.7.egg/EGG-INFO/*
 
     #Install biopython
     cd /root/tools; curl http://biopython.org/DIST/biopython-1.60.tar.gz > biopython-1.60.tar.gz
