@@ -381,5 +381,6 @@ Create scripts by running:
     * sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_compute.sh -inputdir=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/ -worksheet=/target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGoNLv4/ImputationWorksheet_gonl_release4.csv -parameters=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv -workflow=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/workflowMinimacStage3.csv -protocols=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/protocols/ -outputdir=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252/step_3_GoNL -id=lifelines_gonlv4_3
 * Submitted STEP 3 chromosomes 1,2,3,4,5,6,7,8,9,10 in scheduler02. Tue 29 Jan, 10:28 AM
 * Chromosome 1,2,3,4,5,6,7,8,9,10 finished
-
-### Submitted STEP 3 chromosomes 11,12,13,14,15,16,17,18,19,20,21,22. Sun 3 Feb 15.35 PM https://mail.google.com/mail/#inbox/13ca03cc1e68ca3b
+* Submitted STEP 3 chromosomes 11,12,13,14,15,16,17,18,19,20,21,22. Sun 3 Feb 15.35 PM https://mail.google.com/mail/#inbox/13ca03cc1e68ca3b
+* Imputation finished. 
+### ToDo: validate results
