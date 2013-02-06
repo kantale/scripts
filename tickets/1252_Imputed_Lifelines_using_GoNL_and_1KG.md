@@ -382,5 +382,4 @@ Create scripts by running:
 * Submitted STEP 3 chromosomes 1,2,3,4,5,6,7,8,9,10 in scheduler02. Tue 29 Jan, 10:28 AM
 * Chromosome 1,2,3,4,5,6,7,8,9,10 finished
 * Submitted STEP 3 chromosomes 11,12,13,14,15,16,17,18,19,20,21,22. Sun 3 Feb 15.35 PM https://mail.google.com/mail/#inbox/13ca03cc1e68ca3b
-* Imputation finished. 
-### ToDo: validate results
+* Chromosomes 13,14,15,16,17,18,19,20,21,22 Failed. Resubmitted 7 Feb 2013 
