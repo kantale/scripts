@@ -129,6 +129,16 @@ liblapack-dev
     cd /root/tools/networkx-1.7; python setup.py build
     cd /root/tools/networkx-1.7; python setup.py install
     
+    #install pygraphviz
+    apt-get install -y libgraphviz-dev
+    cd /root/tools; wget http://pypi.python.org/packages/source/p/pygraphviz/pygraphviz-1.1.tar.gz#md5=5c206838ce81180557e29135e93b2461
+    cd /root/tools; tar zxvf pygraphviz-1.1.tar.gz
+    #Edit /root/tools/pygraphviz-1.1/serup.py:
+    #library_path='/usr/lib/graphviz/'
+    #include_path='/usr/include/graphviz'
+    cd /root/tools/pygraphviz-1.1; python setup.py build 
+    cd /root/tools/pygraphviz-1.1; python setup.py install     
+    
     useradd puser
     passwd puser
     
