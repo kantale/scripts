@@ -132,6 +132,5 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Whereas what we want is:  inverse normally transformed BMI is calculated based on the inverse normal transformation where you first rank the values and then assign values to the ranks using the inverse normal distribution. This transformation results in the mean and the sd of the transformed variable as 0 and 1
     * Hopefully there be no confusion..
 
-## Wait for data files from cohorts!
-
+* Submission of analysis plan: https://mail.google.com/mail/#inbox/13c913bb35344359 31 Jan 2013
 ..and closing ticket!
