@@ -123,6 +123,12 @@ liblapack-dev
     #install  sckikit-learn
     pip install -U scikit-learn
     
+    #Install networkx
+    cd /root/tools; wget http://pypi.python.org/packages/source/n/networkx/networkx-1.7.tar.gz#md5=1a73da9d571a206aa40f6ef69254f7b4
+    cd /root/tools; tar zxvf networkx-1.7.tar.gz
+    cd /root/tools/networkx-1.7; python setup.py build
+    cd /root/tools/networkx-1.7; python setup.py install
+    
     useradd puser
     passwd puser
     
