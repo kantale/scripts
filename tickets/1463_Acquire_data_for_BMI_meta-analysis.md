@@ -133,4 +133,12 @@ On mac OSX: ld: library not found for -lcrt0.o
     * Hopefully there be no confusion..
 
 * Submission of analysis plan: https://mail.google.com/mail/#inbox/13c913bb35344359 31 Jan 2013
-..and closing ticket!
+* Preparing analysis scripts in case they are requested by the biobanks:
+* PCA:
+.
+
+    #Create random ped and map files: chr1.ped , chr1.map
+    #Location: /target/gpfs2/gcc/home/akanterakis/runs/test_meta_analysis
+    /target/gpfs2/gcc/tools/plink-1.07-x86_64/plink-1.07-x86_64/plink --file chr1 --cluster --noweb --matrix
+
+## Waiting for analysis to finish..
