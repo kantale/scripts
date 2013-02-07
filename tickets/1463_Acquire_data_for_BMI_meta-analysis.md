@@ -135,6 +135,7 @@ On mac OSX: ld: library not found for -lcrt0.o
 * Submission of analysis plan: https://mail.google.com/mail/#inbox/13c913bb35344359 31 Jan 2013
 * Preparing analysis scripts in case they are requested by the biobanks:
 * PCA:
+
 .
 
     #Create random ped and map files: chr1.ped , chr1.map
