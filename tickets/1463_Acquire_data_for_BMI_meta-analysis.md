@@ -142,4 +142,5 @@ On mac OSX: ld: library not found for -lcrt0.o
     #Location: /target/gpfs2/gcc/home/akanterakis/runs/test_meta_analysis
     /target/gpfs2/gcc/tools/plink-1.07-x86_64/plink-1.07-x86_64/plink --file chr1 --cluster --noweb --matrix
 
+* Using plink: http://pngu.mgh.harvard.edu/~purcell/plink/strat.shtml#mds
 ## Waiting for analysis to finish..
