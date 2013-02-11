@@ -1,3 +1,4 @@
+* Working dir: /target/gpfs2/gcc/home/akanterakis/runs/test_quicktest
 * Quicktest command: /target/gpfs2/gcc/tools/quicktest-0.95-x86_64/quicktest-0.95-x86_64 --compute-rSqHat --pheno /target/gpfs2/gcc/tools/snptest_v2.4.1_Linux_x86_64_static/example/cohort1.sample --npheno 5 --out output_mean --geno example1.gen --method-mean --ooops-line
 * Question in Biostar http://www.biostars.org/p/63461/
 * Mail: https://mail.google.com/mail/?ui=2&shva=1#inbox/13cca1e9d5843b08
