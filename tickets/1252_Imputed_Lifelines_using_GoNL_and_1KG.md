@@ -391,3 +391,36 @@ Create scripts by running:
 * pbs align_to_ref ". align_to_ref.sh" > submit_align_to_ref.sh
 * Change queue in submit_align_to_ref.sh from gcc to test
 * Submitted to scheduler02
+* Finished
+* Created dir: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252_GIANT/scripts_step1
+* Created worksheet: /target/gpfs2/gcc/home/akanterakis/runs/ticket_1252_GIANT/PrePhasingWorksheet.csv
+* Contents:
+
+.
+
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr1,minimac,b37,1,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr2,minimac,b37,2,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr3,minimac,b37,3,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr4,minimac,b37,4,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr5,minimac,b37,5,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr6,minimac,b37,6,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr7,minimac,b37,7,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr8,minimac,b37,8,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr9,minimac,b37,9,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr10,minimac,b37,10,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr11,minimac,b37,11,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr12,minimac,b37,12,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr13,minimac,b37,13,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr14,minimac,b37,14,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr15,minimac,b37,15,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr16,minimac,b37,16,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr17,minimac,b37,17,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr18,minimac,b37,18,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr19,minimac,b37,19,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr20,minimac,b37,20,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr21,minimac,b37,21,FALSE
+    zz_gonlV4,${root}/home/akanterakis/runs/ticket_1252_GIANT/results/,${root}/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/chr22,minimac,b37,22,FALSE
+
+* Run: sh /target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/molgenis_compute.sh -inputdir=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/ -outputdir=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252_GIANT/scripts_step1/ -workflow=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/workflowMinimacStage1.csv -protocols=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/protocols/ -parameters=/target/gpfs2/gcc/tools/MolgenisCompute4/molgenis_compute-0a00dd6/protocols/imputation/minimacV2/parametersMinimac.csv -worksheet=/target/gpfs2/gcc/home/akanterakis/runs/ticket_1252_GIANT/PrePhasingWorksheet.csv -id=lifelines_Giant
+* Submit scripts: cd scripts_step1; sh submit.sh
+* Waiting for jobs to finish
