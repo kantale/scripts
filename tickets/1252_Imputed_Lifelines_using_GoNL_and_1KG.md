@@ -385,3 +385,9 @@ Create scripts by running:
 * Chromosomes 13,14,15,16,17,18,19,20,21,22 Failed. Resubmitted 7 Feb 2013 
 * Finished.
 * Created dir: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G
+* Created dir: /target/gpfs2/gcc/groups/gonl/projects/imputationBenchmarking/imputationResult/lifelines_MinimacV2_refGiant1000G/results
+* Copy ped,map files and align_to_ref.sh
+* Edit File (2nd line and --hap parameter
+* pbs align_to_ref ". align_to_ref.sh" > submit_align_to_ref.sh
+* Change queue in submit_align_to_ref.sh from gcc to test
+* Submitted to scheduler02
