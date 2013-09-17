@@ -63,6 +63,7 @@ liblapack-dev
     apt-get -y install libpng-dev libjpeg8-dev
 
     echo 'none /dev/shm tmpfs rw,nosuid,nodev,noexec 0 0' >> /etc/fstab
+    echo 'none /tmp tmpfs size=16m,mode=1777 0 0' >> /etc/fstab
     mount -a
 
     mkdir /root/tools
