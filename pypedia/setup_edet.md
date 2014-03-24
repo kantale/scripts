@@ -46,6 +46,11 @@ liblapack3gf
 liblapack-doc  
 liblapack-dev  
 
+## Setup port forwarding, so that requests to port 80 go to port 8080
+* http://serverfault.com/questions/112795/how-can-i-run-a-server-on-linux-on-port-80-as-a-normal-user
+* iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+* iptables -t nat -I OUTPUT -p tcp -d 127.0.0.1 --dport 80 -j REDIRECT --to-ports 8080
+
 ## INSIDE THE ROOT JAIL:
 
 
